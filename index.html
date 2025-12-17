@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quest Counseling | Level Up Your Life</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        quest: {
+                            bg: '#FDFBF7',      /* Cream/Off-white */
+                            red: '#FF7F7F',     /* Potion Red */
+                            blue: '#89CFF0',    /* Mana Blue */
+                            green: '#98FF98',   /* Stamina Green */
+                            gold: '#FFD700',    /* Loot Gold */
+                            dark: '#2D3748',    /* Text Dark */
+                            slate: '#4A5568',   /* Text Light */
+                            card: '#FFFFFF',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Nunito', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                    },
+                    boxShadow: {
+                        'pixel': '4px 4px 0px 0px rgba(0,0,0,0.1)',
+                        'pixel-hover': '6px 6px 0px 0px rgba(137, 207, 240, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Health Bar at Top */
+        #health-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: #E2E8F0;
+            z-index: 1000;
+        }
+
+        #health-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #FF7F7F, #98FF98);
+            width: 0%;
+            transition: width 0.2s ease-out;
+            border-right: 2px solid #2D3748;
+        }
+
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        /* Pixel Button Effect */
+        .btn-pixel {
+            position: relative;
+            transition: all 0.1s;
+        }
+        .btn-pixel:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Tooltip-style stats */
+        .stat-row:hover .stat-bar-fill {
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body class="bg-quest-bg font-body text-quest-dark antialiased overflow-x-hidden">
+
+    <!-- Progress/Health Bar -->
+    <div id="health-bar-container">
+        <div id="health-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b-2 border-quest-blue sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-quest-red rounded-lg flex items-center justify-center text-white shadow-pixel group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-shield-heart text-xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-quest-dark leading-none">
+                                New Quest
+                            </span>
+                            <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-quest-blue leading-none mt-0.5">
+                                Counseling
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-heading font-bold text-quest-slate">
+                    <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
+                    <a href="#services" class="hover:text-quest-blue transition-colors">Skill Trees</a>
+                    <a href="#about" class="hover:text-quest-green transition-colors">My Character</a>
+                    <a href="#wiki" class="hover:text-quest-gold transition-colors">The Wiki</a>
+                    <a href="#contact" class="bg-quest-red text-white px-6 py-2 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel">
+                        Start Quest
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-quest-dark hover:text-quest-blue focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-b border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">Home Base</a>
+                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">Skill Trees</a>
+                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">My Character</a>
+                <a href="#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">The Wiki</a>
+                <a href="#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red text-white rounded-xl shadow-sm">Start Quest</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-16 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <!-- Decor Elements -->
+        <div class="absolute top-20 right-10 text-quest-blue opacity-20 text-9xl float-anim" style="animation-delay: 1s;"><i class="fa-solid fa-cloud"></i></div>
+        <div class="absolute bottom-20 left-10 text-quest-green opacity-20 text-8xl float-anim"><i class="fa-brands fa-pagelines"></i></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center">
+                <div class="inline-block bg-quest-blue/20 rounded-full px-4 py-1 mb-6 border border-quest-blue/30">
+                    <span class="text-quest-dark font-heading font-bold text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-gamepad mr-2 text-quest-blue"></i> Tutorial Complete. Real Game Starts Now.
+                    </span>
+                </div>
+                <h1 class="text-4xl tracking-tight font-heading font-extrabold text-quest-dark sm:text-5xl md:text-6xl mb-6">
+                    Life didn't come with a <br class="hidden sm:block" />
+                    <span class="text-quest-red">walkthrough.</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-quest-slate mb-10">
+                    But you don't have to play solo. Upgrade your mental health, defeat your inner bosses, and unlock your potential with a guide who gets it.
+                </p>
+                <div class="flex justify-center gap-4 flex-col sm:flex-row">
+                    <a href="#contact" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg">
+                        Join the Party
+                    </a>
+                    <a href="#services" class="bg-white text-quest-dark border-2 border-quest-blue px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-blue/10 transition-all btn-pixel text-lg">
+                        View Map
+                    </a>
+                </div>
+                <p class="mt-4 text-sm text-gray-400 italic">No subscription fees. Just real support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section (The Glitch) -->
+    <section class="py-16 bg-white border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-quest-dark">Stuck on a Hard Level?</h2>
+                <p class="mt-4 text-lg text-quest-slate max-w-2xl mx-auto">Even the best players encounter glitches. Identify what's draining your HP.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-smog text-2xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">The Fog of War</h3>
+                    <p class="text-quest-slate">Anxiety and stress making it hard to see the path forward? Let's clear the map.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-heart-crack text-2xl text-quest-red"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">Low Health Bar</h3>
+                    <p class="text-quest-slate">Feeling drained, depressed, or burned out? We'll focus on restoration and resilience.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-users text-2xl text-quest-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">Co-Op Issues</h3>
+                    <p class="text-quest-slate">Relationship conflicts? Learn to communicate and coordinate with your teammates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Skill Trees) -->
+    <section id="services" class="py-20 bg-quest-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="font-pixel text-xs text-quest-blue mb-2 block">SELECT YOUR MODE</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-extrabold text-quest-dark">Choose Your Campaign</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Solo Campaign -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-blue hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-quest-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">LVL 1+</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-user-astronaut text-4xl text-quest-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Solo Campaign</h3>
+                    <p class="text-quest-slate mb-6">Individual therapy to grind for XP (Experience Points) and unlock personal growth.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Coping Strategies
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Emotional Regulation
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Self-Discovery
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-blue text-quest-blue font-bold rounded-lg hover:bg-quest-blue hover:text-white transition-colors">Select Mode</a>
+                </div>
+
+                <!-- Co-Op Mode -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-red hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-red text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">MULTIPLAYER</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-people-arrows text-4xl text-quest-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Co-Op Mode</h3>
+                    <p class="text-quest-slate mb-6">Couples counseling. Improve mechanics, tank for each other, and coordinate attacks on problems.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Conflict Resolution
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Communication Buffs
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Deep Intimacy
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-red text-quest-red font-bold rounded-lg hover:bg-quest-red hover:text-white transition-colors">Select Mode</a>
+                </div>
+
+                <!-- Speedrun -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-gold hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">TIMED</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-stopwatch text-4xl text-quest-gold"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Speedrunning</h3>
+                    <p class="text-quest-slate mb-6">Solution-focused brief therapy. Map out a direct route to the solution in fewer sessions.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Specific Goals
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Action Plans
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Short Duration
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-600 font-bold rounded-lg hover:bg-quest-gold hover:text-white transition-colors">Select Mode</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About (Character Stats) -->
+    <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <!-- Background Grid Pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#444 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+                <!-- The "NPC" Card -->
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-quest-bg rounded-2xl p-6 shadow-pixel border-2 border-gray-200 relative">
+                        <!-- Header of Card -->
+                        <div class="flex items-center border-b-2 border-gray-200 pb-4 mb-4">
+                            <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden border-2 border-quest-blue mr-4">
+                                <img src="/api/placeholder/150/150" alt="Therapist Headshot" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-xl text-quest-dark">Dr. Sarah Jenkins</h3>
+                                <p class="text-sm font-pixel text-quest-blue">LVL 50 HEALER</p>
+                            </div>
+                        </div>
+
+                        <!-- Stats Block -->
+                        <div class="space-y-4 mb-6">
+                            <div class="stat-row">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>EMPATHY</span>
+                                    <span>100/100</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-quest-red h-2.5 rounded-full stat-bar-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>JUDGMENT</span>
+                                    <span>0/100</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-quest-dark h-2.5 rounded-full stat-bar-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>WISDOM</span>
+                                    <span>95/100</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-quest-blue h-2.5 rounded-full stat-bar-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Equipment Slots (Specialties) -->
+                        <h4 class="font-bold text-sm mb-2 text-gray-500 uppercase">Equipped Skills</h4>
+                        <div class="flex gap-2">
+                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="CBT">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="Mindfulness">
+                                <i class="fa-solid fa-om"></i>
+                            </div>
+                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="Listening">
+                                <i class="fa-solid fa-ear-listen"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-heading font-extrabold text-quest-dark mb-6">Meet Your Guide</h2>
+                    <p class="text-lg text-quest-slate mb-6 leading-relaxed">
+                        Hi, I'm Sarah. Consider me the NPC (Non-Player Character) who stocks you up with potions and maps before you head out into the world.
+                    </p>
+                    <p class="text-lg text-quest-slate mb-8 leading-relaxed">
+                        I use evidence-based techniques to help you rewrite your storyline. My office is a judgment-free zone where we can pause the game, look at the map, and figure out your next move together.
+                    </p>
+                    <div class="flex items-center gap-4 text-sm font-bold text-gray-500">
+                        <span class="flex items-center"><i class="fa-solid fa-medal text-quest-gold mr-2"></i> Licensed LPC</span>
+                        <span class="flex items-center"><i class="fa-solid fa-graduation-cap text-quest-blue mr-2"></i> Master's Degree</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wiki (FAQ) -->
+    <section id="wiki" class="py-20 bg-quest-blue/10">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <i class="fa-solid fa-book-journal-whills text-4xl text-quest-blue mb-4"></i>
+                <h2 class="text-3xl font-heading font-bold text-quest-dark">The Wiki</h2>
+                <p class="text-quest-slate mt-2">Common questions answered.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-lg text-quest-dark">Do you take insurance?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
+                        <p class="font-pixel text-xs text-quest-gold mb-2">THE GOLD EXCHANGE</p>
+                        <p>Yes, we accept major insurance plans including Blue Cross, Aetna, and Cigna. We also offer sliding scale options for players paying out-of-pocket.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-lg text-quest-dark">Is therapy right for me?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
+                        <p class="font-pixel text-xs text-quest-red mb-2">EVERYONE NEEDS A HEALER</p>
+                        <p>If you're feeling overwhelmed, stuck, or just want to optimize your life, therapy is a great tool. You don't need to be in crisis to benefit from a strategy session.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-lg text-quest-dark">How long are sessions?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
+                        <p class="font-pixel text-xs text-quest-green mb-2">ROUND DURATION</p>
+                        <p>Standard sessions are 50 minutes long. This gives us enough time to tackle current issues and set up homework for the week ahead.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-20 bg-quest-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-pixel border-2 border-gray-100 overflow-hidden flex flex-col md:flex-row">
+                <!-- Contact Info Side -->
+                <div class="bg-quest-dark text-white p-10 md:w-1/3 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-heading font-bold mb-6">Server Info</h3>
+                        <p class="mb-6 opacity-90">Ready to start? Send a message to schedule your free 15-minute consultation.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-map-location-dot text-quest-blue w-8"></i>
+                                <span>123 Healing Hub Way,<br>Level 4, City Center</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-phone text-quest-green w-8"></i>
+                                <span>(555) 123-QUEST</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-envelope text-quest-red w-8"></i>
+                                <span>hello@newquest.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <p class="font-pixel text-xs opacity-50 mb-4">FOLLOW US</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="hover:text-quest-blue transition-colors"><i class="fa-brands fa-discord text-xl"></i></a>
+                            <a href="#" class="hover:text-quest-red transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                            <a href="#" class="hover:text-quest-blue transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="p-10 md:w-2/3 flex flex-col justify-center text-center">
+                    <div class="max-w-md mx-auto">
+                        <div class="w-20 h-20 bg-quest-blue/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fa-solid fa-dungeon text-3xl text-quest-blue"></i>
+                        </div>
+                        <h3 class="text-3xl font-heading font-bold text-quest-dark mb-4">New Game Request</h3>
+                        <p class="text-lg text-quest-slate mb-8 leading-relaxed">
+                            Ready to begin your journey? Click the button below to access our secure player portal where you can schedule appointments and send confidential messages.
+                        </p>
+                        
+                        <a href="https://your-simplepractice-url.com" target="_blank" class="w-full block bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group">
+                            <span>Open Secure Portal</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        
+                        <p class="mt-6 text-sm text-gray-400 italic">
+                            <i class="fa-solid fa-lock mr-1"></i> You will be redirected to SimplePractice.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-quest-dark text-white py-12 border-t-4 border-quest-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fa-solid fa-shield-heart text-4xl text-quest-red mb-4"></i>
+            <h2 class="text-2xl font-heading font-bold mb-2">New Quest Counseling</h2>
+            <p class="text-gray-400 mb-8 max-w-md mx-auto">Game Over? Not yet. Just a checkpoint. Take a rest, refill your inventory, and try again.</p>
+            
+            <div class="border-t border-gray-700 pt-8 mt-8">
+                <p class="text-sm text-gray-500 font-pixel">© 2025 NEW QUEST COUNSELING. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('open');
+            });
+        });
+
+        // FAQ Accordion
+        const toggles = document.querySelectorAll('.faq-toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                // Toggle current
+                content.classList.toggle('hidden');
+                
+                // Rotate icon
+                if (content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Health Bar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const bar = document.getElementById('health-bar');
+            
+            bar.style.width = scrolled + "%";
+            
+            // Change color based on progress
+            if (scrolled < 30) {
+                bar.style.background = "#FF7F7F"; // Red
+            } else if (scrolled < 70) {
+                bar.style.background = "#F6E05E"; // Yellow/Gold
+            } else {
+                bar.style.background = "#98FF98"; // Green
+            }
+        });
+    </script>
+</body>
+</html>
