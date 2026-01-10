@@ -139,24 +139,24 @@
                     </a>
                 </div>
 
-                <!-- Get Started & Client Portal Buttons (Desktop) -->
+                <!-- Get Started Button (Desktop) -->
                 <div class="hidden md:flex flex-col items-end w-1/3 justify-center gap-2">
                     <a href="#contact" class="bg-quest-red text-white px-6 py-3 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-base font-heading font-bold">
                         Get Started
-                    </a>
-                    <a href="#" class="bg-quest-blue text-white px-6 py-3 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-base font-heading font-bold">
-                        Client Portal
                     </a>
                 </div>
 
             </div>
 
-            <!-- Bottom row: Navigation links centered (Desktop only) -->
+            <!-- Bottom row: Navigation links and Client Portal centered (Desktop only) -->
             <div class="hidden md:flex justify-center items-center space-x-12 pb-4 font-heading font-bold text-quest-slate text-lg">
                 <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
                 <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
                 <a href="#about" class="hover:text-quest-green transition-colors">About Me</a>
                 <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
+                <a href="#" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    Client Portal
+                </a>
             </div>
         </div>
 
@@ -510,22 +510,52 @@
                         </div>
                         <h3 class="text-3xl font-heading font-bold text-quest-dark mb-4">Request Appointment</h3>
                         <p class="text-lg text-quest-slate mb-8 leading-relaxed">
-                            Ready to begin your journey? Click the button below to access our secure client portal where you can schedule appointments and send confidential messages.
+                            Ready to begin your journey? Click the button below to open our secure contact form and send a message to schedule your free consultation.
                         </p>
 
-                        <a href="https://your-simplepractice-url.com" target="_blank" class="w-full block bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark">
-                            <span>Open Secure Portal</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                        <button onclick="openContactForm()" class="w-full bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark cursor-pointer">
+                            <span>Open Contact Form</span>
+                            <i class="fa-solid fa-envelope group-hover:translate-x-1 transition-transform"></i>
+                        </button>
 
                         <p class="mt-6 text-sm text-quest-slate italic">
-                            <i class="fa-solid fa-lock mr-1"></i> You will be redirected to SimplePractice.
+                            <i class="fa-solid fa-lock mr-1"></i> Secure form powered by SimplePractice
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Contact Form Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-[9999] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-quest-dark/80 backdrop-blur-sm" onclick="closeContactForm()"></div>
+
+        <!-- Modal Content -->
+        <div class="absolute inset-4 md:inset-y-10 md:left-1/2 md:-translate-x-1/2 md:w-[600px] lg:w-[650px] bg-white rounded-2xl shadow-2xl border-4 border-quest-blue overflow-hidden flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-4 border-b-2 border-quest-dark bg-quest-bg">
+                <h3 class="font-heading font-bold text-xl text-quest-dark">
+                    <i class="fa-solid fa-envelope mr-2 text-quest-red"></i> Contact Form
+                </h3>
+                <button onclick="closeContactForm()" class="w-10 h-10 bg-quest-red text-white rounded-lg border-2 border-quest-dark hover:bg-red-600 transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body with iframe -->
+            <div class="flex-1 overflow-auto">
+                <iframe
+                    id="contact-iframe"
+                    src=""
+                    style="border: none; width: 100%; height: 100%; min-height: 500px;"
+                    title="Contact Form"
+                    allow="geolocation"
+                ></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-quest-dark text-white py-12 border-t-4 border-quest-blue">
@@ -574,6 +604,19 @@
                 }
             });
         });
+
+        // Contact Form Modal Functions
+        function openContactForm() {
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactForm() {
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.getElementById('contact-iframe').src = '';
+            document.body.style.overflow = '';
+        }
 
         // Health Bar Scroll Effect
         window.addEventListener('scroll', () => {
