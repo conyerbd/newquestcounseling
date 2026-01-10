@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Quest Counseling | Level Up Your Life</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -21,13 +21,13 @@
                 extend: {
                     colors: {
                         quest: {
-                            bg: '#FDFBF7',      /* Cream/Off-white */
-                            red: '#FF7F7F',     /* Potion Red */
-                            blue: '#89CFF0',    /* Mana Blue */
-                            green: '#98FF98',   /* Stamina Green */
-                            gold: '#FFD700',    /* Loot Gold */
-                            dark: '#2D3748',    /* Text Dark */
-                            slate: '#4A5568',   /* Text Light */
+                            bg: '#B3D4E8',      /* User: Light blue background */
+                            red: '#E85A8F',     /* User: Heart Pink (CTA) */
+                            blue: '#1A3A5C',    /* User: Navy (Outlines/Text) */
+                            green: '#98FF98',   /* Stamina Green (Kept for health bar) */
+                            gold: '#F7D426',    /* User: Lightning Yellow (Accent) */
+                            dark: '#1A3A5C',    /* User: Navy (Main Text) */
+                            slate: '#2A4460',   /* Lighter Navy (Secondary Text) */
                             card: '#FFFFFF',
                         }
                     },
@@ -37,8 +37,8 @@
                         pixel: ['"Press Start 2P"', 'cursive'],
                     },
                     boxShadow: {
-                        'pixel': '4px 4px 0px 0px rgba(0,0,0,0.1)',
-                        'pixel-hover': '6px 6px 0px 0px rgba(137, 207, 240, 0.4)',
+                        'pixel': '4px 4px 0px 0px rgba(26, 58, 92, 0.2)', /* Navy shadow */
+                        'pixel-hover': '6px 6px 0px 0px rgba(232, 90, 143, 0.4)', /* Pink shadow */
                     }
                 }
             }
@@ -68,17 +68,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background-color: #E2E8F0;
+            height: 8px; /* Slightly thicker to see the colors better */
+            background-color: #1A3A5C; /* Navy background for the empty bar */
             z-index: 1000;
         }
 
         #health-bar {
             height: 100%;
-            background: linear-gradient(90deg, #FF7F7F, #98FF98);
+            background: #E85A8F; /* Starts Pink */
             width: 0%;
             transition: width 0.2s ease-out;
-            border-right: 2px solid #2D3748;
+            border-right: 2px solid #fff;
         }
 
         /* Mobile Menu Transition */
@@ -117,53 +117,58 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="bg-white/90 backdrop-blur-md border-b-2 border-quest-blue sticky top-0 z-50">
+    <nav class="bg-white/95 backdrop-blur-md border-b-4 border-quest-blue sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center">
-                    <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
-                        <div class="w-10 h-10 bg-quest-red rounded-lg flex items-center justify-center text-white shadow-pixel group-hover:scale-105 transition-transform">
-                            <i class="fa-solid fa-shield-heart text-xl"></i>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-quest-dark leading-none">
-                                New Quest
-                            </span>
-                            <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-quest-blue leading-none mt-0.5">
-                                Counseling
-                            </span>
-                        </div>
-                    </a>
+            <!-- Top row: Logo centered, Get Started on right -->
+            <div class="flex justify-between items-center h-36 md:h-48 relative">
+
+                <!-- Mobile Menu Button (Absolute Left on Mobile) -->
+                <div class="flex items-center md:hidden absolute left-0 z-20">
+                    <button id="mobile-menu-btn" class="text-quest-dark hover:text-quest-red focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </button>
                 </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8 font-heading font-bold text-quest-slate">
-                    <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
-                    <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
-                    <a href="#about" class="hover:text-quest-green transition-colors">About Me</a>
-                    <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
-                    <a href="#contact" class="bg-quest-red text-white px-6 py-2 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel">
-                        Get Started
+
+                <!-- Spacer for desktop layout -->
+                <div class="hidden md:block w-1/3"></div>
+
+                <!-- Center Logo -->
+                <div class="flex justify-center w-full md:w-1/3">
+                    <a href="#" class="group z-10">
+                        <img src="logo.svg" alt="New Quest Counseling" class="h-32 md:h-44 group-hover:scale-105 transition-transform">
                     </a>
                 </div>
 
-                <!-- Mobile menu button -->
-                <div class="flex items-center md:hidden">
-                    <button id="mobile-menu-btn" class="text-quest-dark hover:text-quest-blue focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
+                <!-- Get Started & Client Portal Buttons (Desktop) -->
+                <div class="hidden md:flex flex-col items-end w-1/3 justify-center gap-2">
+                    <a href="#contact" class="bg-quest-red text-white px-6 py-3 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-base font-heading font-bold">
+                        Get Started
+                    </a>
+                    <a href="#" class="bg-quest-blue text-white px-6 py-3 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-base font-heading font-bold">
+                        Client Portal
+                    </a>
                 </div>
+
+            </div>
+
+            <!-- Bottom row: Navigation links centered (Desktop only) -->
+            <div class="hidden md:flex justify-center items-center space-x-12 pb-4 font-heading font-bold text-quest-slate text-lg">
+                <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
+                <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
+                <a href="#about" class="hover:text-quest-green transition-colors">About Me</a>
+                <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-white border-b border-gray-200">
+        <div id="mobile-menu" class="md:hidden bg-white border-b-4 border-quest-blue">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
-                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">Home Base</a>
-                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">Services</a>
-                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">About Me</a>
-                <a href="#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-blue/20 text-quest-dark">FAQ</a>
-                <a href="#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red text-white rounded-xl shadow-sm">Get Started</a>
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
+                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
+                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
+                <a href="#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
+                <a href="#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
+                <a href="#" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
             </div>
         </div>
     </nav>
@@ -171,38 +176,38 @@
     <!-- Hero Section -->
     <section id="home" class="relative pt-16 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
         <!-- Decor Elements -->
-        <div class="absolute top-20 right-10 text-quest-blue opacity-20 text-9xl float-anim" style="animation-delay: 1s;"><i class="fa-solid fa-cloud"></i></div>
-        <div class="absolute bottom-20 left-10 text-quest-green opacity-20 text-8xl float-anim"><i class="fa-brands fa-pagelines"></i></div>
+        <div class="absolute top-20 right-1/4 text-quest-blue opacity-10 text-9xl float-anim" style="animation-delay: 1s;"><i class="fa-solid fa-cloud"></i></div>
+        <div class="absolute bottom-20 left-1/4 text-quest-gold opacity-20 text-8xl float-anim"><i class="fa-solid fa-bolt"></i></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="text-center">
-                <div class="inline-block bg-quest-blue/20 rounded-full px-4 py-1 mb-6 border border-quest-blue/30">
+                <div class="inline-block bg-white rounded-full px-4 py-1 mb-6 border-2 border-quest-dark shadow-pixel">
                     <span class="text-quest-dark font-heading font-bold text-sm uppercase tracking-wider">
-                        <i class="fa-solid fa-compass mr-2 text-quest-blue"></i> Your Journey Starts Here
+                        <i class="fa-solid fa-compass mr-2 text-quest-gold"></i> Your Journey Starts Here
                     </span>
                 </div>
-                <h1 class="text-4xl tracking-tight font-heading font-extrabold text-quest-dark sm:text-5xl md:text-6xl mb-6">
+                <h1 class="text-4xl tracking-tight font-heading font-extrabold text-quest-dark sm:text-5xl md:text-6xl mb-6 drop-shadow-sm">
                     Life didn't come with a <br class="hidden sm:block" />
                     <span class="text-quest-red">walkthrough.</span>
                 </h1>
-                <p class="mt-4 max-w-2xl mx-auto text-xl text-quest-slate mb-10">
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-quest-dark font-medium mb-10">
                     But you don't have to do it alone. Upgrade your mental health, overcome your challenges, and unlock your potential with a guide who gets it.
                 </p>
                 <div class="flex justify-center gap-4 flex-col sm:flex-row">
-                    <a href="#contact" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg">
+                    <a href="#contact" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
                         Schedule Consult
                     </a>
-                    <a href="#services" class="bg-white text-quest-dark border-2 border-quest-blue px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-blue/10 transition-all btn-pixel text-lg">
+                    <a href="#services" class="bg-white text-quest-dark border-2 border-quest-dark px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-bg transition-all btn-pixel text-lg">
                         View Services
                     </a>
                 </div>
-                <p class="mt-4 text-sm text-gray-400 italic">No subscription fees. Just real support.</p>
+                <p class="mt-4 text-sm text-quest-slate font-bold italic">No subscription fees. Just real support.</p>
             </div>
         </div>
     </section>
 
     <!-- Problem Section (The Glitch) -->
-    <section class="py-16 bg-white border-y border-gray-100">
+    <section class="py-16 bg-white border-y-4 border-quest-blue">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-heading font-bold text-quest-dark">Feeling Stuck?</h2>
@@ -211,17 +216,17 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-smog text-2xl text-purple-500"></i>
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
+                        <i class="fa-solid fa-smog text-2xl text-quest-slate"></i>
                     </div>
                     <h3 class="text-xl font-heading font-bold mb-3">Overwhelming Anxiety</h3>
                     <p class="text-quest-slate">Is stress making it hard to see the path forward? Let's clear the fog and find your way.</p>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
-                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
                         <i class="fa-solid fa-heart-crack text-2xl text-quest-red"></i>
                     </div>
                     <h3 class="text-xl font-heading font-bold mb-3">Feeling Depleted</h3>
@@ -229,8 +234,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-quest-bg p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow text-center group">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
                         <i class="fa-solid fa-users text-2xl text-quest-blue"></i>
                     </div>
                     <h3 class="text-xl font-heading font-bold mb-3">Relationship Struggles</h3>
@@ -244,14 +249,14 @@
     <section id="services" class="py-20 bg-quest-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="font-pixel text-xs text-quest-blue mb-2 block">CHOOSE YOUR PATH</span>
-                <h2 class="text-3xl md:text-4xl font-heading font-extrabold text-quest-dark">Our Services</h2>
+                <span class="font-pixel text-xs text-quest-dark mb-2 block bg-quest-gold inline-block px-2 py-1 border-2 border-quest-dark shadow-sm">CHOOSE YOUR PATH</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-extrabold text-quest-dark mt-4">Our Services</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Solo Campaign -->
-                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-blue hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 bg-quest-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">GROWTH</div>
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-blue hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-quest-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">GROWTH</div>
                     <div class="mb-6">
                         <i class="fa-solid fa-user-astronaut text-4xl text-quest-blue"></i>
                     </div>
@@ -259,21 +264,21 @@
                     <p class="text-quest-slate mb-6">One-on-one sessions to explore your goals, build skills, and unlock personal growth.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Coping Strategies
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Coping Strategies
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Emotional Regulation
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Emotional Regulation
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Self-Discovery
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Self-Discovery
                         </li>
                     </ul>
                     <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-blue text-quest-blue font-bold rounded-lg hover:bg-quest-blue hover:text-white transition-colors">Learn More</a>
                 </div>
 
                 <!-- Co-Op Mode -->
-                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-red hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-quest-red text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">CONNECTION</div>
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-red hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-red text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">CONNECTION</div>
                     <div class="mb-6">
                         <i class="fa-solid fa-people-arrows text-4xl text-quest-red"></i>
                     </div>
@@ -281,21 +286,21 @@
                     <p class="text-quest-slate mb-6">Improve your dynamic. Learn to support each other and coordinate on life's problems.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Conflict Resolution
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Conflict Resolution
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Better Communication
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Better Communication
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Deep Intimacy
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Deep Intimacy
                         </li>
                     </ul>
                     <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-red text-quest-red font-bold rounded-lg hover:bg-quest-red hover:text-white transition-colors">Learn More</a>
                 </div>
 
                 <!-- Speedrun -->
-                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-transparent hover:border-quest-gold hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-quest-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel">FOCUS</div>
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-gold hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-gold text-quest-dark text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">FOCUS</div>
                     <div class="mb-6">
                         <i class="fa-solid fa-stopwatch text-4xl text-quest-gold"></i>
                     </div>
@@ -303,84 +308,84 @@
                     <p class="text-quest-slate mb-6">Brief therapy designed to map out a direct route to your goals in fewer sessions.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Specific Goals
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Specific Goals
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Action Plans
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Action Plans
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa-solid fa-check text-quest-green mr-3"></i> Short Duration
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md"></i> Short Duration
                         </li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-600 font-bold rounded-lg hover:bg-quest-gold hover:text-white transition-colors">Learn More</a>
+                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-600 font-bold rounded-lg hover:bg-quest-gold hover:text-quest-dark transition-colors">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About (Character Stats) -->
-    <section id="about" class="py-20 bg-white relative overflow-hidden">
+    <section id="about" class="py-20 bg-white border-y-4 border-quest-blue relative overflow-hidden">
         <!-- Background Grid Pattern -->
-        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#444 1px, transparent 1px); background-size: 20px 20px;"></div>
-        
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#1A3A5C 1px, transparent 1px); background-size: 20px 20px;"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-12">
-                
+
                 <!-- The "NPC" Card -->
                 <div class="w-full lg:w-1/2">
-                    <div class="bg-quest-bg rounded-2xl p-6 shadow-pixel border-2 border-gray-200 relative">
+                    <div class="bg-quest-bg rounded-2xl p-6 shadow-pixel border-2 border-quest-dark relative">
                         <!-- Header of Card -->
-                        <div class="flex items-center border-b-2 border-gray-200 pb-4 mb-4">
-                            <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden border-2 border-quest-blue mr-4">
-                                <img src="/api/placeholder/150/150" alt="Therapist Headshot" class="w-full h-full object-cover">
+                        <div class="flex items-center border-b-2 border-quest-dark pb-4 mb-4">
+                            <div class="w-20 h-20 rounded-full bg-white overflow-hidden border-2 border-quest-dark mr-4">
+                                <img src="headshot.jpg" alt="Dorasae Rosario" class="w-full h-full object-cover">
                             </div>
                             <div>
-                                <h3 class="font-heading font-bold text-xl text-quest-dark">Dr. Sarah Jenkins</h3>
-                                <p class="text-sm font-pixel text-quest-blue">LICENSED THERAPIST</p>
+                                <h3 class="font-heading font-bold text-xl text-quest-dark">Dorasae Rosario</h3>
+                                <p class="text-sm font-pixel text-quest-blue bg-white inline-block px-2 py-1 border border-quest-dark rounded mt-1">MA, LPCC</p>
                             </div>
                         </div>
 
                         <!-- Stats Block -->
                         <div class="space-y-4 mb-6">
                             <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1">
+                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
                                     <span>EMPATHY</span>
                                     <span>100/100</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-quest-red h-2.5 rounded-full stat-bar-fill" style="width: 100%"></div>
+                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
+                                    <div class="bg-quest-red h-full rounded-full stat-bar-fill border-r border-quest-dark" style="width: 100%"></div>
                                 </div>
                             </div>
                             <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1">
+                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
                                     <span>JUDGMENT</span>
                                     <span>0/100</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-quest-dark h-2.5 rounded-full stat-bar-fill" style="width: 0%"></div>
+                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
+                                    <div class="bg-quest-dark h-full rounded-full stat-bar-fill" style="width: 0%"></div>
                                 </div>
                             </div>
                             <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1">
+                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
                                     <span>WISDOM</span>
                                     <span>95/100</span>
                                 </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-quest-blue h-2.5 rounded-full stat-bar-fill" style="width: 95%"></div>
+                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
+                                    <div class="bg-quest-blue h-full rounded-full stat-bar-fill border-r border-quest-dark" style="width: 95%"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Equipment Slots (Specialties) -->
-                        <h4 class="font-bold text-sm mb-2 text-gray-500 uppercase">Clinical Tools</h4>
+                        <h4 class="font-bold text-sm mb-2 text-quest-slate uppercase">Clinical Tools</h4>
                         <div class="flex gap-2">
-                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="CBT">
+                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="CBT">
                                 <i class="fa-solid fa-brain"></i>
                             </div>
-                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="Mindfulness">
+                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="Mindfulness">
                                 <i class="fa-solid fa-om"></i>
                             </div>
-                            <div class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-quest-dark tooltip" title="Listening">
+                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="Listening">
                                 <i class="fa-solid fa-ear-listen"></i>
                             </div>
                         </div>
@@ -390,15 +395,22 @@
                 <!-- Text Content -->
                 <div class="w-full lg:w-1/2">
                     <h2 class="text-3xl font-heading font-extrabold text-quest-dark mb-6">Meet Your Guide</h2>
+                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
+                        Looking for someone that can help navigate you through life's ups and downs? Do you need a boost to set you back on your feet so you can show the world who's boss? My goal in therapy is to be your player 2 as we work together to unlock the best person you can be.
+                    </p>
+                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
+                        My passion is empowerment; teaching essential life and coping skills to help you navigate through life in a healthy way. I know you already have it in you, so it's time to help you discover that strength for yourself. You are not alone in this journey, so let's take that next step together.
+                    </p>
+                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
+                        I have over five years of experience working with children, teens/adolescents, and adults from all walks of life. I am also certified in Prepare and Enrich for my Pre-marital/Marital clients through my Master's program. Through these experiences I can provide a diverse insight for an enriching and well rounded experience.
+                    </p>
                     <p class="text-lg text-quest-slate mb-6 leading-relaxed">
-                        Hi, I'm Sarah. Consider me the guide who stocks you up with tools and strategies before you head out into the world.
+                        If you have read this far, I want to congratulate you for taking this first step in wanting to become a healthier you. I know this can be a scary process of journeying into this unknown. I want you to know I'm proud of you for making it this far. If you're ready to take the next step or have any questions, please reach out for a free phone consultation.
                     </p>
-                    <p class="text-lg text-quest-slate mb-8 leading-relaxed">
-                        I use evidence-based techniques to help you rewrite your storyline. My office is a judgment-free zone where we can pause, look at the map, and figure out your next move together.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm font-bold text-gray-500">
-                        <span class="flex items-center"><i class="fa-solid fa-medal text-quest-gold mr-2"></i> Licensed LPC</span>
-                        <span class="flex items-center"><i class="fa-solid fa-graduation-cap text-quest-blue mr-2"></i> Master's Degree</span>
+                    <div class="flex items-center gap-4 text-sm font-bold text-quest-dark flex-wrap">
+                        <span class="flex items-center bg-quest-gold/20 px-3 py-1 rounded-full border border-quest-gold"><i class="fa-solid fa-medal text-quest-gold mr-2"></i> Licensed LPCC</span>
+                        <span class="flex items-center bg-quest-blue/10 px-3 py-1 rounded-full border border-quest-blue"><i class="fa-solid fa-graduation-cap text-quest-blue mr-2"></i> Master's Degree</span>
+                        <span class="flex items-center bg-quest-red/10 px-3 py-1 rounded-full border border-quest-red"><i class="fa-solid fa-heart text-quest-red mr-2"></i> Prepare/Enrich Certified</span>
                     </div>
                 </div>
             </div>
@@ -406,7 +418,7 @@
     </section>
 
     <!-- Wiki (FAQ) -->
-    <section id="wiki" class="py-20 bg-quest-blue/10">
+    <section id="wiki" class="py-20 bg-white/50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <i class="fa-solid fa-book-journal-whills text-4xl text-quest-blue mb-4"></i>
@@ -416,38 +428,38 @@
 
             <div class="space-y-4">
                 <!-- FAQ Item 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
                         <span class="font-bold text-lg text-quest-dark">Do you take insurance?</span>
                         <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
-                        <p class="font-pixel text-xs text-quest-gold mb-2">INSURANCE & RATES</p>
-                        <p>Yes, we accept major insurance plans including Blue Cross, Aetna, and Cigna. We also offer sliding scale options for clients paying out-of-pocket.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-gold mb-2 bg-quest-dark inline-block px-2 py-1 rounded">INSURANCE & RATES</p>
+                        <p class="mt-2">Yes, we accept major insurance plans including Blue Cross, Aetna, and Cigna. We also offer sliding scale options for clients paying out-of-pocket.</p>
                     </div>
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
                         <span class="font-bold text-lg text-quest-dark">Is therapy right for me?</span>
                         <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
-                        <p class="font-pixel text-xs text-quest-red mb-2">SUPPORT FOR EVERYONE</p>
-                        <p>If you're feeling overwhelmed, stuck, or just want to optimize your life, therapy is a great tool. You don't need to be in crisis to benefit from a strategy session.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-red mb-2 bg-quest-dark inline-block px-2 py-1 rounded">SUPPORT FOR EVERYONE</p>
+                        <p class="mt-2">If you're feeling overwhelmed, stuck, or just want to optimize your life, therapy is a great tool. You don't need to be in crisis to benefit from a strategy session.</p>
                     </div>
                 </div>
 
                 <!-- FAQ Item 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
                         <span class="font-bold text-lg text-quest-dark">How long are sessions?</span>
                         <i class="fa-solid fa-chevron-down text-quest-blue transition-transform"></i>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 text-quest-slate">
-                        <p class="font-pixel text-xs text-quest-green mb-2">SESSION LENGTH</p>
-                        <p>Standard sessions are 50 minutes long. This gives us enough time to tackle current issues and set up tools for the week ahead.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-green mb-2 bg-quest-dark inline-block px-2 py-1 rounded">SESSION LENGTH</p>
+                        <p class="mt-2">Standard sessions are 50 minutes long. This gives us enough time to tackle current issues and set up tools for the week ahead.</p>
                     </div>
                 </div>
             </div>
@@ -455,15 +467,15 @@
     </section>
 
     <!-- Contact Form -->
-    <section id="contact" class="py-20 bg-quest-bg">
+    <section id="contact" class="py-20 bg-quest-bg border-t-4 border-quest-blue">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-pixel border-2 border-gray-100 overflow-hidden flex flex-col md:flex-row">
+            <div class="bg-white rounded-3xl shadow-pixel border-2 border-quest-dark overflow-hidden flex flex-col md:flex-row">
                 <!-- Contact Info Side -->
                 <div class="bg-quest-dark text-white p-10 md:w-1/3 flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl font-heading font-bold mb-6">Contact Us</h3>
                         <p class="mb-6 opacity-90">Ready to start? Send a message to schedule your free 15-minute consultation.</p>
-                        
+
                         <div class="space-y-4">
                             <div class="flex items-center">
                                 <i class="fa-solid fa-map-location-dot text-quest-blue w-8"></i>
@@ -479,7 +491,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mt-10">
                         <p class="font-pixel text-xs opacity-50 mb-4">FOLLOW US</p>
                         <div class="flex space-x-4">
@@ -493,20 +505,20 @@
                 <!-- Form Side -->
                 <div class="p-10 md:w-2/3 flex flex-col justify-center text-center">
                     <div class="max-w-md mx-auto">
-                        <div class="w-20 h-20 bg-quest-blue/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-20 h-20 bg-quest-blue/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-quest-dark">
                             <i class="fa-solid fa-dungeon text-3xl text-quest-blue"></i>
                         </div>
                         <h3 class="text-3xl font-heading font-bold text-quest-dark mb-4">Request Appointment</h3>
                         <p class="text-lg text-quest-slate mb-8 leading-relaxed">
                             Ready to begin your journey? Click the button below to access our secure client portal where you can schedule appointments and send confidential messages.
                         </p>
-                        
-                        <a href="https://your-simplepractice-url.com" target="_blank" class="w-full block bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group">
+
+                        <a href="https://your-simplepractice-url.com" target="_blank" class="w-full block bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark">
                             <span>Open Secure Portal</span>
                             <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        
-                        <p class="mt-6 text-sm text-gray-400 italic">
+
+                        <p class="mt-6 text-sm text-quest-slate italic">
                             <i class="fa-solid fa-lock mr-1"></i> You will be redirected to SimplePractice.
                         </p>
                     </div>
@@ -518,10 +530,9 @@
     <!-- Footer -->
     <footer class="bg-quest-dark text-white py-12 border-t-4 border-quest-blue">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <i class="fa-solid fa-shield-heart text-4xl text-quest-red mb-4"></i>
-            <h2 class="text-2xl font-heading font-bold mb-2">New Quest Counseling</h2>
+            <img src="logo.svg" alt="New Quest Counseling" class="h-16 mx-auto mb-4">
             <p class="text-gray-400 mb-8 max-w-md mx-auto">Game Over? Not yet. Just a checkpoint. Take a rest, refill your inventory, and try again.</p>
-            
+
             <div class="border-t border-gray-700 pt-8 mt-8">
                 <p class="text-sm text-gray-500 font-pixel">© 2025 NEW QUEST COUNSELING. ALL RIGHTS RESERVED.</p>
             </div>
@@ -551,10 +562,10 @@
             toggle.addEventListener('click', () => {
                 const content = toggle.nextElementSibling;
                 const icon = toggle.querySelector('i');
-                
+
                 // Toggle current
                 content.classList.toggle('hidden');
-                
+
                 // Rotate icon
                 if (content.classList.contains('hidden')) {
                     icon.style.transform = 'rotate(0deg)';
@@ -570,14 +581,14 @@
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             const bar = document.getElementById('health-bar');
-            
+
             bar.style.width = scrolled + "%";
-            
-            // Change color based on progress
+
+            // Change color based on progress (Pink -> Yellow -> Green)
             if (scrolled < 30) {
-                bar.style.background = "#FF7F7F"; // Red
+                bar.style.background = "#E85A8F"; // Pink
             } else if (scrolled < 70) {
-                bar.style.background = "#F6E05E"; // Yellow/Gold
+                bar.style.background = "#F7D426"; // Yellow
             } else {
                 bar.style.background = "#98FF98"; // Green
             }
