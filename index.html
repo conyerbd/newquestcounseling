@@ -51,6 +51,11 @@
             scroll-behavior: smooth;
         }
 
+        /* Offset for anchor links to account for sticky nav */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
         /* Custom Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -107,6 +112,17 @@
         .stat-row:hover .stat-bar-fill {
             filter: brightness(1.1);
         }
+
+        /* Nav collapse */
+        #nav-top-row {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            max-height: 12rem; /* 192px = h-48 */
+            overflow: hidden;
+        }
+        #nav-top-row.collapsed {
+            max-height: 0 !important;
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="bg-quest-bg font-body text-quest-dark antialiased overflow-x-hidden">
@@ -139,12 +155,8 @@
                     </a>
                 </div>
 
-                <!-- Get Started Button (Desktop) -->
-                <div class="hidden md:flex flex-col items-end w-1/3 justify-center gap-2">
-                    <a href="#contact" class="bg-quest-red text-white px-6 py-3 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-base font-heading font-bold">
-                        Get Started
-                    </a>
-                </div>
+                <!-- Spacer for desktop layout -->
+                <div class="hidden md:block w-1/3"></div>
 
             </div>
 
@@ -152,10 +164,13 @@
             <div class="hidden md:flex justify-center items-center space-x-12 py-4 font-heading font-bold text-quest-slate text-lg">
                 <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
                 <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
-                <a href="#about" class="hover:text-quest-green transition-colors">About Me</a>
+                <a href="about.html" class="hover:text-quest-green transition-colors">About Me</a>
                 <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
-                <a href="#" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
                     Client Portal
+                </a>
+                <a href="#contact" class="bg-quest-red text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    Get Started
                 </a>
             </div>
         </div>
@@ -165,10 +180,10 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
                 <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
                 <a href="#services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
-                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
                 <a href="#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
                 <a href="#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
-                <a href="#" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
             </div>
         </div>
     </nav>
@@ -323,102 +338,8 @@
         </div>
     </section>
 
-    <!-- About (Character Stats) -->
-    <section id="about" class="py-20 bg-white border-y-4 border-quest-blue relative overflow-hidden">
-        <!-- Background Grid Pattern -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#1A3A5C 1px, transparent 1px); background-size: 20px 20px;"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-
-                <!-- The "NPC" Card -->
-                <div class="w-full lg:w-1/2">
-                    <div class="bg-quest-bg rounded-2xl p-6 shadow-pixel border-2 border-quest-dark relative">
-                        <!-- Header of Card -->
-                        <div class="flex items-center border-b-2 border-quest-dark pb-4 mb-4">
-                            <div class="w-20 h-20 rounded-full bg-white overflow-hidden border-2 border-quest-dark mr-4">
-                                <img src="headshot.jpg" alt="Dorasae Rosario" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h3 class="font-heading font-bold text-xl text-quest-dark">Dorasae Rosario</h3>
-                                <p class="text-sm font-pixel text-quest-blue bg-white inline-block px-2 py-1 border border-quest-dark rounded mt-1">MA, LPCC</p>
-                            </div>
-                        </div>
-
-                        <!-- Stats Block -->
-                        <div class="space-y-4 mb-6">
-                            <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
-                                    <span>EMPATHY</span>
-                                    <span>100/100</span>
-                                </div>
-                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
-                                    <div class="bg-quest-red h-full rounded-full stat-bar-fill border-r border-quest-dark" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
-                                    <span>JUDGMENT</span>
-                                    <span>0/100</span>
-                                </div>
-                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
-                                    <div class="bg-quest-dark h-full rounded-full stat-bar-fill" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            <div class="stat-row">
-                                <div class="flex justify-between text-xs font-bold mb-1 text-quest-dark">
-                                    <span>WISDOM</span>
-                                    <span>95/100</span>
-                                </div>
-                                <div class="w-full bg-white border border-quest-dark rounded-full h-3">
-                                    <div class="bg-quest-blue h-full rounded-full stat-bar-fill border-r border-quest-dark" style="width: 95%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Equipment Slots (Specialties) -->
-                        <h4 class="font-bold text-sm mb-2 text-quest-slate uppercase">Clinical Tools</h4>
-                        <div class="flex gap-2">
-                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="CBT">
-                                <i class="fa-solid fa-brain"></i>
-                            </div>
-                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="Mindfulness">
-                                <i class="fa-solid fa-om"></i>
-                            </div>
-                            <div class="w-10 h-10 bg-white border-2 border-quest-dark rounded flex items-center justify-center text-quest-dark tooltip hover:bg-quest-gold transition-colors" title="Listening">
-                                <i class="fa-solid fa-ear-listen"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text Content -->
-                <div class="w-full lg:w-1/2">
-                    <h2 class="text-3xl font-heading font-extrabold text-quest-dark mb-6">Meet Your Guide</h2>
-                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
-                        Looking for someone that can help navigate you through life's ups and downs? Do you need a boost to set you back on your feet so you can show the world who's boss? My goal in therapy is to be your player 2 as we work together to unlock the best person you can be.
-                    </p>
-                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
-                        My passion is empowerment; teaching essential life and coping skills to help you navigate through life in a healthy way. I know you already have it in you, so it's time to help you discover that strength for yourself. You are not alone in this journey, so let's take that next step together.
-                    </p>
-                    <p class="text-lg text-quest-slate mb-4 leading-relaxed">
-                        I have over five years of experience working with children, teens/adolescents, and adults from all walks of life. I am also certified in Prepare and Enrich for my Pre-marital/Marital clients through my Master's program. Through these experiences I can provide a diverse insight for an enriching and well rounded experience.
-                    </p>
-                    <p class="text-lg text-quest-slate mb-6 leading-relaxed">
-                        If you have read this far, I want to congratulate you for taking this first step in wanting to become a healthier you. I know this can be a scary process of journeying into this unknown. I want you to know I'm proud of you for making it this far. If you're ready to take the next step or have any questions, please reach out for a free phone consultation.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm font-bold text-quest-dark flex-wrap">
-                        <span class="flex items-center bg-quest-gold/20 px-3 py-1 rounded-full border border-quest-gold"><i class="fa-solid fa-medal text-quest-gold mr-2"></i> Licensed LPCC</span>
-                        <span class="flex items-center bg-quest-blue/10 px-3 py-1 rounded-full border border-quest-blue"><i class="fa-solid fa-graduation-cap text-quest-blue mr-2"></i> Master's Degree</span>
-                        <span class="flex items-center bg-quest-red/10 px-3 py-1 rounded-full border border-quest-red"><i class="fa-solid fa-heart text-quest-red mr-2"></i> Prepare/Enrich Certified</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Wiki (FAQ) -->
-    <section id="wiki" class="py-20 bg-white/50">
+    <section id="wiki" class="py-20 bg-white/50 border-t-4 border-quest-blue">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <i class="fa-solid fa-book-journal-whills text-4xl text-quest-blue mb-4"></i>
@@ -620,22 +541,41 @@
 
         // Nav Collapse on Scroll
         const navTopRow = document.getElementById('nav-top-row');
-        let lastScroll = 0;
+        let isCollapsed = false;
+        let scrollLock = false;
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            // Collapse nav when scrolled down more than 100px
-            if (currentScroll > 100) {
-                navTopRow.style.height = '0';
-                navTopRow.style.opacity = '0';
-            } else {
-                navTopRow.style.height = '';
-                navTopRow.style.opacity = '1';
+        // Collapse on any downward wheel movement
+        window.addEventListener('wheel', (e) => {
+            if (e.deltaY > 0 && !isCollapsed) {
+                isCollapsed = true;
+                scrollLock = true;
+                navTopRow.classList.add('collapsed');
+                // Lock expansion for 300ms to prevent jitter
+                setTimeout(() => { scrollLock = false; }, 300);
             }
+        }, { passive: true });
 
-            lastScroll = currentScroll;
-        });
+        // Handle scroll position changes
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0 && !isCollapsed) {
+                isCollapsed = true;
+                scrollLock = true;
+                navTopRow.classList.add('collapsed');
+                setTimeout(() => { scrollLock = false; }, 300);
+            } else if (window.scrollY <= 5 && isCollapsed && !scrollLock) {
+                // Expand when at or very near top (within 5px)
+                isCollapsed = false;
+                navTopRow.classList.remove('collapsed');
+            }
+        }, { passive: true });
+
+        // Also check on wheel up when near top
+        window.addEventListener('wheel', (e) => {
+            if (e.deltaY < 0 && window.scrollY <= 5 && isCollapsed && !scrollLock) {
+                isCollapsed = false;
+                navTopRow.classList.remove('collapsed');
+            }
+        }, { passive: true });
 
         // Health Bar Scroll Effect
         window.addEventListener('scroll', () => {
