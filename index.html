@@ -120,7 +120,7 @@
     <nav class="bg-white/95 backdrop-blur-md border-b-4 border-quest-blue sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Top row: Logo centered, Get Started on right -->
-            <div class="flex justify-between items-center h-36 md:h-48 relative">
+            <div id="nav-top-row" class="flex justify-between items-center h-36 md:h-48 relative transition-all duration-300 overflow-hidden">
 
                 <!-- Mobile Menu Button (Absolute Left on Mobile) -->
                 <div class="flex items-center md:hidden absolute left-0 z-20">
@@ -149,7 +149,7 @@
             </div>
 
             <!-- Bottom row: Navigation links and Client Portal centered (Desktop only) -->
-            <div class="hidden md:flex justify-center items-center space-x-12 pb-4 font-heading font-bold text-quest-slate text-lg">
+            <div class="hidden md:flex justify-center items-center space-x-12 py-4 font-heading font-bold text-quest-slate text-lg">
                 <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
                 <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
                 <a href="#about" class="hover:text-quest-green transition-colors">About Me</a>
@@ -617,6 +617,25 @@
             document.getElementById('contact-iframe').src = '';
             document.body.style.overflow = '';
         }
+
+        // Nav Collapse on Scroll
+        const navTopRow = document.getElementById('nav-top-row');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            // Collapse nav when scrolled down more than 100px
+            if (currentScroll > 100) {
+                navTopRow.style.height = '0';
+                navTopRow.style.opacity = '0';
+            } else {
+                navTopRow.style.height = '';
+                navTopRow.style.opacity = '1';
+            }
+
+            lastScroll = currentScroll;
+        });
 
         // Health Bar Scroll Effect
         window.addEventListener('scroll', () => {
