@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quest Counseling Ad</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Centers the ad on the page and adds padding so it doesn't hug the edges of the preview window */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e5e7eb; 
+            padding: 20px;
+        }
+
+        /* The strict 1080x1080 Ad Container */
+        .ad-container {
+            width: 1080px;
+            height: 1080px;
+            background-color: #ffffff;
+            background-image: radial-gradient(#d1d5db 3px, transparent 3px);
+            background-size: 40px 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 70px 40px;
+            color: #002D62;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0; 
+            border: 12px solid #002D62;
+            border-radius: 40px;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            margin-bottom: -20px;
+            margin-left: -30px;
+            margin-top: -10px;
+            text-align: left;
+        }
+        .logo-container img {
+            width: 70%;
+            height: auto;
+        }
+
+        /* Content Wrapper to sit above the background elements */
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 95px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #002D62;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #FF4C8B; /* Pink from the hearts in the logo */
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-color: #FFD100; /* Yellow from the logo */
+            z-index: -1;
+            border-radius: 10px;
+        }
+
+        p.subtitle {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #4B5563;
+            max-width: 850px;
+        }
+
+        /* Bottom bar: button + branding in one row */
+        .bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 5px dashed #cbd5e1;
+            padding-top: 25px;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            background-color: #FFD100;
+            color: #002D62;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            border-radius: 18px;
+            border: 5px solid #002D62;
+            box-shadow: 0 6px 0 #002D62;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            flex-shrink: 0;
+        }
+
+        .branding {
+            text-align: right;
+        }
+
+        .tagline {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 24px;
+            color: #002D62;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tagline.url {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .subtext {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 30px;
+            font-weight: 600;
+            color: #FF4C8B;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This container is strictly 1080x1080px -->
+    <div class="ad-container" id="ad-capture-area">
+        
+        <div class="logo-container">
+            <img src="logo.svg" alt="New Quest Counseling Logo">
+        </div>
+
+        <div class="content">
+            <h1>Life didn't come <br>with a <span class="highlight">walkthrough.</span></h1>
+            
+            <p class="subtitle">
+                But you don't have to play solo. <br>
+                Upgrade your mental health and unlock your potential with <strong>a guide that gets you.</strong>
+            </p>
+
+        </div>
+
+        <p class="subtext">Specialized Therapy for Geeks &amp; Gamers.</p>
+
+        <div class="bottom-bar">
+            <div class="btn">Start Your Quest</div>
+            <div class="branding">
+                <div class="tagline">Level Up Your Life</div>
+                <div class="tagline url">NEWQUESTCOUNSELING.COM</div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
