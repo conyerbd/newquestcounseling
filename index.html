@@ -544,6 +544,7 @@
             document.getElementById('contact-modal').classList.remove('hidden');
             document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
             document.body.style.overflow = 'hidden';
+            if (typeof fbq !== 'undefined') fbq('track', 'Contact');
         }
 
         function closeContactForm() {
