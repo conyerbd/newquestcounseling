@@ -553,6 +553,46 @@
             document.body.style.overflow = '';
         }
 
+        // Meta Pixel Event Tracking
+        function trackEvent(event, params) {
+            if (typeof fbq !== 'undefined') fbq('track', event, params || {});
+        }
+
+        // Track "Schedule Consult" and "Learn More" clicks
+        document.querySelectorAll('a[href="#contact"]').forEach(link => {
+            link.addEventListener('click', () => {
+                trackEvent('Schedule');
+            });
+        });
+
+        // Track when services section scrolls into view
+        const servicesSection = document.getElementById('services');
+        if (servicesSection) {
+            const servicesObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        trackEvent('ViewContent', {content_name: 'Services'});
+                        servicesObserver.disconnect();
+                    }
+                });
+            }, {threshold: 0.3});
+            servicesObserver.observe(servicesSection);
+        }
+
+        // Track when FAQ section scrolls into view
+        const faqSection = document.getElementById('wiki');
+        if (faqSection) {
+            const faqObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        trackEvent('ViewContent', {content_name: 'FAQ'});
+                        faqObserver.disconnect();
+                    }
+                });
+            }, {threshold: 0.3});
+            faqObserver.observe(faqSection);
+        }
+
         // Nav Collapse on Scroll
         const navTopRow = document.getElementById('nav-top-row');
         let isCollapsed = false;
