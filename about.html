@@ -157,19 +157,16 @@
             transition: height 0.35s ease;
         }
         .nav-links {
-            flex: 1 1 auto;
+            /* content-sized, so the parent can center logo + links as one group */
+            flex: 0 0 auto;
             justify-content: center;
         }
         #site-nav.compact .nav-logo-link {
             flex-basis: auto;             /* shares the row with the links */
-            justify-content: flex-start;
             padding: 0.4rem 1.5rem 0.4rem 0;
         }
         #site-nav.compact .nav-logo {
             height: 4.5rem;
-        }
-        #site-nav.compact .nav-links {
-            justify-content: flex-start;
         }
 
         /* Mobile: logo shrinks in place, never hidden */
@@ -225,7 +222,7 @@
 
             <!-- Desktop bar: logo centered above the links; on scroll it shrinks
                  and moves inline to the left of "Home Base" -->
-            <div class="hidden md:flex flex-wrap items-center">
+            <div class="hidden md:flex flex-wrap items-center justify-center">
                 <a href="index.html#home" class="nav-logo-link group" aria-label="New Quest Counseling home">
                     <img src="logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo group-hover:scale-105 transition-transform">
                 </a>
@@ -481,8 +478,12 @@
         // Driven purely by scroll position (with a hysteresis gap so it can't
         // flutter), so the logo is always in the right state on load.
         const siteNav = document.getElementById('site-nav');
-        const COMPACT_AT = 80;   // scroll past this -> compact
-        const EXPAND_AT = 20;    // scroll back above this -> full size
+        // Thresholds are deliberately tight: a single wheel tick must land
+        // past COMPACT_AT, otherwise the nav sits at full height over
+        // already-scrolled content and looks stuck. The small gap between the
+        // two values is only there to absorb sub-pixel scroll jitter.
+        const COMPACT_AT = 8;    // scroll past this -> compact
+        const EXPAND_AT = 3;     // scroll back above this -> full size
 
         function updateNav() {
             const y = window.scrollY;
