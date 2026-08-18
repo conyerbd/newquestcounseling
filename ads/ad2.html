@@ -91,6 +91,16 @@
             border-radius: 10px;
         }
 
+        /* "School" swap-in: yellow with navy outline like the logo lettering, slight tilt */
+        .school {
+            display: inline-block;
+            color: #FFD100;
+            -webkit-text-stroke: 4px #002D62;
+            paint-order: stroke fill;
+            transform: rotate(-3deg);
+            text-shadow: 4px 5px 0 rgba(0, 45, 98, 0.25);
+        }
+
         p.subtitle {
             font-size: 36px;
             font-weight: 700;
@@ -178,7 +188,7 @@
 
         <div class="content">
             <span class="badge">New School Year, New Quest</span>
-            <h1>Life didn't come <br>with a <span class="highlight">walkthrough.</span></h1>
+            <h1><span class="school">School</span> didn't come <br>with a <span class="highlight">walkthrough.</span></h1>
 
             <p class="subtitle">
                 New backpacks. New schedules. New stress. <br>
