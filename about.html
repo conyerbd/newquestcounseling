@@ -40,7 +40,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -66,119 +66,22 @@
                         }
                     },
                     fontFamily: {
-                        heading: ['Nunito', 'sans-serif'],
+                        heading: ['Fredoka', 'Nunito', 'sans-serif'],
                         body: ['Open Sans', 'sans-serif'],
                         pixel: ['"Press Start 2P"', 'cursive'],
                     },
                     boxShadow: {
-                        'pixel': '4px 4px 0px 0px rgba(26, 58, 92, 0.2)',
-                        'pixel-hover': '6px 6px 0px 0px rgba(232, 90, 143, 0.4)',
+                        'pixel': '5px 5px 0px 0px #1A3A5C', /* Solid navy sticker shadow, like the ads */
+                        'pixel-hover': '8px 8px 0px 0px #E85A8F', /* Solid pink lift on hover */
                     }
                 }
             }
         }
     </script>
 
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Offset for anchor links to account for sticky nav */
-        section[id] {
-            scroll-margin-top: 100px;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .float-anim {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        #health-bar-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background-color: #1A3A5C;
-            z-index: 1000;
-        }
-
-        #health-bar {
-            height: 100%;
-            background: #E85A8F;
-            width: 0%;
-            transition: width 0.2s ease-out;
-            border-right: 2px solid #fff;
-        }
-
-        #mobile-menu {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-        #mobile-menu.open {
-            max-height: 400px;
-            opacity: 1;
-        }
-
-        .btn-pixel {
-            position: relative;
-            transition: all 0.1s;
-        }
-        .btn-pixel:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.1);
-        }
-
-        .stat-row:hover .stat-bar-fill {
-            filter: brightness(1.1);
-        }
-
-        /* Nav: the logo is always visible. At the top of the page it sits
-           large and centered above the links; once you scroll it shrinks and
-           slides left to sit inline with "Home Base". */
-        .nav-logo-link {
-            flex: 0 0 100%;               /* own line -> links wrap beneath */
-            display: flex;
-            justify-content: center;
-            padding: 0.75rem 0 0.25rem;
-            transition: flex-basis 0.35s ease, padding 0.35s ease;
-        }
-        .nav-logo {
-            height: 11rem;
-            width: auto;
-            transition: height 0.35s ease;
-        }
-        .nav-links {
-            /* content-sized, so the parent can center logo + links as one group */
-            flex: 0 0 auto;
-            justify-content: center;
-        }
-        #site-nav.compact .nav-logo-link {
-            flex-basis: auto;             /* shares the row with the links */
-            padding: 0.4rem 1.5rem 0.4rem 0;
-        }
-        #site-nav.compact .nav-logo {
-            height: 4.5rem;
-        }
-
-        /* Mobile: logo shrinks in place, never hidden */
-        .nav-logo-mobile {
-            height: 7rem;
-            width: auto;
-            transition: height 0.35s ease;
-        }
-        #site-nav.compact .nav-logo-mobile {
-            height: 3.5rem;
-        }
-    </style>
+    <!-- Site design layer: dot-grid paper, sticker shadows, Fredoka headings, motion -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="enhance.js" defer></script>
 
     <!-- Structured Data: therapist profile -->
     <script type="application/ld+json">

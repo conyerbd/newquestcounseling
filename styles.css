@@ -1,0 +1,374 @@
+/* ==========================================================================
+   New Quest Counseling — design layer
+   Carries the ad/logo design language (dot-grid paper, chunky navy sticker
+   shadows, Fredoka bubble headings, pink+gold highlight swipes) through the
+   whole site. Loaded by index.html and about.html after Tailwind.
+   ========================================================================== */
+
+/* Palette is the existing site palette, unchanged. This layer only adds
+   texture, depth, and motion on top of the same colors. */
+:root {
+    --nq-navy: #1A3A5C;
+    --nq-pink: #E85A8F;
+    --nq-pink-dark: #C9265F;
+    --nq-gold: #F7D426;
+    --nq-mint: #98FF98;
+    --nq-sky: #B3D4E8;
+}
+
+/* --------------------------------------------------------------------------
+   Foundation
+   -------------------------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Dot-grid texture (from the ad creatives) over the same light-blue background */
+body {
+    background-color: var(--nq-sky);
+    background-image: radial-gradient(rgba(26, 58, 92, 0.18) 2px, transparent 2px);
+    background-size: 34px 34px;
+}
+
+/* White sections keep a fainter, tighter grid so the paper feel is continuous */
+body section.bg-white {
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(26, 58, 92, 0.09) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+}
+
+/* Tinted sections: same light blue as today, with the grid texture */
+body section.bg-quest-bg,
+body section.bg-white\/50 {
+    background-color: var(--nq-sky);
+    background-image: radial-gradient(rgba(26, 58, 92, 0.14) 2px, transparent 2px);
+    background-size: 34px 34px;
+}
+
+section {
+    position: relative;
+}
+
+/* Candy accent strip along the top of bordered sections */
+body section.border-t-4::before,
+body section.border-y-4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 7px;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--nq-gold) 0 18px,
+        var(--nq-navy) 18px 36px,
+        var(--nq-pink) 36px 54px,
+        var(--nq-navy) 54px 72px
+    );
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Typography — Fredoka bubble headings, matching the logo and ads
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3,
+.font-heading {
+    font-family: 'Fredoka', 'Nunito', sans-serif !important;
+}
+
+h1 { letter-spacing: -0.01em; }
+
+/* Hero headline: the ad treatment. Pink word with a gold swipe behind it. */
+#home h1 {
+    font-weight: 600;
+}
+
+#home h1 span {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    color: var(--nq-pink);
+    rotate: -1.5deg;
+}
+
+#home h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 0.08em;
+    left: -0.05em;
+    right: -0.05em;
+    height: 0.22em;
+    background-color: var(--nq-gold);
+    border-radius: 999px;
+    z-index: -1;
+}
+
+/* --------------------------------------------------------------------------
+   Sticker shadows & chunky borders
+   -------------------------------------------------------------------------- */
+
+.border-2 { border-width: 2.5px; }
+
+.btn-pixel {
+    position: relative;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-width: 3px !important;
+}
+
+.btn-pixel:active {
+    transform: translate(3px, 3px) !important;
+    box-shadow: 1px 1px 0px 0px var(--nq-navy) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
+#site-nav {
+    box-shadow: 0 4px 0 0 rgba(26, 58, 92, 0.12);
+}
+
+/* Gold swipe underline on text links */
+.nav-links a:not(.btn-pixel) {
+    position: relative;
+    padding-bottom: 2px;
+    background-image: linear-gradient(var(--nq-gold), var(--nq-gold));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 5px;
+    transition: background-size 0.25s ease, color 0.2s ease;
+    border-radius: 2px;
+}
+
+.nav-links a:not(.btn-pixel):hover,
+.nav-links a[aria-current="page"] {
+    background-size: 100% 5px;
+}
+
+/* Nav logo mechanics (shrinks + slides left on scroll) */
+.nav-logo-link {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 0 0.25rem;
+    transition: flex-basis 0.35s ease, padding 0.35s ease;
+}
+.nav-logo {
+    height: 11rem;
+    width: auto;
+    transition: height 0.35s ease;
+}
+.nav-links {
+    flex: 0 0 auto;
+    justify-content: center;
+}
+#site-nav.compact .nav-logo-link {
+    flex-basis: auto;
+    padding: 0.4rem 1.5rem 0.4rem 0;
+}
+#site-nav.compact .nav-logo {
+    height: 4.5rem;
+}
+.nav-logo-mobile {
+    height: 7rem;
+    width: auto;
+    transition: height 0.35s ease;
+}
+#site-nav.compact .nav-logo-mobile {
+    height: 3.5rem;
+}
+
+/* Mobile menu */
+#mobile-menu {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+#mobile-menu.open {
+    max-height: 400px;
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Health bar
+   -------------------------------------------------------------------------- */
+
+#health-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: var(--nq-navy);
+    z-index: 1000;
+}
+
+#health-bar {
+    position: relative;
+    height: 100%;
+    background: var(--nq-pink);
+    width: 0%;
+    transition: width 0.2s ease-out;
+    border-right: 2px solid #fff;
+}
+
+/* Pixel-segment sheen over whatever color the JS sets */
+#health-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.28) 0 8px,
+        transparent 8px 16px
+    );
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Cards — sticker lift + tilt on hover
+   -------------------------------------------------------------------------- */
+
+.shadow-pixel {
+    transition: box-shadow 0.25s ease, transform 0.25s ease, rotate 0.25s ease, border-color 0.25s ease;
+}
+
+#services .grid > div:hover,
+section.bg-white .grid > div:hover {
+    rotate: -0.6deg;
+}
+
+#services .grid > div:nth-child(2):hover,
+section.bg-white .grid > div:nth-child(2):hover {
+    rotate: 0.6deg;
+}
+
+/* Icon chips get a playful wiggle when their card is hovered */
+@keyframes nq-wiggle {
+    0%, 100% { rotate: 0deg; }
+    25% { rotate: -8deg; }
+    75% { rotate: 8deg; }
+}
+
+#services .grid > div:hover i.fa-solid,
+section.bg-white .grid > div:hover .rounded-full i {
+    animation: nq-wiggle 0.45s ease-in-out;
+    display: inline-block;
+}
+
+.stat-row:hover .stat-bar-fill {
+    filter: brightness(1.1);
+}
+
+/* --------------------------------------------------------------------------
+   FAQ accordion
+   -------------------------------------------------------------------------- */
+
+.faq-content {
+    animation: nq-faq-open 0.3s ease-out;
+}
+
+@keyframes nq-faq-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.faq-toggle i {
+    background: var(--nq-sky);
+    border: 2px solid var(--nq-navy);
+    border-radius: 8px;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Contact + footer atmosphere
+   -------------------------------------------------------------------------- */
+
+#contact .bg-quest-dark,
+footer.bg-quest-dark {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px);
+    background-size: 28px 28px;
+}
+
+/* --------------------------------------------------------------------------
+   Motion — hero load-in and scroll reveals
+   -------------------------------------------------------------------------- */
+
+@keyframes float {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-12px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.float-anim {
+    animation: float 4.5s ease-in-out infinite;
+}
+
+/* Hero: staggered entrance on page load */
+@keyframes nq-rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#home .text-center > * {
+    animation: nq-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#home .text-center > *:nth-child(1) { animation-delay: 0.05s; }
+#home .text-center > *:nth-child(2) { animation-delay: 0.15s; }
+#home .text-center > *:nth-child(3) { animation-delay: 0.25s; }
+#home .text-center > *:nth-child(4) { animation-delay: 0.35s; }
+#home .text-center > *:nth-child(5) { animation-delay: 0.45s; }
+#home .text-center > *:nth-child(6) { animation-delay: 0.55s; }
+
+/* Scroll reveal: enhance.js adds .in-view to sections as they enter */
+.nq-reveal section .grid > div,
+.nq-reveal section .space-y-4 > div {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nq-reveal section.in-view .grid > div,
+.nq-reveal section.in-view .space-y-4 > div {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nq-reveal section.in-view .grid > div:nth-child(2),
+.nq-reveal section.in-view .space-y-4 > div:nth-child(2) { transition-delay: 0.1s; }
+.nq-reveal section.in-view .grid > div:nth-child(3),
+.nq-reveal section.in-view .space-y-4 > div:nth-child(3) { transition-delay: 0.2s; }
+.nq-reveal section.in-view .space-y-4 > div:nth-child(4) { transition-delay: 0.3s; }
+
+/* Respect reduced-motion preferences: everything lands instantly */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .nq-reveal section .grid > div,
+    .nq-reveal section .space-y-4 > div {
+        opacity: 1;
+        transform: none;
+    }
+}
