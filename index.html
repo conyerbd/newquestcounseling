@@ -56,6 +56,7 @@
                             'red-dark': '#C9265F', /* Darker pink: small text on color (WCAG AA 5.35:1 vs white) */
                             blue: '#1A3A5C',    /* User: Navy (Outlines/Text) */
                             green: '#98FF98',   /* Stamina Green (Kept for health bar) */
+                            'green-dark': '#137A42', /* Green for text on light backgrounds (5.40:1 vs white) */
                             gold: '#F7D426',    /* User: Lightning Yellow (Accent) */
                             dark: '#1A3A5C',    /* User: Navy (Main Text) */
                             slate: '#2A4460',   /* Lighter Navy (Secondary Text) */
@@ -84,7 +85,7 @@
 
         /* Offset for anchor links to account for sticky nav */
         section[id] {
-            scroll-margin-top: 80px;
+            scroll-margin-top: 100px;
         }
 
         /* Custom Animations */
@@ -144,15 +145,45 @@
             filter: brightness(1.1);
         }
 
-        /* Nav collapse */
-        #nav-top-row {
-            transition: max-height 0.3s ease, opacity 0.3s ease;
-            max-height: 12rem; /* 192px = h-48 */
-            overflow: hidden;
+        /* Nav: the logo is always visible. At the top of the page it sits
+           large and centered above the links; once you scroll it shrinks and
+           slides left to sit inline with "Home Base". */
+        .nav-logo-link {
+            flex: 0 0 100%;               /* own line -> links wrap beneath */
+            display: flex;
+            justify-content: center;
+            padding: 0.75rem 0 0.25rem;
+            transition: flex-basis 0.35s ease, padding 0.35s ease;
         }
-        #nav-top-row.collapsed {
-            max-height: 0 !important;
-            opacity: 0;
+        .nav-logo {
+            height: 11rem;
+            width: auto;
+            transition: height 0.35s ease;
+        }
+        .nav-links {
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+        #site-nav.compact .nav-logo-link {
+            flex-basis: auto;             /* shares the row with the links */
+            justify-content: flex-start;
+            padding: 0.4rem 1.5rem 0.4rem 0;
+        }
+        #site-nav.compact .nav-logo {
+            height: 4.5rem;
+        }
+        #site-nav.compact .nav-links {
+            justify-content: flex-start;
+        }
+
+        /* Mobile: logo shrinks in place, never hidden */
+        .nav-logo-mobile {
+            height: 7rem;
+            width: auto;
+            transition: height 0.35s ease;
+        }
+        #site-nav.compact .nav-logo-mobile {
+            height: 3.5rem;
         }
     </style>
 
@@ -206,45 +237,37 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="bg-white/95 backdrop-blur-md border-b-4 border-quest-blue sticky top-0 z-50">
+    <nav id="site-nav" class="bg-white/95 backdrop-blur-md border-b-4 border-quest-blue sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Top row: Logo centered, Get Started on right -->
-            <div id="nav-top-row" class="flex justify-between items-center h-36 md:h-48 relative transition-all duration-300 overflow-hidden">
 
-                <!-- Mobile Menu Button (Absolute Left on Mobile) -->
-                <div class="flex items-center md:hidden absolute left-0 z-20">
-                    <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="text-quest-dark hover:text-quest-red focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-3xl" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <!-- Spacer for desktop layout -->
-                <div class="hidden md:block w-1/3"></div>
-
-                <!-- Center Logo -->
-                <div class="flex justify-center w-full md:w-1/3">
-                    <a href="#home" class="group z-10" aria-label="New Quest Counseling home">
-                        <img src="logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="h-32 md:h-44 w-auto group-hover:scale-105 transition-transform">
-                    </a>
-                </div>
-
-                <!-- Spacer for desktop layout -->
-                <div class="hidden md:block w-1/3"></div>
-
+            <!-- Mobile bar: hamburger left, logo centered (shrinks on scroll) -->
+            <div class="flex md:hidden items-center relative py-2">
+                <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="text-quest-dark hover:text-quest-red focus:outline-none p-2 absolute left-0 z-20">
+                    <i class="fa-solid fa-bars text-3xl" aria-hidden="true"></i>
+                </button>
+                <a href="#home" class="group mx-auto z-10" aria-label="New Quest Counseling home">
+                    <img src="logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo-mobile group-hover:scale-105 transition-transform">
+                </a>
             </div>
 
-            <!-- Bottom row: Navigation links and Client Portal centered (Desktop only) -->
-            <div class="hidden md:flex justify-center items-center space-x-12 py-4 font-heading font-bold text-quest-slate text-lg">
-                <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
-                <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
-                <a href="about.html" class="hover:text-quest-green transition-colors">About Me</a>
-                <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
-                <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
-                    Client Portal
+            <!-- Desktop bar: logo centered above the links; on scroll it shrinks
+                 and moves inline to the left of "Home Base" -->
+            <div class="hidden md:flex flex-wrap items-center">
+                <a href="#home" class="nav-logo-link group" aria-label="New Quest Counseling home">
+                    <img src="logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo group-hover:scale-105 transition-transform">
                 </a>
-                <a href="#contact" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
-                    Get Started
-                </a>
+                <div class="nav-links flex items-center space-x-10 py-3 font-heading font-bold text-quest-slate text-lg">
+                    <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
+                    <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
+                    <a href="about.html" class="hover:text-quest-green-dark transition-colors">About Me</a>
+                    <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
+                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                        Client Portal
+                    </a>
+                    <a href="#contact" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                        Get Started
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -700,43 +723,24 @@
             faqObserver.observe(faqSection);
         }
 
-        // Nav Collapse on Scroll
-        const navTopRow = document.getElementById('nav-top-row');
-        let isCollapsed = false;
-        let scrollLock = false;
+        // Nav: shrink the logo and move it inline once the page is scrolled.
+        // Driven purely by scroll position (with a hysteresis gap so it can't
+        // flutter), so the logo is always in the right state on load.
+        const siteNav = document.getElementById('site-nav');
+        const COMPACT_AT = 80;   // scroll past this -> compact
+        const EXPAND_AT = 20;    // scroll back above this -> full size
 
-        // Collapse on any downward wheel movement
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0 && !isCollapsed) {
-                isCollapsed = true;
-                scrollLock = true;
-                navTopRow.classList.add('collapsed');
-                // Lock expansion for 300ms to prevent jitter
-                setTimeout(() => { scrollLock = false; }, 300);
+        function updateNav() {
+            const y = window.scrollY;
+            if (y > COMPACT_AT) {
+                siteNav.classList.add('compact');
+            } else if (y < EXPAND_AT) {
+                siteNav.classList.remove('compact');
             }
-        }, { passive: true });
+        }
 
-        // Handle scroll position changes
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 0 && !isCollapsed) {
-                isCollapsed = true;
-                scrollLock = true;
-                navTopRow.classList.add('collapsed');
-                setTimeout(() => { scrollLock = false; }, 300);
-            } else if (window.scrollY <= 5 && isCollapsed && !scrollLock) {
-                // Expand when at or very near top (within 5px)
-                isCollapsed = false;
-                navTopRow.classList.remove('collapsed');
-            }
-        }, { passive: true });
-
-        // Also check on wheel up when near top
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY < 0 && window.scrollY <= 5 && isCollapsed && !scrollLock) {
-                isCollapsed = false;
-                navTopRow.classList.remove('collapsed');
-            }
-        }, { passive: true });
+        updateNav(); // match the state to wherever the page actually opens
+        window.addEventListener('scroll', updateNav, { passive: true });
 
         // Health Bar Scroll Effect
         window.addEventListener('scroll', () => {
