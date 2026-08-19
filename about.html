@@ -336,10 +336,24 @@
     <section class="py-16 bg-quest-bg">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-heading font-bold text-quest-dark mb-4">Ready to Start Your New Adventure?</h2>
-            <p class="text-lg text-quest-slate mb-8">Take the first step towards becoming a healthier you. Schedule a free consultation today.</p>
-            <a href="index.html#contact" class="inline-block bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
-                Schedule Consult
+            <p class="text-lg text-quest-slate mb-8">Take the first step towards becoming a healthier you. Schedule a free 15-minute consultation today.</p>
+
+            <!-- Goes to the home page and opens the contact form straight away -->
+            <a href="index.html?contact=open" class="inline-flex items-center gap-3 bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                Open Contact Form
             </a>
+
+            <!-- Direct contact too, so nobody has to go back to the home page for it -->
+            <p class="mt-10 mb-4 font-pixel text-xs text-quest-slate">OR REACH ME DIRECTLY</p>
+            <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-4">
+                <a href="tel:5136229072" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all">
+                    <i class="fa-solid fa-phone text-quest-green-dark" aria-hidden="true"></i> (513) 622-9072
+                </a>
+                <a href="mailto:dorasae@newquestcounseling.com" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all text-sm sm:text-base break-all">
+                    <i class="fa-solid fa-envelope text-quest-red-dark shrink-0" aria-hidden="true"></i> dorasae@newquestcounseling.com
+                </a>
+            </div>
         </div>
     </section>
 

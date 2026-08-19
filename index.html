@@ -580,6 +580,22 @@
             }
         });
 
+        // Arriving from the about page's "Open Contact Form" button: open it on
+        // landing so the visitor doesn't have to find the button again.
+        // Waits for DOMContentLoaded so deferred tracking.js has registered
+        // nqTrack and the Lead event isn't dropped.
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.search.indexOf('contact=open') === -1) return;
+            openContactForm();
+            // Drop the parameter so a refresh (or a shared link) doesn't reopen it
+            history.replaceState(null, '', window.location.pathname + window.location.hash);
+            // Re-assert focus once the page has settled; a focus() call this
+            // early in the load doesn't always stick.
+            window.addEventListener('load', () => {
+                document.getElementById('contact-modal-close').focus();
+            }, { once: true });
+        });
+
         // Meta Pixel event tracking (clicks + scroll depth) lives in tracking.js,
         // shared with about.html.
 

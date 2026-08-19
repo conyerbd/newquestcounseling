@@ -59,7 +59,7 @@
 
         // Any CTA pointing at the contact section, on either page
         // ("#contact" here, "index.html#contact" from the about page).
-        if (href === '#contact' || href.indexOf('#contact') !== -1) {
+        if (href.indexOf('#contact') !== -1 || href.indexOf('contact=open') !== -1) {
             trackCustom('CTAClick', {
                 content_name: (link.textContent || '').trim().slice(0, 60) || 'Contact CTA',
                 source_page: document.title
