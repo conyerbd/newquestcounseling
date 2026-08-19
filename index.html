@@ -80,6 +80,7 @@
     <!-- Site design layer: dot-grid paper, sticker shadows, Fredoka headings, motion -->
     <link rel="stylesheet" href="styles.css">
     <script src="enhance.js" defer></script>
+    <script src="tracking.js" defer></script>
 
     <!-- Structured Data: local practice details for search engines -->
     <script type="application/ld+json">
@@ -559,7 +560,9 @@
             document.body.style.overflow = 'hidden';
             // Move focus into the dialog so keyboard users aren't left behind it
             document.getElementById('contact-modal-close').focus();
-            if (typeof fbq !== 'undefined') fbq('track', 'Contact');
+            // Best available conversion signal: the form itself is a cross-origin
+            // iframe, so opening it is as far as we can see.
+            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'Contact Form', content_category: 'Contact' });
         }
 
         function closeContactForm() {
@@ -577,45 +580,8 @@
             }
         });
 
-        // Meta Pixel Event Tracking
-        function trackEvent(event, params) {
-            if (typeof fbq !== 'undefined') fbq('track', event, params || {});
-        }
-
-        // Track "Schedule Consult" and "Learn More" clicks
-        document.querySelectorAll('a[href="#contact"]').forEach(link => {
-            link.addEventListener('click', () => {
-                trackEvent('Schedule');
-            });
-        });
-
-        // Track when services section scrolls into view
-        const servicesSection = document.getElementById('services');
-        if (servicesSection) {
-            const servicesObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        trackEvent('ViewContent', {content_name: 'Services'});
-                        servicesObserver.disconnect();
-                    }
-                });
-            }, {threshold: 0.3});
-            servicesObserver.observe(servicesSection);
-        }
-
-        // Track when FAQ section scrolls into view
-        const faqSection = document.getElementById('wiki');
-        if (faqSection) {
-            const faqObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        trackEvent('ViewContent', {content_name: 'FAQ'});
-                        faqObserver.disconnect();
-                    }
-                });
-            }, {threshold: 0.3});
-            faqObserver.observe(faqSection);
-        }
+        // Meta Pixel event tracking (clicks + scroll depth) lives in tracking.js,
+        // shared with about.html.
 
         // Nav: shrink the logo and move it inline once the page is scrolled.
         // Driven purely by scroll position (with a hysteresis gap so it can't
