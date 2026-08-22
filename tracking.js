@@ -1,13 +1,26 @@
 // Meta Pixel event tracking, shared by every page.
 //
 // The contact form is a cross-origin SimplePractice iframe, so the page cannot
-// see submissions. That means there is no true "form submitted" signal to send.
-// Instead we treat the strongest measurable contact actions as the conversion.
+// see submissions with certainty. The widget shows its own "message sent"
+// screen inside the iframe and never navigates or posts a message out, so the
+// page only ever learns that the visitor closed the modal. thank-you.html is
+// the site's stand-in for a submission: closing the form after ten seconds or
+// more is treated as one, and there is a manual "Sent your message? Continue"
+// link under the form for anyone who takes another route. Loading that page
+// is therefore the strongest conversion signal available, and it fires Lead.
+//
+// Intent and completion are deliberately split across two standard events, so
+// one person who sends a message is counted once and not twice: opening the
+// form fires Contact, reaching the confirmation page fires Lead. Optimize on
+// Lead; read Contact as the top of that funnel.
 //
 // STANDARD events (what Meta can optimize and attribute against):
 //
 //   PageView    -> fired by the base pixel snippet in the page head
-//   Lead        -> phone click, email click, contact form opened
+//   Contact     -> contact form opened (intent, no message sent yet)
+//   Lead        -> confirmation page reached, phone click, email click
+//                  (phone and email are completed contact attempts, so they
+//                  belong with the conversion rather than with intent)
 //   ViewContent -> Services / FAQ sections scrolled into view
 //
 // CUSTOM events (readable, one per thing a visitor can actually click, so
@@ -25,13 +38,22 @@
 //   learn-more-family       Family Therapy card
 //   open-contact-form       the button that actually opens the form
 //   contact-form-opened     the form modal is now on screen (any path in)
+//   contact-form-continue   the manual "Sent your message? Continue" link
+//   contact-form-handoff    left the form for the confirmation page; detected_by
+//                           says how (modal-closed in almost every case, or
+//                           postMessage / iframe-navigation if the widget ever
+//                           starts signalling)
+//   contact-form-submitted  the confirmation page loaded
+//   thank-you-home          confirmation page -> home
+//   thank-you-about         confirmation page -> about
 //   phone-click             tel: link
 //   email-click             mailto: link
 //   client-portal           existing client heading to SimplePractice
 //   psychology-today        outbound profile link
 //
-// Every click event carries source_page ("home" or "about"), so the same name
-// can be used on both pages and still be broken down by where it happened.
+// Every click event carries source_page ("home", "about" or "thank-you"), so
+// the same name can be used on every page and still be broken down by where it
+// happened.
 //
 // Names come from data-nq-event="..." in the markup. To track a new link or
 // button, add that attribute - no change is needed in this file.
@@ -64,7 +86,10 @@
 
     // Which page the action happened on, attached to every event so the shared
     // names ("phone-click", "nav-faq") stay breakdown-able.
-    const pageLabel = /about\.html$/.test(window.location.pathname) ? 'about' : 'home';
+    const path = window.location.pathname;
+    const pageLabel = /about\.html$/.test(path) ? 'about'
+        : /thank-you\.html$/.test(path) ? 'thank-you'
+        : 'home';
 
     // Let the inline contact-modal code report the form opening.
     window.nqTrack = track;

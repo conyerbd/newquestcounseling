@@ -495,6 +495,16 @@
                     allow="geolocation"
                 ></iframe>
             </div>
+
+            <!-- The widget is cross-origin, so a submission can't be detected
+                 with certainty. This is the guaranteed path to the confirmation
+                 page for anyone the automatic handoff misses. -->
+            <div class="p-3 border-t-2 border-quest-dark bg-quest-bg text-center">
+                <a href="thank-you.html" data-nq-event="contact-form-continue" class="font-heading font-bold text-quest-red-dark hover:text-quest-red transition-colors">
+                    Sent your message? Continue
+                    <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -552,24 +562,88 @@
 
         // Contact Form Modal Functions
         let lastFocusedBeforeModal = null;
+        const CONTACT_WIDGET_ORIGIN = 'https://dorasae-rosario.clientsecure.me';
+
+        // Handing off to the confirmation page. Everything below can call this;
+        // the flag makes sure only the first caller wins, so a postMessage and
+        // an iframe load for the same submission don't fight over the tab.
+        let handedOffToThankYou = false;
+
+        function goToThankYou(reason) {
+            if (handedOffToThankYou) return;
+            handedOffToThankYou = true;
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: reason, source_page: 'home' });
+            window.location.href = 'thank-you.html';
+        }
+
+        // Path 1: the widget tells us. SimplePractice isn't documented as
+        // posting anything, but if it ever does we take it - strictly from its
+        // own origin, and only for a message that looks like a submission.
+        window.addEventListener('message', (e) => {
+            if (e.origin !== CONTACT_WIDGET_ORIGIN) return;
+            const data = typeof e.data === 'string' ? e.data : (e.data && (e.data.type || e.data.event)) || '';
+            if (/submit|success|complete|thank/i.test(String(data))) goToThankYou('postMessage');
+        });
+
+        // Path 2: the widget navigates itself. The first load is the form; a
+        // later one would mean a new document. In practice the widget shows its
+        // own confirmation in place and never navigates, so this rarely fires -
+        // it stays as a cheap catch in case that ever changes.
+        let contactFormOpenedAt = 0;
+        let contactFormLoads = 0;
+
+        document.getElementById('contact-iframe').addEventListener('load', () => {
+            // Closing the modal blanks the src, which also fires load - ignore it.
+            if (!document.getElementById('contact-iframe').getAttribute('src')) return;
+            contactFormLoads++;
+            if (contactFormLoads < 2) return;
+            if (secondsWithForm() < MIN_FILL_SECONDS) return;
+            goToThankYou('iframe-navigation');
+        });
+
+        // Path 3, the one that actually carries the traffic: the widget puts its
+        // own "message sent" screen inside the iframe, so the last thing anyone
+        // does is close the modal. Closing after long enough to have filled the
+        // form in is treated as a submission and hands off to the confirmation
+        // page instead of dropping the visitor back on the home page. It's a
+        // short form, so ten seconds is the line.
+        const MIN_FILL_SECONDS = 10;
+
+        function secondsWithForm() {
+            if (!contactFormOpenedAt) return 0;   // never opened this page view
+            return (Date.now() - contactFormOpenedAt) / 1000;
+        }
 
         function openContactForm() {
+            contactFormLoads = 0;
+            contactFormOpenedAt = Date.now();
             lastFocusedBeforeModal = document.activeElement;
             document.getElementById('contact-modal').classList.remove('hidden');
             document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
             document.body.style.overflow = 'hidden';
             // Move focus into the dialog so keyboard users aren't left behind it
             document.getElementById('contact-modal-close').focus();
-            // Best available conversion signal: the form itself is a cross-origin
-            // iframe, so opening it is as far as we can see.
-            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-opened', content_category: 'Contact' });
+            // Contact, not Lead: opening the form is intent, not a submission.
+            // Lead is reserved for the confirmation page, so one visitor who
+            // actually sends a message is counted once.
+            if (window.nqTrack) window.nqTrack('Contact', { content_name: 'contact-form-opened', content_category: 'Contact' });
             if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'home' });
         }
 
         function closeContactForm() {
+            const wasOpenLongEnough = secondsWithForm() >= MIN_FILL_SECONDS;
+
             document.getElementById('contact-modal').classList.add('hidden');
             document.getElementById('contact-iframe').src = '';
             document.body.style.overflow = '';
+
+            // Long enough to have sent something: carry on to the confirmation
+            // page rather than leaving them back on the home page.
+            if (wasOpenLongEnough) {
+                goToThankYou('modal-closed');
+                return;
+            }
+
             // Return focus to whatever opened the dialog
             if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
         }
@@ -584,7 +658,7 @@
         // Arriving from the about page's "Open Contact Form" button: open it on
         // landing so the visitor doesn't have to find the button again.
         // Waits for DOMContentLoaded so deferred tracking.js has registered
-        // nqTrack and the Lead event isn't dropped.
+        // nqTrack and the open event isn't dropped.
         document.addEventListener('DOMContentLoaded', () => {
             if (window.location.search.indexOf('contact=open') === -1) return;
             openContactForm();
