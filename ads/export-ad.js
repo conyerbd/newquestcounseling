@@ -46,5 +46,25 @@ const path = require('path');
     });
 
     console.log('Exported ad1-vertical.png (1080x1920)');
+
+    // Export landscape version (1200x628) for feed link ads and Google Display
+    await page.setViewport({ width: 1200, height: 628, deviceScaleFactor: 1 });
+
+    const landscapePath = path.resolve(__dirname, 'ad1-landscape.html');
+    await page.goto(`file://${landscapePath}`, { waitUntil: 'networkidle0' });
+
+    await page.evaluate(() => {
+        document.body.style.padding = '0';
+        document.body.style.margin = '0';
+        document.body.style.minHeight = '628px';
+    });
+
+    await page.screenshot({
+        path: path.resolve(__dirname, 'ad1-landscape.png'),
+        type: 'png',
+        clip: { x: 0, y: 0, width: 1200, height: 628 },
+    });
+
+    console.log('Exported ad1-landscape.png (1200x628)');
     await browser.close();
 })();
