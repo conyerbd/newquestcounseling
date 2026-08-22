@@ -37,7 +37,7 @@ Use the `quest-*` Tailwind classes — never hardcode hex values in markup.
 
 | Class | Font | Usage |
 |-------|------|-------|
-| `font-heading` | Nunito | Headings, navigation, buttons |
+| `font-heading` | Fredoka (Nunito fallback) | Headings, navigation, buttons |
 | `font-body` | Open Sans | Body text, descriptions |
 | `font-pixel` | Press Start 2P | Accent labels, section eyebrows (use sparingly) |
 
@@ -65,6 +65,9 @@ newquestcounseling/
 ├── .claude/instructions.md   (this file)
 ├── index.html                (home: hero, problems, services, insurance, FAQ, contact)
 ├── about.html                 (therapist bio / "character sheet")
+├── styles.css                 (shared: dot-grid paper, sticker shadows, scroll reveal)
+├── enhance.js                 (shared: IntersectionObserver scroll reveal)
+├── tracking.js                (shared: all Meta Pixel event logic)
 ├── favicon.svg                (navy square + yellow bolt; hand-drawn for 16px legibility)
 ├── og-image.png               (1200x630 social/ad share card)
 ├── logo.svg                   (main logo, precision-optimized)
@@ -79,7 +82,7 @@ newquestcounseling/
 ### External Dependencies (CDN)
 - Tailwind CSS via `cdn.tailwindcss.com` — this is the runtime JIT build, not a compiled stylesheet. It logs a production warning and means styles depend on third-party JS. Accepted tradeoff to keep the no-build, single-file-per-page setup.
 - Font Awesome 6.4.0
-- Google Fonts (Nunito, Open Sans, Press Start 2P)
+- Google Fonts (Fredoka, Nunito, Open Sans, Press Start 2P)
 
 ---
 
@@ -108,13 +111,27 @@ Both pages share: mobile menu toggle (syncs `aria-expanded`/`aria-label`), nav c
 
 ## Analytics
 
-Meta Pixel `1395723405642951` is on both pages. Events:
-- `PageView` — both pages
-- `ViewContent` — About page load; Services and FAQ sections on scroll into view (fires once each)
-- `Schedule` — clicks on any `a[href="#contact"]`
-- `Contact` — contact modal opened
+Meta Pixel `1395723405642951` is on both pages. `tracking.js` is shared by both and holds all event logic.
 
-When adding a CTA that should be tracked, point it at `#contact` so it picks up `Schedule` automatically.
+**Standard events** (what Meta can optimize and attribute against):
+
+| Event | Fires on |
+|-------|----------|
+| `PageView` | every page load (base pixel snippet) |
+| `Lead` | phone click, email click, contact form opened |
+| `ViewContent` | Services / FAQ sections scrolled into view; About page load |
+
+**Custom events** — one readable name per thing a visitor can click, so Events Manager says *what* was clicked:
+
+`schedule-consult`, `view-services`, `nav-get-started`, `nav-services`, `nav-about-me`, `nav-faq`, `nav-home`, `learn-more-individual`, `learn-more-couples`, `learn-more-family`, `open-contact-form`, `contact-form-opened`, `phone-click`, `email-click`, `client-portal`, `psychology-today`
+
+Plus engagement depth: `scroll-25` / `scroll-50` / `scroll-75` and `engaged-15s` / `engaged-45s` (visible time only, tab-blur aware).
+
+Every event carries `source_page` (`"home"` or `"about"`) so a shared name can still be broken down by where it happened.
+
+**To track a new link or button:** add `data-nq-event="kebab-case-name"` to it. `tracking.js` reads the attribute — no JS change needed. Name the *action*, not the element. An untagged CTA pointing at `#contact` fires `contact-cta-untagged` carrying its link text, so it surfaces as something to go label.
+
+Deliberately unused: `Schedule` — in Meta's taxonomy that means an appointment was actually booked, which the cross-origin SimplePractice iframe never tells us.
 
 ---
 
@@ -138,7 +155,7 @@ Both pages carry: `meta description`, `canonical`, `theme-color`, favicon links,
 ## Development Guidelines
 
 1. **Edit the HTML directly** — no build process.
-2. **Keep CSS/JS inline** per page; the two pages intentionally duplicate the shared nav/footer/JS. When you change one, check whether the other needs the same change.
+2. **Shared behaviour goes in a shared file** — `styles.css`, `enhance.js`, `tracking.js`. Page-specific CSS/JS stays inline. The two pages still duplicate the nav/footer markup and their nav JS: when you change one, check whether the other needs the same change.
 3. **Test responsiveness** before committing.
 4. **Maintain the gaming theme** but don't overdo it.
 5. **Preserve accessibility** — alt text, semantic HTML, `aria-hidden="true"` on decorative Font Awesome icons, `aria-expanded` on disclosure controls, and the contrast rule above.

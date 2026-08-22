@@ -131,14 +131,14 @@
                     <img src="logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo group-hover:scale-105 transition-transform">
                 </a>
                 <div class="nav-links flex items-center space-x-10 py-3 font-heading font-bold text-quest-slate text-lg">
-                    <a href="index.html#home" class="hover:text-quest-red transition-colors">Home Base</a>
-                    <a href="index.html#services" class="hover:text-quest-blue transition-colors">Services</a>
+                    <a href="index.html#home" data-nq-event="nav-home" class="hover:text-quest-red transition-colors">Home Base</a>
+                    <a href="index.html#services" data-nq-event="nav-services" class="hover:text-quest-blue transition-colors">Services</a>
                     <a href="about.html" class="text-quest-green-dark transition-colors" aria-current="page">About Me</a>
-                    <a href="index.html#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
-                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    <a href="index.html#wiki" data-nq-event="nav-faq" class="hover:text-quest-gold transition-colors">FAQ</a>
+                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
                         Client Portal
                     </a>
-                    <a href="index.html#contact" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    <a href="index.html#contact" data-nq-event="nav-get-started" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
                         Get Started
                     </a>
                 </div>
@@ -148,12 +148,12 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden bg-white border-b-4 border-quest-blue">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
-                <a href="index.html#home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
-                <a href="index.html#services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
+                <a href="index.html#home" data-nq-event="nav-home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
+                <a href="index.html#services" data-nq-event="nav-services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
                 <a href="about.html" class="block px-3 py-2 rounded-md bg-quest-bg text-quest-green-dark" aria-current="page">About Me</a>
-                <a href="index.html#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
-                <a href="index.html#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red-dark text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
-                <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
+                <a href="index.html#wiki" data-nq-event="nav-faq" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
+                <a href="index.html#contact" data-nq-event="nav-get-started" class="block px-3 py-2 mt-4 text-center bg-quest-red-dark text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
             </div>
         </div>
     </nav>
@@ -339,7 +339,7 @@
             <p class="text-lg text-quest-slate mb-8">Take the first step towards becoming a healthier you. Schedule a free 15-minute consultation today.</p>
 
             <!-- Goes to the home page and opens the contact form straight away -->
-            <a href="index.html?contact=open" class="inline-flex items-center gap-3 bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
+            <a href="index.html?contact=open" data-nq-event="open-contact-form" class="inline-flex items-center gap-3 bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                 Open Contact Form
             </a>
@@ -347,10 +347,10 @@
             <!-- Direct contact too, so nobody has to go back to the home page for it -->
             <p class="mt-10 mb-4 font-pixel text-xs text-quest-slate">OR REACH ME DIRECTLY</p>
             <div class="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-4">
-                <a href="tel:5136229072" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all">
+                <a href="tel:5136229072" data-nq-event="phone-click" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all">
                     <i class="fa-solid fa-phone text-quest-green-dark" aria-hidden="true"></i> (513) 622-9072
                 </a>
-                <a href="mailto:dorasae@newquestcounseling.com" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all text-sm sm:text-base break-all">
+                <a href="mailto:dorasae@newquestcounseling.com" data-nq-event="email-click" class="flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all text-sm sm:text-base break-all">
                     <i class="fa-solid fa-envelope text-quest-red-dark shrink-0" aria-hidden="true"></i> dorasae@newquestcounseling.com
                 </a>
             </div>

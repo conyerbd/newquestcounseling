@@ -2,21 +2,45 @@
 //
 // The contact form is a cross-origin SimplePractice iframe, so the page cannot
 // see submissions. That means there is no true "form submitted" signal to send.
-// Instead we treat the strongest measurable contact actions as the conversion:
+// Instead we treat the strongest measurable contact actions as the conversion.
 //
+// STANDARD events (what Meta can optimize and attribute against):
+//
+//   PageView    -> fired by the base pixel snippet in the page head
 //   Lead        -> phone click, email click, contact form opened
-//                  (segmented by content_name so you can still tell them apart)
-//   CTAClick    -> custom; any "Schedule Consult" / "Get Started" / "Learn More"
-//                  click. Intent only, kept OFF the standard events so it can't
-//                  inflate the conversion count.
-//   PortalLogin -> custom; existing clients heading to the client portal.
-//   ViewContent -> scroll depth through the Services and FAQ sections.
+//   ViewContent -> Services / FAQ sections scrolled into view
 //
-// Plus shallow engagement signals, all custom so they stay out of the
+// CUSTOM events (readable, one per thing a visitor can actually click, so
+// Events Manager tells you WHAT was clicked and not just "a CTA was"):
+//
+//   schedule-consult        hero primary button
+//   view-services           hero secondary button
+//   nav-get-started         "Get Started" in the nav (desktop or mobile)
+//   nav-services            nav -> Services
+//   nav-about-me            nav -> About Me
+//   nav-faq                 nav -> FAQ
+//   nav-home                nav -> Home Base (about page only)
+//   learn-more-individual   Individual Therapy card
+//   learn-more-couples      Couples Counseling card
+//   learn-more-family       Family Therapy card
+//   open-contact-form       the button that actually opens the form
+//   contact-form-opened     the form modal is now on screen (any path in)
+//   phone-click             tel: link
+//   email-click             mailto: link
+//   client-portal           existing client heading to SimplePractice
+//   psychology-today        outbound profile link
+//
+// Every click event carries source_page ("home" or "about"), so the same name
+// can be used on both pages and still be broken down by where it happened.
+//
+// Names come from data-nq-event="..." in the markup. To track a new link or
+// button, add that attribute - no change is needed in this file.
+//
+// Plus shallow engagement signals, all custom so they stay out of any
 // conversion count:
 //
-//   Scroll25/50/75          -> how far down the page people actually get
-//   Engaged15s / Engaged45s -> visible time on page, tab-blur aware
+//   scroll-25 / scroll-50 / scroll-75   how far down the page people get
+//   engaged-15s / engaged-45s           visible time on page, tab-blur aware
 //
 // These exist because ViewContent only fires once the Services section is on
 // screen, which is over two phone screens down. Without a shallower signal an
@@ -38,6 +62,10 @@
         window.fbq('trackCustom', event, params || {});
     }
 
+    // Which page the action happened on, attached to every event so the shared
+    // names ("phone-click", "nav-faq") stay breakdown-able.
+    const pageLabel = /about\.html$/.test(window.location.pathname) ? 'about' : 'home';
+
     // Let the inline contact-modal code report the form opening.
     window.nqTrack = track;
     window.nqTrackCustom = trackCustom;
@@ -46,33 +74,40 @@
     // Delegated from the document so it covers both pages, survives markup
     // changes, and picks up keyboard activation (Enter on a link fires click).
     document.addEventListener('click', function (e) {
-        const link = e.target.closest && e.target.closest('a');
-        if (!link) return;
-        const href = link.getAttribute('href') || '';
+        if (!e.target.closest) return;
+        const el = e.target.closest('a, button');
+        if (!el) return;
 
+        const href = el.getAttribute('href') || '';
+        const name = el.getAttribute('data-nq-event');
+
+        // Phone and email are real, completed contact attempts - our best
+        // conversions. They fire Lead (so Meta can optimize on it) AND a
+        // readable custom event (so you can read it in Events Manager).
         if (href.indexOf('tel:') === 0) {
-            // A phone call is a real, completed contact - our best conversion.
-            track('Lead', { content_name: 'Phone Call', content_category: 'Contact' });
+            track('Lead', { content_name: 'phone-click', content_category: 'Contact' });
+            trackCustom('phone-click', { source_page: pageLabel });
             return;
         }
 
         if (href.indexOf('mailto:') === 0) {
-            track('Lead', { content_name: 'Email', content_category: 'Contact' });
+            track('Lead', { content_name: 'email-click', content_category: 'Contact' });
+            trackCustom('email-click', { source_page: pageLabel });
             return;
         }
 
-        if (href.indexOf('clientsecure.me/sign-in') !== -1) {
-            // Existing clients, not new leads - keep it out of the conversion count.
-            trackCustom('PortalLogin');
+        if (name) {
+            trackCustom(name, { source_page: pageLabel });
             return;
         }
 
-        // Any CTA pointing at the contact section, on either page
-        // ("#contact" here, "index.html#contact" from the about page).
+        // Safety net: an untagged CTA pointing at the contact section still
+        // reports something, labelled with its own text so it can be found
+        // and given a proper data-nq-event.
         if (href.indexOf('#contact') !== -1 || href.indexOf('contact=open') !== -1) {
-            trackCustom('CTAClick', {
-                content_name: (link.textContent || '').trim().slice(0, 60) || 'Contact CTA',
-                source_page: document.title
+            trackCustom('contact-cta-untagged', {
+                link_text: (el.textContent || '').trim().slice(0, 60) || 'unknown',
+                source_page: pageLabel
             });
         }
     }, true);
@@ -106,9 +141,9 @@
     // Percentage of the total scrollable distance, matching the health bar at
     // the top of the page. Each milestone fires at most once per page view.
     const scrollMarks = [
-        { pct: 25, event: 'Scroll25' },
-        { pct: 50, event: 'Scroll50' },
-        { pct: 75, event: 'Scroll75' }
+        { pct: 25, event: 'scroll-25' },
+        { pct: 50, event: 'scroll-50' },
+        { pct: 75, event: 'scroll-75' }
     ];
 
     let scrollQueued = false;
@@ -126,7 +161,7 @@
             if (mark.fired) return;
             if (pct >= mark.pct) {
                 mark.fired = true;
-                trackCustom(mark.event, { percent: mark.pct });
+                trackCustom(mark.event, { percent: mark.pct, source_page: pageLabel });
             } else {
                 remaining++;
             }
@@ -148,8 +183,8 @@
     // Counts only seconds where the tab is actually visible, so a page left
     // open in a background tab doesn't read as someone reading it.
     const timeMarks = [
-        { seconds: 15, event: 'Engaged15s' },
-        { seconds: 45, event: 'Engaged45s' }
+        { seconds: 15, event: 'engaged-15s' },
+        { seconds: 45, event: 'engaged-45s' }
     ];
 
     let visibleSeconds = 0;
@@ -163,7 +198,7 @@
             if (mark.fired) return;
             if (visibleSeconds >= mark.seconds) {
                 mark.fired = true;
-                trackCustom(mark.event, { seconds: mark.seconds });
+                trackCustom(mark.event, { seconds: mark.seconds, source_page: pageLabel });
             } else {
                 remaining++;
             }

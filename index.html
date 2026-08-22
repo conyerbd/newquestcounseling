@@ -153,13 +153,13 @@
                 </a>
                 <div class="nav-links flex items-center space-x-10 py-3 font-heading font-bold text-quest-slate text-lg">
                     <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
-                    <a href="#services" class="hover:text-quest-blue transition-colors">Services</a>
-                    <a href="about.html" class="hover:text-quest-green-dark transition-colors">About Me</a>
-                    <a href="#wiki" class="hover:text-quest-gold transition-colors">FAQ</a>
-                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    <a href="#services" data-nq-event="nav-services" class="hover:text-quest-blue transition-colors">Services</a>
+                    <a href="about.html" data-nq-event="nav-about-me" class="hover:text-quest-green-dark transition-colors">About Me</a>
+                    <a href="#wiki" data-nq-event="nav-faq" class="hover:text-quest-gold transition-colors">FAQ</a>
+                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
                         Client Portal
                     </a>
-                    <a href="#contact" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                    <a href="#contact" data-nq-event="nav-get-started" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
                         Get Started
                     </a>
                 </div>
@@ -170,11 +170,11 @@
         <div id="mobile-menu" class="md:hidden bg-white border-b-4 border-quest-blue">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
                 <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
-                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
-                <a href="about.html" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
-                <a href="#wiki" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
-                <a href="#contact" class="block px-3 py-2 mt-4 text-center bg-quest-red-dark text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
-                <a href="https://dorasae-rosario.clientsecure.me/sign-in" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
+                <a href="#services" data-nq-event="nav-services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
+                <a href="about.html" data-nq-event="nav-about-me" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
+                <a href="#wiki" data-nq-event="nav-faq" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
+                <a href="#contact" data-nq-event="nav-get-started" class="block px-3 py-2 mt-4 text-center bg-quest-red-dark text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
             </div>
         </div>
     </nav>
@@ -200,10 +200,10 @@
                     But you don't have to do it alone. Upgrade your mental health, overcome your challenges, and unlock your potential with a guide who gets it.
                 </p>
                 <div class="flex justify-center gap-4 flex-col sm:flex-row">
-                    <a href="#contact" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
+                    <a href="#contact" data-nq-event="schedule-consult" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
                         Schedule Consult
                     </a>
-                    <a href="#services" class="bg-white text-quest-dark border-2 border-quest-dark px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-bg transition-all btn-pixel text-lg">
+                    <a href="#services" data-nq-event="view-services" class="bg-white text-quest-dark border-2 border-quest-dark px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-bg transition-all btn-pixel text-lg">
                         View Services
                     </a>
                 </div>
@@ -280,7 +280,7 @@
                             <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Self-Discovery
                         </li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-blue text-quest-blue font-bold rounded-lg hover:bg-quest-blue hover:text-white transition-colors">Learn More</a>
+                    <a href="#contact" data-nq-event="learn-more-individual" class="block text-center w-full py-3 border-2 border-quest-blue text-quest-blue font-bold rounded-lg hover:bg-quest-blue hover:text-white transition-colors">Learn More</a>
                 </div>
 
                 <!-- Co-Op Mode -->
@@ -302,7 +302,7 @@
                             <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Deep Intimacy
                         </li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-red-dark text-quest-red-dark font-bold rounded-lg hover:bg-quest-red-dark hover:text-white transition-colors">Learn More</a>
+                    <a href="#contact" data-nq-event="learn-more-couples" class="block text-center w-full py-3 border-2 border-quest-red-dark text-quest-red-dark font-bold rounded-lg hover:bg-quest-red-dark hover:text-white transition-colors">Learn More</a>
                 </div>
 
                 <!-- Family Therapy -->
@@ -324,7 +324,7 @@
                             <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Stronger Bonds
                         </li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-700 font-bold rounded-lg hover:bg-quest-gold hover:text-quest-dark transition-colors">Learn More</a>
+                    <a href="#contact" data-nq-event="learn-more-family" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-700 font-bold rounded-lg hover:bg-quest-gold hover:text-quest-dark transition-colors">Learn More</a>
                 </div>
             </div>
 
@@ -424,11 +424,11 @@
                         <div class="space-y-4">
                             <div class="flex items-center">
                                 <i class="fa-solid fa-phone text-quest-green w-8" aria-hidden="true"></i>
-                                <a href="tel:5136229072" class="hover:text-quest-green transition-colors">(513) 622-9072</a>
+                                <a href="tel:5136229072" data-nq-event="phone-click" class="hover:text-quest-green transition-colors">(513) 622-9072</a>
                             </div>
                             <div class="flex items-start">
                                 <i class="fa-solid fa-envelope text-quest-red w-8 mt-1" aria-hidden="true"></i>
-                                <a href="mailto:dorasae@newquestcounseling.com" class="hover:text-quest-red transition-colors text-sm break-all">dorasae@newquestcounseling.com</a>
+                                <a href="mailto:dorasae@newquestcounseling.com" data-nq-event="email-click" class="hover:text-quest-red transition-colors text-sm break-all">dorasae@newquestcounseling.com</a>
                             </div>
                         </div>
                     </div>
@@ -436,7 +436,7 @@
                     <div class="mt-10">
                         <p class="font-pixel text-xs opacity-50 mb-4">FIND ME</p>
                         <div class="flex space-x-4">
-                            <a href="https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447" target="_blank" class="hover:text-quest-gold transition-colors" title="Psychology Today">
+                            <a data-nq-event="psychology-today" href="https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447" target="_blank" class="hover:text-quest-gold transition-colors" title="Psychology Today">
                                 <i class="fa-solid fa-brain text-xl" aria-hidden="true"></i>
                             </a>
                         </div>
@@ -454,7 +454,7 @@
                             Ready to start your new adventure? Click the button below to open our secure contact form and send a message to schedule your free consultation.
                         </p>
 
-                        <button onclick="openContactForm()" class="w-full bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark cursor-pointer">
+                        <button onclick="openContactForm()" data-nq-event="open-contact-form" class="w-full bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark cursor-pointer">
                             <span>Open Contact Form</span>
                             <i class="fa-solid fa-envelope group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
                         </button>
@@ -562,7 +562,8 @@
             document.getElementById('contact-modal-close').focus();
             // Best available conversion signal: the form itself is a cross-origin
             // iframe, so opening it is as far as we can see.
-            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'Contact Form', content_category: 'Contact' });
+            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-opened', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'home' });
         }
 
         function closeContactForm() {
