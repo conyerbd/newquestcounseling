@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Keep charset first. It must land within the first 1024 bytes or the
+         browser falls back to guessing the encoding, and the tag scripts below
+         are long enough to push it past that. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18404659720"></script>
     <script>
@@ -11,8 +17,20 @@
       gtag('config', 'AW-18404659720');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Ads conversion action 7732927162 "Contact form submitted",
+         label rRBlCLq1rOccEIikg8hE. Counted one per click, so a reload of this
+         page does not add a second lead. Fires here rather than on the form
+         button, because reaching this page is the closest thing the site has
+         to a confirmed submission. The form-open click is a separate,
+         Secondary action wired in index.html. -->
+    <script>
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18404659720/rRBlCLq1rOccEIikg8hE',
+          'value': 1.0,
+          'currency': 'USD'
+      });
+    </script>
+
     <title>Message Sent | New Quest Counseling</title>
     <meta name="description" content="Your message to New Quest Counseling is on its way.">
     <!-- Confirmation page: reachable only after the contact form, never from search -->
@@ -161,6 +179,10 @@
         // submission, so it carries the conversion event. Deferred until
         // DOMContentLoaded so tracking.js has registered nqTrack first,
         // otherwise the event is dropped.
+        //
+        // The Google Ads half of this is in <head> instead, since gtag() is
+        // defined inline up there and queues events until gtag.js loads, so it
+        // needs no such deferral.
         document.addEventListener('DOMContentLoaded', () => {
             if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-submitted', content_category: 'Contact' });
             if (window.nqTrackCustom) window.nqTrackCustom('contact-form-submitted', { source_page: 'thank-you' });

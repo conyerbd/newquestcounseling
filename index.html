@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Keep charset first. It must land within the first 1024 bytes or the
+         browser falls back to guessing the encoding, and the tag scripts below
+         are long enough to push it past that. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18404659720"></script>
     <script>
@@ -11,8 +17,29 @@
       gtag('config', 'AW-18404659720');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Ads conversion action 7732881582, label gxwRCK7RqeccEIikg8hE.
+         Called from openContactForm() when a visitor opens the contact form,
+         so it measures intent, not a submitted message. The action gets
+         renamed and demoted to Secondary in Google Ads; neither changes the
+         label, so this keeps working. The url argument is unused here
+         (nothing navigates on open), but it is kept as Google ships it so the
+         same helper works on a link later. -->
+    <!-- Actual form submissions are tracked separately on thank-you.html. -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18404659720/gxwRCK7RqeccEIikg8hE',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
     <title>New Quest Counseling | Therapy in Cincinnati, OH</title>
     <meta name="description" content="Therapy in Cincinnati, Ohio with Dorasae Rosario, LPCC. Individual, couples, and family counseling for anxiety, burnout, and life transitions. Now accepting Anthem and UnitedHealthcare, plus sliding-scale self-pay. Free 15-minute consultation.">
     <link rel="canonical" href="https://www.newquestcounseling.com/">
@@ -601,6 +628,7 @@
         // it stays as a cheap catch in case that ever changes.
         let contactFormOpenedAt = 0;
         let contactFormLoads = 0;
+        let reportedAdsConversion = false;
 
         document.getElementById('contact-iframe').addEventListener('load', () => {
             // Closing the modal blanks the src, which also fires load - ignore it.
@@ -638,6 +666,14 @@
             // actually sends a message is counted once.
             if (window.nqTrack) window.nqTrack('Contact', { content_name: 'contact-form-opened', content_category: 'Contact' });
             if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'home' });
+
+            // Google Ads conversion, once per page view. Closing the form and
+            // opening it again is the same visitor having second thoughts, not
+            // a second lead.
+            if (!reportedAdsConversion) {
+                reportedAdsConversion = true;
+                gtag_report_conversion();
+            }
         }
 
         function closeContactForm() {
