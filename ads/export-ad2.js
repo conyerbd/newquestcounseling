@@ -18,7 +18,7 @@ const path = require('path');
         document.body.style.minHeight = '1080px';
     });
 
-    // Full page clip at 1080x1080 — captures the navy background behind rounded corners
+    // Full page clip at 1080x1080, captures the navy background behind rounded corners
     await page.screenshot({
         path: path.resolve(__dirname, 'ad2.png'),
         type: 'png',

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   New Quest Counseling — design layer
+   New Quest Counseling design layer
    Carries the ad/logo design language (dot-grid paper, chunky navy sticker
    shadows, Fredoka bubble headings, pink+gold highlight swipes) through the
    whole site. Loaded by index.html and about.html after Tailwind.
@@ -76,7 +76,7 @@ body section.border-y-4::before {
 }
 
 /* --------------------------------------------------------------------------
-   Typography — Fredoka bubble headings, matching the logo and ads
+   Typography: Fredoka bubble headings, matching the logo and ads
    -------------------------------------------------------------------------- */
 
 h1, h2, h3,
@@ -237,7 +237,7 @@ h1 { letter-spacing: -0.01em; }
 }
 
 /* --------------------------------------------------------------------------
-   Cards — sticker lift + tilt on hover
+   Cards: sticker lift + tilt on hover
    -------------------------------------------------------------------------- */
 
 .shadow-pixel {
@@ -308,7 +308,7 @@ footer.bg-quest-dark {
 }
 
 /* --------------------------------------------------------------------------
-   Motion — hero load-in and scroll reveals
+   Motion: hero load-in and scroll reveals
    -------------------------------------------------------------------------- */
 
 @keyframes float {
