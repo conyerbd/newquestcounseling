@@ -684,6 +684,44 @@
             if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
         }
 
+        // Path 4: the visitor leaves without closing the modal. Closing the
+        // tab, hitting back, or switching away on a phone never calls
+        // closeContactForm(), so someone who sent a message and then shut the
+        // tab was invisible - which is most of the reason the first campaign
+        // recorded three form opens and zero submissions.
+        //
+        // Same ten-second gate as the close path, so this reports exactly what
+        // that path would have. It cannot navigate anywhere (the page is on
+        // its way out), so it reports the conversion in place instead.
+        let reportedSubmission = false;
+
+        function reportSubmissionOnExit() {
+            if (reportedSubmission || handedOffToThankYou) return;
+            if (document.getElementById('contact-modal').classList.contains('hidden')) return;
+            if (secondsWithForm() < MIN_FILL_SECONDS) return;
+
+            reportedSubmission = true;
+            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-submitted', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: 'page-exit', source_page: 'home' });
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18404659720/rRBlCLq1rOccEIikg8hE',
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+
+        // Both events, deliberately. pagehide is the accurate one but phones
+        // often kill a page without ever firing it, and visibilitychange is
+        // the last thing that reliably runs there. The cost is that a visitor
+        // who tabs away after ten seconds and comes back is reported at the
+        // moment they tabbed away rather than when they close the form. They
+        // are counted once either way, and the alternative is missing real
+        // submissions on mobile, which is the worse error.
+        window.addEventListener('pagehide', reportSubmissionOnExit);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') reportSubmissionOnExit();
+        });
+
         // Escape closes the modal
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !document.getElementById('contact-modal').classList.contains('hidden')) {

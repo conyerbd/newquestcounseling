@@ -177,6 +177,72 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
         !fired.some(f => f.label === SUBMIT_LABEL));
       await page.close();
     }
+    // --- Test 5: leaving without closing the modal still reports ----------
+    // The leak this exists to catch. visibilityState is read-only, so it gets
+    // redefined before the event is dispatched.
+    console.log(`\nTest 5: open the form, wait ${MIN_FILL_SECONDS + 1}s, then leave without closing`);
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
+      await page.click('button[data-nq-event="open-contact-form"]');
+      console.log(`  waiting ${MIN_FILL_SECONDS + 1}s...`);
+      await sleep((MIN_FILL_SECONDS + 1) * 1000);
+      await page.evaluate(() => {
+        Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+      await sleep(1200);
+      check('submit conversion fires when the visitor just leaves',
+        fired.some(f => f.label === SUBMIT_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      check('stays on the page rather than navigating',
+        !page.url().includes('thank-you.html'),
+        `url: ${page.url()}`);
+
+      // Leaving twice is still one visitor.
+      const before = fired.filter(f => f.label === SUBMIT_LABEL).length;
+      await page.evaluate(() => window.dispatchEvent(new Event('pagehide')));
+      await sleep(800);
+      check('a second exit event does not report again',
+        fired.filter(f => f.label === SUBMIT_LABEL).length === before,
+        `fired ${fired.filter(f => f.label === SUBMIT_LABEL).length}x total`);
+      await page.close();
+    }
+
+    // --- Test 6: leaving too early reports nothing ------------------------
+    console.log('\nTest 6: open the form and leave immediately');
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
+      await page.click('button[data-nq-event="open-contact-form"]');
+      await sleep(500);
+      await page.evaluate(() => {
+        Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+      await sleep(1200);
+      check('submit conversion does NOT fire below the time gate',
+        !fired.some(f => f.label === SUBMIT_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.close();
+    }
+
+    // --- Test 7: leaving without ever opening the form reports nothing ----
+    console.log('\nTest 7: leave the page without opening the form');
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
+      await sleep((MIN_FILL_SECONDS + 1) * 1000);
+      await page.evaluate(() => window.dispatchEvent(new Event('pagehide')));
+      await sleep(1000);
+      check('no conversion of any kind fires',
+        fired.length === 0,
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.close();
+    }
   } finally {
     await browser.close();
     server.close();
