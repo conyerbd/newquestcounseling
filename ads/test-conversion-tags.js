@@ -23,6 +23,7 @@ const HEADFUL = process.argv.includes('--headful');
 
 const OPEN_LABEL = 'gxwRCK7RqeccEIikg8hE';   // action 7732881582, Contact form opened
 const SUBMIT_LABEL = 'rRBlCLq1rOccEIikg8hE'; // action 7732927162, Contact form submitted
+const PHONE_LABEL = 'fX8YCMu0vYQdEIikg8hE';  // action 7794022987, Phone number tapped (fired by tracking.js)
 
 // index.html requires the modal to sit open this long before a close counts as
 // a submission. Kept in sync by hand; see MIN_FILL_SECONDS in index.html.
@@ -58,7 +59,7 @@ const isConversionBeacon = url =>
 // on some variants and as a `label` query param on others, so check both.
 function labelsIn(url) {
   const found = new Set();
-  for (const l of [OPEN_LABEL, SUBMIT_LABEL]) if (url.includes(l)) found.add(l);
+  for (const l of [OPEN_LABEL, SUBMIT_LABEL, PHONE_LABEL]) if (url.includes(l)) found.add(l);
   return [...found];
 }
 
@@ -241,6 +242,34 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       check('no conversion of any kind fires',
         fired.length === 0,
         `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.close();
+    }
+
+    // --- Test 8: tapping a phone number fires the phone conversion --------
+    // The hero link on index.html and the CTA on about.html both go through
+    // the delegated tel: handler in tracking.js.
+    for (const pageName of ['index.html', 'about.html']) {
+      console.log(`
+Test 8: tap the phone number on ${pageName}`);
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/${pageName}`, { waitUntil: 'networkidle2' });
+      await sleep(1000);
+      // Click via the DOM so the tel: navigation itself never leaves headless Chrome.
+      const clicked = await page.evaluate(() => {
+        const a = document.querySelector('a[href^="tel:"]');
+        if (!a) return false;
+        a.addEventListener('click', e => e.preventDefault(), { once: true });
+        a.click();
+        return true;
+      });
+      await sleep(1500);
+      check(`${pageName} has a tel: link`, clicked);
+      check(`phone conversion fires on ${pageName}`,
+        fired.some(f => f.label === PHONE_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      check(`no form conversion fires from a phone tap on ${pageName}`,
+        !fired.some(f => f.label === SUBMIT_LABEL || f.label === OPEN_LABEL));
       await page.close();
     }
   } finally {

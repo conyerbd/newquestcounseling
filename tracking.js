@@ -112,6 +112,17 @@
         if (href.indexOf('tel:') === 0) {
             track('Lead', { content_name: 'phone-click', content_category: 'Contact' });
             trackCustom('phone-click', { source_page: pageLabel });
+            // Google Ads "Phone number tapped". Calls placed from the ad
+            // itself are counted by Google separately; this covers visitors
+            // who reached the site first. Every page with a tel: link loads
+            // gtag, but guard anyway so a blocked tag can't break the click.
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'conversion', {
+                    'send_to': 'AW-18404659720/fX8YCMu0vYQdEIikg8hE',
+                    'value': 1.0,
+                    'currency': 'USD'
+                });
+            }
             return;
         }
 
