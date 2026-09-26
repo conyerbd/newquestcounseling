@@ -24,6 +24,7 @@ const HEADFUL = process.argv.includes('--headful');
 const OPEN_LABEL = 'gxwRCK7RqeccEIikg8hE';   // action 7732881582, Contact form opened
 const SUBMIT_LABEL = 'rRBlCLq1rOccEIikg8hE'; // action 7732927162, Contact form submitted
 const PHONE_LABEL = 'fX8YCMu0vYQdEIikg8hE';  // action 7794022987, Phone number tapped (fired by tracking.js)
+const ENGAGED_LABEL = '8J31COfV3IUdEIikg8hE'; // action 7796632295, Engaged visit, secondary (fired by tracking.js)
 
 // index.html requires the modal to sit open this long before a close counts as
 // a submission. Kept in sync by hand; see MIN_FILL_SECONDS in index.html.
@@ -59,7 +60,7 @@ const isConversionBeacon = url =>
 // on some variants and as a `label` query param on others, so check both.
 function labelsIn(url) {
   const found = new Set();
-  for (const l of [OPEN_LABEL, SUBMIT_LABEL, PHONE_LABEL]) if (url.includes(l)) found.add(l);
+  for (const l of [OPEN_LABEL, SUBMIT_LABEL, PHONE_LABEL, ENGAGED_LABEL]) if (url.includes(l)) found.add(l);
   return [...found];
 }
 
@@ -270,6 +271,53 @@ Test 8: tap the phone number on ${pageName}`);
         `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
       check(`no form conversion fires from a phone tap on ${pageName}`,
         !fired.some(f => f.label === SUBMIT_LABEL || f.label === OPEN_LABEL));
+      await page.close();
+    }
+
+    // --- Test 9: engaged visit ---------------------------------------------
+    // Fires once when the visitor scrolls halfway OR stays 30 visible seconds,
+    // and never for a quick look.
+    console.log('\nTest 9: engaged visit');
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
+      await sleep(5000);
+      check('no engaged visit after 5 seconds at the top of the page',
+        !fired.some(f => f.label === ENGAGED_LABEL));
+      await page.evaluate(() => window.scrollTo(0, (document.documentElement.scrollHeight - innerHeight) * 0.55));
+      await sleep(1000);
+      check('engaged visit fires after scrolling halfway',
+        fired.some(f => f.label === ENGAGED_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+      await sleep(1000);
+      // One gtag conversion event goes out as a beacon to each of Google's
+      // endpoints (googleadservices.com and google.com), so "once" means no
+      // endpoint sees the label twice, not one request in total.
+      const perEndpoint = {};
+      fired.filter(f => f.label === ENGAGED_LABEL).forEach(f => {
+        const k = new URL(f.url).host;
+        perEndpoint[k] = (perEndpoint[k] || 0) + 1;
+      });
+      check('engaged visit fires only once per page view',
+        Object.values(perEndpoint).every(n => n === 1),
+        `beacons per endpoint: ${JSON.stringify(perEndpoint)}`);
+      check('no lead conversion fires from engagement alone',
+        !fired.some(f => [OPEN_LABEL, SUBMIT_LABEL, PHONE_LABEL].includes(f.label)));
+      await page.close();
+    }
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/about.html`, { waitUntil: 'networkidle2' });
+      await sleep(26000);
+      const early = fired.some(f => f.label === ENGAGED_LABEL);
+      await sleep(6000);
+      check('engaged visit waits for 30 visible seconds without scrolling', !early);
+      check('engaged visit fires after 30 visible seconds',
+        fired.some(f => f.label === ENGAGED_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
       await page.close();
     }
   } finally {

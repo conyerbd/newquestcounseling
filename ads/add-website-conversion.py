@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """
-Create the "Phone number tapped" website conversion action and print the
-send_to value the site's tag needs.
+Create one of the site's website conversion actions and print the send_to
+value the site's tag needs. Both are fired from tracking.js.
 
-Round one only counted calls placed from the ad itself ("Calls from ads").
-Someone who reached the site and tapped the phone number was invisible to
-Google Ads. This action is fired by tracking.js on any tel: link click.
+  phone-tap      "Phone number tapped", primary. Round one only counted calls
+                 placed from the ad itself; anyone who reached the site and
+                 tapped the number was invisible to Google Ads.
+  engaged-visit  "Engaged visit", SECONDARY (reported under All conversions,
+                 never counted as a lead). An ad visitor who stayed 30 visible
+                 seconds or scrolled halfway, so the dashboard can tell "wrong
+                 people clicked" apart from "right people, page didn't land".
 
 Safe to re-run: if the action already exists it just prints its send_to.
 Same auth as apply-pmax-assets.py.
 
-    python ads/add-phone-tap-conversion.py --dry-run
-    python ads/add-phone-tap-conversion.py
+    python ads/add-website-conversion.py engaged-visit --dry-run
+    python ads/add-website-conversion.py engaged-visit
 """
 import argparse
 import importlib.util
@@ -25,7 +29,10 @@ _spec = importlib.util.spec_from_file_location("ads_client", Path(__file__).with
 ads_client = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ads_client)
 
-NAME = "Phone number tapped"
+PRESETS = {
+    "phone-tap": {"name": "Phone number tapped", "category": "PHONE_CALL_LEAD", "primary": True},
+    "engaged-visit": {"name": "Engaged visit", "category": "ENGAGEMENT", "primary": False},
+}
 
 
 def send_to(ads, resource_name):
@@ -42,8 +49,11 @@ def send_to(ads, resource_name):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("action", choices=sorted(PRESETS))
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
+    preset = PRESETS[args.action]
+    NAME = preset["name"]
 
     ads = ads_client.Ads(ads_client.access_token(), os.environ["GOOGLE_ADS_DEVELOPER_TOKEN"])
     ads.detect_version()
@@ -61,10 +71,10 @@ def main():
     op = {"create": {
         "name": NAME,
         "type": "WEBPAGE",
-        "category": "PHONE_CALL_LEAD",
+        "category": preset["category"],
         "status": "ENABLED",
         "countingType": "ONE_PER_CLICK",
-        "primaryForGoal": True,
+        "primaryForGoal": preset["primary"],
         "valueSettings": {"defaultValue": 1.0, "alwaysUseDefaultValue": True},
         "clickThroughLookbackWindowDays": 30,
     }}

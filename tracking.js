@@ -173,6 +173,29 @@
         });
     }
 
+    // ---- Google Ads "Engaged visit" -------------------------------------
+    // Secondary conversion (reported, never counted as a lead) for a visitor
+    // who stays 30 visible seconds or scrolls halfway, whichever comes first.
+    // It separates "the ads drew the wrong people" from "the right people
+    // came and the page didn't convince them". Once per page view; Google
+    // also counts at most one per ad click.
+    const ENGAGED_SECONDS = 30;
+    const ENGAGED_SCROLL_PCT = 50;
+    let engagedReported = false;
+
+    function reportEngaged(reason) {
+        if (engagedReported) return;
+        engagedReported = true;
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion', {
+                'send_to': 'AW-18404659720/8J31COfV3IUdEIikg8hE',
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+        trackCustom('engaged-visit', { reason: reason, source_page: pageLabel });
+    }
+
     // ---- Scroll depth ---------------------------------------------------
     // Percentage of the total scrollable distance, matching the health bar at
     // the top of the page. Each milestone fires at most once per page view.
@@ -191,6 +214,7 @@
         if (scrollable <= 0) return;   // page shorter than the viewport
 
         const pct = (window.scrollY / scrollable) * 100;
+        if (pct >= ENGAGED_SCROLL_PCT) reportEngaged('scroll');
         let remaining = 0;
 
         scrollMarks.forEach(function (mark) {
@@ -228,6 +252,7 @@
     const timer = window.setInterval(function () {
         if (document.visibilityState !== 'visible') return;
         visibleSeconds++;
+        if (visibleSeconds >= ENGAGED_SECONDS) reportEngaged('time');
 
         let remaining = 0;
         timeMarks.forEach(function (mark) {
