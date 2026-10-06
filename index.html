@@ -666,9 +666,11 @@
         // own "message sent" screen inside the iframe, so the last thing anyone
         // does is close the modal. Closing after long enough to have filled the
         // form in is treated as a submission and hands off to the confirmation
-        // page instead of dropping the visitor back on the home page. It's a
-        // short form, so ten seconds is the line.
-        const MIN_FILL_SECONDS = 10;
+        // page instead of dropping the visitor back on the home page.
+        // 45 seconds is the line: about the least it takes to type a name,
+        // email and message. It was 10 until Oct 2026, when a 2am phone visit
+        // that opened the form and then left was counted (and told) "sent".
+        const MIN_FILL_SECONDS = 45;
 
         function secondsWithForm() {
             if (!contactFormOpenedAt) return 0;   // never opened this page view

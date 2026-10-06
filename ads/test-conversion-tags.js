@@ -28,7 +28,7 @@ const ENGAGED_LABEL = '8J31COfV3IUdEIikg8hE'; // action 7796632295, Engaged visi
 
 // index.html requires the modal to sit open this long before a close counts as
 // a submission. Kept in sync by hand; see MIN_FILL_SECONDS in index.html.
-const MIN_FILL_SECONDS = 10;
+const MIN_FILL_SECONDS = 45;
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
@@ -240,9 +240,12 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       await sleep((MIN_FILL_SECONDS + 1) * 1000);
       await page.evaluate(() => window.dispatchEvent(new Event('pagehide')));
       await sleep(1000);
-      check('no conversion of any kind fires',
-        fired.length === 0,
-        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      // An engaged visit is expected here (the wait passes 30 visible seconds);
+      // what must not fire is anything form- or lead-related.
+      const formOrLead = fired.filter(f => f.label !== ENGAGED_LABEL);
+      check('no form or lead conversion fires',
+        formOrLead.length === 0,
+        `saw: ${formOrLead.map(f => f.label).join(', ') || 'nothing'}`);
       await page.close();
     }
 
