@@ -84,6 +84,15 @@ async function newPage(browser, fired) {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// The site only counts a submission if the visitor used the form, which it
+// sees as focus moving into the widget's iframe. A real visitor gets there by
+// tapping a field; here a click on the (blocked, blank) iframe does the same.
+async function tapIntoForm(page) {
+  await page.click('#contact-iframe');
+  await sleep(700);   // longer than the page's 500ms focus poll
+  return page.evaluate(() => document.activeElement && document.activeElement.id === 'contact-iframe');
+}
+
 (async () => {
   const { server, port } = await serve();
   const base = `http://127.0.0.1:${port}`;
@@ -149,6 +158,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       const page = await newPage(browser, fired);
       await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
       await page.click('button[data-nq-event="open-contact-form"]');
+      check('focus moves into the form when tapped', await tapIntoForm(page));
       console.log(`  waiting ${MIN_FILL_SECONDS + 1}s...`);
       await sleep((MIN_FILL_SECONDS + 1) * 1000);
       await page.click('#contact-modal-close');
@@ -188,6 +198,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       const page = await newPage(browser, fired);
       await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
       await page.click('button[data-nq-event="open-contact-form"]');
+      check('focus moves into the form when tapped', await tapIntoForm(page));
       console.log(`  waiting ${MIN_FILL_SECONDS + 1}s...`);
       await sleep((MIN_FILL_SECONDS + 1) * 1000);
       await page.evaluate(() => {
@@ -321,6 +332,36 @@ Test 8: tap the phone number on ${pageName}`);
       check('engaged visit fires after 30 visible seconds',
         fired.some(f => f.label === ENGAGED_LABEL),
         `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.close();
+    }
+
+    // --- Test 10: the Oct 3 case. Open the form, never touch it, wait past
+    // the gate, then leave or close. Nothing counts, and nobody is told their
+    // message was sent.
+    console.log(`
+Test 10: open the form, never touch it, wait ${MIN_FILL_SECONDS + 1}s, leave, then close`);
+    {
+      const fired = [];
+      const page = await newPage(browser, fired);
+      await page.goto(`${base}/index.html`, { waitUntil: 'networkidle2' });
+      await page.click('button[data-nq-event="open-contact-form"]');
+      console.log(`  waiting ${MIN_FILL_SECONDS + 1}s...`);
+      await sleep((MIN_FILL_SECONDS + 1) * 1000);
+      await page.evaluate(() => {
+        Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+      await sleep(1200);
+      check('untouched form: leaving does NOT count as a submission',
+        !fired.some(f => f.label === SUBMIT_LABEL),
+        `saw: ${fired.map(f => f.label).join(', ') || 'nothing'}`);
+      await page.click('#contact-modal-close');
+      await sleep(2500);
+      check('untouched form: closing does NOT go to the thank-you page',
+        !page.url().includes('thank-you.html'),
+        `url: ${page.url()}`);
+      check('untouched form: closing does NOT count as a submission',
+        !fired.some(f => f.label === SUBMIT_LABEL));
       await page.close();
     }
   } finally {

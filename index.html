@@ -677,9 +677,33 @@
             return (Date.now() - contactFormOpenedAt) / 1000;
         }
 
+        // Did the visitor actually use the form? The widget is a cross-origin
+        // iframe, so we can't see typing or the Send button, but we can see
+        // focus move into it, which happens when someone taps a field. Opening
+        // the form and walking away (a phone locking at 2am, Oct 3) never
+        // does. Two signals, because not every phone browser fires the first:
+        // the window losing focus to the iframe, and a light poll of
+        // document.activeElement while the form is open.
+        let formTouched = false;
+        let touchPoll = 0;
+
+        function checkFormTouched() {
+            if (document.activeElement === document.getElementById('contact-iframe')) formTouched = true;
+        }
+        window.addEventListener('blur', () => setTimeout(checkFormTouched, 0));
+
+        // Counted as a submission only when both hold: the visitor used the
+        // form, and kept it open long enough to have filled it in.
+        function looksSubmitted() {
+            return formTouched && secondsWithForm() >= MIN_FILL_SECONDS;
+        }
+
         function openContactForm() {
             contactFormLoads = 0;
             contactFormOpenedAt = Date.now();
+            formTouched = false;
+            clearInterval(touchPoll);
+            touchPoll = setInterval(checkFormTouched, 500);
             lastFocusedBeforeModal = document.activeElement;
             document.getElementById('contact-modal').classList.remove('hidden');
             document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
@@ -702,14 +726,16 @@
         }
 
         function closeContactForm() {
-            const wasOpenLongEnough = secondsWithForm() >= MIN_FILL_SECONDS;
+            checkFormTouched();
+            const wasOpenLongEnough = looksSubmitted();
+            clearInterval(touchPoll);
 
             document.getElementById('contact-modal').classList.add('hidden');
             document.getElementById('contact-iframe').src = '';
             document.body.style.overflow = '';
 
-            // Long enough to have sent something: carry on to the confirmation
-            // page rather than leaving them back on the home page.
+            // Used the form long enough to have sent something: carry on to the
+            // confirmation page rather than leaving them back on the home page.
             if (wasOpenLongEnough) {
                 goToThankYou('modal-closed');
                 return;
@@ -725,15 +751,16 @@
         // tab was invisible - which is most of the reason the first campaign
         // recorded three form opens and zero submissions.
         //
-        // Same ten-second gate as the close path, so this reports exactly what
-        // that path would have. It cannot navigate anywhere (the page is on
+        // Same gate as the close path (used the form, 45+ seconds), so this
+        // reports exactly what that path would have. It cannot navigate anywhere (the page is on
         // its way out), so it reports the conversion in place instead.
         let reportedSubmission = false;
 
         function reportSubmissionOnExit() {
             if (reportedSubmission || handedOffToThankYou) return;
             if (document.getElementById('contact-modal').classList.contains('hidden')) return;
-            if (secondsWithForm() < MIN_FILL_SECONDS) return;
+            checkFormTouched();
+            if (!looksSubmitted()) return;
 
             reportedSubmission = true;
             if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-submitted', content_category: 'Contact' });
@@ -748,7 +775,7 @@
         // Both events, deliberately. pagehide is the accurate one but phones
         // often kill a page without ever firing it, and visibilitychange is
         // the last thing that reliably runs there. The cost is that a visitor
-        // who tabs away after ten seconds and comes back is reported at the
+        // who tabs away after filling the form and comes back is reported at the
         // moment they tabbed away rather than when they close the form. They
         // are counted once either way, and the alternative is missing real
         // submissions on mobile, which is the worse error.

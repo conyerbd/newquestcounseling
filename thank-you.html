@@ -125,11 +125,23 @@
 
                 <p class="font-pixel text-xs text-quest-green bg-quest-dark inline-block px-3 py-2 rounded mb-6">QUEST ACCEPTED</p>
 
-                <h1 class="text-4xl md:text-5xl font-heading font-bold text-quest-dark mb-6">Your message is on its way</h1>
-                <p class="text-quest-slate leading-relaxed">
+                <!-- The site can't see whether Send was pressed inside the
+                     SimplePractice widget; this page is reached by closing the form
+                     after tapping into it and keeping it open 45+ seconds. So it
+                     says "if", and offers a way back. -->
+                <h1 class="text-4xl md:text-5xl font-heading font-bold text-quest-dark mb-6">Thanks for reaching out</h1>
+                <p class="text-lg text-quest-dark mb-4">If you hit Send, your message is on its way.</p>
+                <p class="text-quest-slate leading-relaxed mb-8">
                     <i class="fa-solid fa-circle-info mr-1 text-quest-blue" aria-hidden="true"></i>
                     Keep an eye on your spam or junk folder, just in case the reply lands there.
                 </p>
+                <div class="bg-quest-bg rounded-xl border-2 border-quest-dark p-5">
+                    <p class="font-heading font-bold text-quest-dark mb-3">Didn't get to finish?</p>
+                    <a href="index.html#contact" data-nq-event="thank-you-reopen-form" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all">
+                        <i class="fa-solid fa-pen-to-square text-quest-red-dark" aria-hidden="true"></i>
+                        Go back to the contact form
+                    </a>
+                </div>
             </div>
         </div>
     </section>
