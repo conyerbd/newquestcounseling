@@ -9,6 +9,8 @@ Static site, no build step. Two hand-written HTML pages using Tailwind CSS via C
 | File | Purpose |
 |------|---------|
 | `index.html` | Home — hero, problem cards, services, insurance, FAQ, contact |
+| `pro/index.html` | Professional version of the home page, used as an ad landing page (teens, insurance) |
+| `light/index.html` | Copy of the original home page at its own URL, used as an ad landing page (gamers) |
 | `about.html` | Therapist bio, styled as an RPG "character sheet" |
 | `og-image.png` | 1200x630 social/ad share card (template: `images/og-image.html`) |
 | `favicon.svg` | Navy square with the brand lightning bolt |

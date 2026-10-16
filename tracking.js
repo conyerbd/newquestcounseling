@@ -89,6 +89,8 @@
     const path = window.location.pathname;
     const pageLabel = /about\.html$/.test(path) ? 'about'
         : /thank-you\.html$/.test(path) ? 'thank-you'
+        : /^\/pro\//.test(path) ? 'pro'
+        : /^\/light\//.test(path) ? 'light'
         : 'home';
 
     // Let the inline contact-modal code report the form opening.

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Keep charset first. It must land within the first 1024 bytes or the
+         browser falls back to guessing the encoding, and the tag scripts below
+         are long enough to push it past that. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18404659720"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18404659720');
+    </script>
+
+    <!-- Google Ads conversion action 7732881582, label gxwRCK7RqeccEIikg8hE.
+         Called from openContactForm() when a visitor opens the contact form,
+         so it measures intent, not a submitted message. The action gets
+         renamed and demoted to Secondary in Google Ads; neither changes the
+         label, so this keeps working. The url argument is unused here
+         (nothing navigates on open), but it is kept as Google ships it so the
+         same helper works on a link later. -->
+    <!-- Actual form submissions are tracked separately on thank-you.html. -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18404659720/gxwRCK7RqeccEIikg8hE',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
+    <title>New Quest Counseling | Online Therapy in Ohio</title>
+    <meta name="description" content="Online therapy anywhere in Ohio, including Cincinnati, Columbus, and Cleveland. Individual, couples, and family counseling with Dorasae Rosario, LPCC, for anxiety, burnout, and life transitions. Anthem and UnitedHealthcare accepted, plus sliding-scale self-pay. Free 15-minute consultation.">
+    <link rel="canonical" href="https://www.newquestcounseling.com/">
+    <meta name="theme-color" content="#1A3A5C">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New Quest Counseling">
+    <meta property="og:url" content="https://www.newquestcounseling.com/">
+    <meta property="og:title" content="New Quest Counseling | Online Therapy in Ohio">
+    <meta property="og:description" content="Life didn't come with a walkthrough. Online individual, couples, and family therapy across Ohio. Now accepting Anthem and UnitedHealthcare. Free 15-minute consultation.">
+    <meta property="og:image" content="https://www.newquestcounseling.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="New Quest Counseling, online therapy across Ohio">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="New Quest Counseling | Online Therapy in Ohio">
+    <meta name="twitter:description" content="Life didn't come with a walkthrough. Online individual, couples, and family therapy across Ohio. Now accepting Anthem and UnitedHealthcare.">
+    <meta name="twitter:image" content="https://www.newquestcounseling.com/og-image.png">
+
+    <!-- Meta Pixel Code -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1395723405642951'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1395723405642951&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Fonts: Newsreader (headlines), Atkinson Hyperlegible (everything else) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #16243A;      /* text, footer, contact band */
+            --dusk: #2F4E6E;     /* secondary text, links, rules */
+            --mist: #EDF2F5;     /* page ground */
+            --paper: #FFFFFF;    /* alternating bands, cards */
+            --rose: #A8405A;     /* primary actions (white text 8.7:1) */
+            --rose-deep: #8E3349;
+            --glow: #F2CF5B;     /* the bolt mark only */
+            --line: #D3DDE5;
+            --soft: #5B6B7D;     /* quiet text, 4.8:1 on mist */
+            --serif: "Newsreader", Georgia, "Times New Roman", serif;
+            --sans: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+        body { margin: 0; background: var(--mist); color: var(--ink); font: 17px/1.65 var(--sans); }
+        img { max-width: 100%; }
+        a { color: var(--dusk); text-underline-offset: 3px; }
+        a:hover { color: var(--rose); }
+        :focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; border-radius: 4px; }
+        .hidden { display: none !important; }
+        .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 14px; z-index: 100; }
+        .skip:focus { left: 8px; }
+        .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+        h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+        p { margin: 0; }
+        em { font-style: italic; }
+
+        /* Buttons */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 999px; font: 700 17px/1 var(--sans); text-decoration: none; cursor: pointer; border: 2px solid transparent; transition: background .15s, color .15s, border-color .15s; }
+        .btn-primary { background: var(--rose); color: #fff; }
+        .btn-primary:hover { background: var(--rose-deep); color: #fff; }
+        .btn-quiet { background: transparent; color: var(--ink); border-color: var(--ink); }
+        .btn-quiet:hover { background: var(--ink); color: #fff; }
+        .btn-sm { min-height: 42px; padding: 0 18px; font-size: 15px; }
+        .btn-on-dark:focus-visible, .btn-quiet-dark:focus-visible { outline-color: var(--glow); }
+        .btn-quiet-dark { color: #fff; border-color: rgba(255,255,255,.6); }
+        .btn-quiet-dark:hover { background: #fff; color: var(--ink); }
+
+        /* Top bar */
+        .topbar { position: sticky; top: 0; z-index: 40; background: rgba(237,242,245,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+        .topbar-inner { display: flex; align-items: center; gap: 28px; min-height: 68px; }
+        .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 500 21px/1 var(--serif); letter-spacing: -0.01em; white-space: nowrap; }
+        .wordmark em { color: var(--dusk); }
+        .bolt { width: 13px; height: 20px; fill: var(--glow); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; flex: none; }
+        .topnav { display: flex; gap: 22px; margin-left: auto; }
+        .topnav a { color: var(--ink); text-decoration: none; font-size: 15px; }
+        .topnav a:hover { color: var(--rose); }
+        .topbar-actions { display: flex; align-items: center; gap: 16px; }
+        .topbar-phone { color: var(--ink); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; }
+        @media (max-width: 960px) { .topnav { display: none; } .topbar-actions { margin-left: auto; } }
+        @media (max-width: 600px) { .topbar-actions { display: none; } .topbar-inner { justify-content: center; } }
+
+        /* Hero */
+        .hero { padding-block: 64px 88px; }
+        .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 56px; align-items: center; }
+        .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dusk); margin-bottom: 16px; }
+        .hero h1 { font-size: clamp(40px, 6vw, 68px); line-height: 1.04; margin-bottom: 22px; }
+        .hero h1 em { color: var(--rose); }
+        .lede { font-size: 19px; color: var(--ink); max-width: 34em; margin-bottom: 30px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .hero-actions.centered { justify-content: center; }
+        .trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; color: var(--soft); }
+        .trust li { display: flex; align-items: center; gap: 8px; }
+        .trust li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dusk); flex: none; }
+
+        /* Portrait with the first-call note overlapping it: the signature */
+        .portrait { position: relative; margin: 0; padding-bottom: 120px; }
+        .portrait-photo { aspect-ratio: 4 / 5; border-radius: 28px 28px 28px 120px; background: #cfd9e1 url("/images/dorasae-portrait.jpg") center / cover no-repeat; box-shadow: 0 30px 60px -30px rgba(22,36,58,.45); }
+        .portrait figcaption { position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,.94); border-radius: 14px; padding: 10px 14px; font: 500 17px/1.25 var(--serif); }
+        .portrait figcaption span { display: block; font: 13px/1.3 var(--sans); color: var(--soft); }
+        .first-call { position: absolute; left: -36px; right: 36px; bottom: 0; background: var(--paper); border-radius: 18px; padding: 22px 24px; box-shadow: 0 18px 40px -18px rgba(22,36,58,.35); border-top: 4px solid var(--rose); }
+        .first-call h2 { font-size: 22px; margin-bottom: 10px; }
+        .first-call ul { margin: 0 0 10px; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15.5px; }
+        .first-call li { padding-left: 22px; position: relative; }
+        .first-call li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 10px; height: 2px; background: var(--rose); }
+        .first-call p { font-size: 14px; color: var(--soft); }
+
+        @media (max-width: 880px) {
+            .hero { padding-block: 36px 56px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+            .portrait { max-width: 460px; width: 100%; margin-inline: auto; padding-bottom: 0; }
+            .first-call { position: relative; left: auto; right: auto; margin: -64px 14px 0; }
+        }
+
+        /* Bands */
+        .band { padding-block: 80px; }
+        .band-paper { background: var(--paper); }
+        .section-title { font-size: clamp(30px, 4vw, 42px); margin-bottom: 32px; }
+        .band h3 { font-size: 23px; margin-bottom: 8px; }
+        @media (max-width: 600px) { .band { padding-block: 56px; } }
+
+        .concern-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+        .concern-grid > div { border-top: 2px solid var(--ink); padding-top: 18px; }
+        .concern-grid p, .service p, .steps p, .teen-modes dd { color: var(--soft); }
+        .aside-note { margin-top: 36px; font: italic 20px/1.5 var(--serif); color: var(--dusk); max-width: 40em; }
+        @media (max-width: 880px) { .concern-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 520px) { .concern-grid { grid-template-columns: 1fr; gap: 22px; } }
+
+        .service-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+        .service { padding-block: 24px; border-bottom: 1px solid var(--line); }
+        .service:nth-child(-n+2) { border-top: 1px solid var(--line); }
+        @media (max-width: 720px) { .service-list { grid-template-columns: 1fr; } .service:nth-child(2) { border-top: 0; } }
+
+        .teens { background: #DCE6EE; }
+        .teens-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: start; }
+        .teens-grid > div > p:not(.eyebrow) { margin-bottom: 28px; max-width: 34em; }
+        .teen-modes { margin: 0; background: var(--paper); border-radius: 22px; padding: 10px 26px 22px; }
+        .teen-modes > div { padding-block: 16px; border-bottom: 1px solid var(--line); }
+        .teen-modes dt { font: 500 21px/1.3 var(--serif); }
+        .teen-modes dd { margin: 4px 0 0; }
+        .mix-note { margin-top: 16px; font: italic 17px/1.5 var(--serif); color: var(--dusk); }
+        @media (max-width: 880px) { .teens-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+        .geek { padding-block: 56px; }
+        .geek-inner { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 40px; align-items: baseline; }
+        .geek h2 { font-size: clamp(28px, 3.4vw, 36px); font-style: italic; }
+        .geek p { font-size: 18px; max-width: 36em; }
+        @media (max-width: 720px) { .geek-inner { grid-template-columns: 1fr; gap: 14px; } }
+
+        .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; counter-reset: step; }
+        .steps li { counter-increment: step; }
+        .steps li::before { content: counter(step); display: block; font: italic 500 54px/1 var(--serif); color: var(--rose); margin-bottom: 12px; }
+        @media (max-width: 720px) { .steps { grid-template-columns: 1fr; gap: 26px; } .steps li { display: grid; grid-template-columns: 48px 1fr; } .steps li::before { grid-row: span 2; font-size: 42px; } }
+
+        .insurance-inner { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 48px; align-items: center; }
+        .insurance-inner p { max-width: 34em; }
+        .plans { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+        .plans li { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; font: 500 21px/1.2 var(--serif); }
+        @media (max-width: 720px) { .insurance-inner { grid-template-columns: 1fr; gap: 24px; } }
+
+        .about-inner > *, .faq-inner > * { max-width: 760px; }
+        .about-inner p { font-size: 19px; margin-bottom: 18px; }
+        .text-link { font-weight: 700; }
+
+        .faq details { border-top: 1px solid var(--line); padding-block: 4px; }
+        .faq details:last-of-type { border-bottom: 1px solid var(--line); }
+        .faq summary { cursor: pointer; list-style: none; padding-block: 16px; font: 500 21px/1.3 var(--serif); display: flex; justify-content: space-between; gap: 16px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: "+"; font: 400 26px/1 var(--sans); color: var(--rose); }
+        .faq details[open] summary::after { content: "\2212"; }
+        .faq details p { padding-bottom: 18px; color: var(--soft); max-width: 40em; }
+
+        .contact { background: var(--ink); color: #fff; text-align: center; }
+        .contact h2 { font-size: clamp(34px, 5vw, 52px); margin-bottom: 14px; }
+        .contact-inner > p { color: #C9D5E0; font-size: 19px; margin-bottom: 28px; }
+        .contact-meta { margin-top: 26px !important; font-size: 15px !important; color: #9FB0C2 !important; }
+        .contact-meta a { color: #fff; }
+
+        .footer { background: #0F1A2B; color: #9FB0C2; padding-block: 40px 110px; font-size: 15px; text-align: center; }
+        .footer-inner { display: grid; gap: 8px; }
+        .footer a { color: #C9D5E0; }
+        .footer-name { font: 500 22px/1.2 var(--serif); color: #fff; }
+        .footer-fine { font-size: 13px; }
+        @media (min-width: 601px) { .footer { padding-bottom: 40px; } }
+
+        /* Phones: Call and Book always reachable */
+        .mobile-bar { display: none; }
+        @media (max-width: 600px) {
+            .mobile-bar { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); }
+            .mobile-bar a, .mobile-bar button { min-height: 48px; border-radius: 999px; font: 700 16px/1 var(--sans); display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; }
+            .mobile-bar a { color: var(--ink); border: 2px solid var(--ink); }
+            .mobile-bar button { background: var(--rose); color: #fff; border: 0; }
+        }
+
+        /* Contact modal */
+        .modal { position: fixed; inset: 0; z-index: 9999; }
+        .modal-backdrop { position: absolute; inset: 0; background: rgba(15,26,43,.7); }
+        .modal-panel { position: absolute; inset: 16px; max-width: 640px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+        @media (min-width: 700px) { .modal-panel { inset: 40px 0; } }
+        .modal-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+        .modal-head h2 { font-size: 22px; }
+        #contact-modal-close { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--mist); color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+        #contact-modal-close:hover { background: var(--ink); color: #fff; }
+        .modal-body { flex: 1; overflow: auto; }
+        #contact-iframe { border: 0; width: 100%; height: 100%; min-height: 500px; display: block; }
+    </style>
+    <script src="/tracking.js" defer></script>
+
+    <!-- Structured Data: local practice details for search engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["ProfessionalService", "MedicalBusiness"],
+      "@id": "https://www.newquestcounseling.com/#practice",
+      "name": "New Quest Counseling",
+      "url": "https://www.newquestcounseling.com/",
+      "image": "https://www.newquestcounseling.com/og-image.png",
+      "logo": "https://www.newquestcounseling.com/logo.svg",
+      "description": "Online individual, couples, and family therapy for clients across Ohio, including Cincinnati, Columbus, and Cleveland. Based in Cincinnati, licensed statewide.",
+      "telephone": "+1-513-622-9072",
+      "email": "dorasae@newquestcounseling.com",
+      "priceRange": "$$",
+      "medicalSpecialty": "Psychiatric",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cincinnati",
+        "addressRegion": "OH",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Ohio"
+      },
+      "availableService": [
+        { "@type": "Service", "name": "Individual Therapy" },
+        { "@type": "Service", "name": "Couples Counseling" },
+        { "@type": "Service", "name": "Family Therapy" }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Dorasae Rosario",
+        "jobTitle": "Licensed Professional Clinical Counselor (LPCC)",
+        "url": "https://www.newquestcounseling.com/about.html"
+      },
+      "sameAs": [
+        "https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="topbar" id="site-nav">
+        <div class="wrap topbar-inner">
+            <a href="#home" class="wordmark" aria-label="New Quest Counseling home">
+                <svg class="bolt" viewBox="0 0 12 18" aria-hidden="true"><path d="M7 0 0 10h5l-1 8 8-11H7z"/></svg>
+                <span>New Quest <em>Counseling</em></span>
+            </a>
+            <nav class="topnav" aria-label="Main">
+                <a href="#services" data-nq-event="nav-services">Services</a>
+                <a href="#teens" data-nq-event="nav-teens">For parents</a>
+                <a href="#insurance" data-nq-event="nav-insurance">Insurance</a>
+                <a href="/about.html" data-nq-event="nav-about-me">About</a>
+                <a href="#wiki" data-nq-event="nav-faq">FAQ</a>
+            </nav>
+            <div class="topbar-actions">
+                <a class="topbar-phone" href="tel:5136229072" data-nq-event="phone-click">(513) 622-9072</a>
+                <button type="button" class="btn btn-primary btn-sm" onclick="openContactForm()" data-nq-event="open-contact-form">Book a free call</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+    <!-- Hero: who she is, what she helps with, and the first step made concrete -->
+    <section id="home" class="hero">
+        <div class="wrap hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">Online therapy anywhere in Ohio</p>
+                <h1>Talk with a therapist who <em>gets&nbsp;it</em>.</h1>
+                <p class="lede">I'm Dorasae Rosario, a licensed counselor helping adults, couples, families, and teens 14 and up with anxiety, burnout, relationships, and big life changes. Sessions are by secure video, so you can start from wherever you are.</p>
+                <div class="hero-actions">
+                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="schedule-consult">Book a free 15-minute call</button>
+                    <a class="btn btn-quiet" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
+                </div>
+                <ul class="trust" aria-label="At a glance">
+                    <li>In-network with Anthem and UnitedHealthcare</li>
+                    <li>Sliding-scale self-pay</li>
+                    <li>Licensed in Ohio (LPCC)</li>
+                </ul>
+            </div>
+
+            <figure class="portrait">
+                <div class="portrait-photo" role="img" aria-label="Dorasae Rosario, smiling"></div>
+                <figcaption>Dorasae Rosario, LPCC<span>Licensed Professional Clinical Counselor</span></figcaption>
+                <aside class="first-call" aria-labelledby="first-call-title">
+                    <h2 id="first-call-title">What happens on the free call</h2>
+                    <ul>
+                        <li>You tell me what's going on, in your own words.</li>
+                        <li>We figure out together if I'm the right fit.</li>
+                        <li>We go over insurance or sliding-scale fees.</li>
+                        <li>There's no pressure to book anything.</li>
+                    </ul>
+                    <p>15 minutes, by phone or video.</p>
+                </aside>
+            </figure>
+        </div>
+    </section>
+
+    <!-- What brings people in -->
+    <section class="band concerns" aria-labelledby="concerns-title">
+        <div class="wrap">
+            <h2 id="concerns-title" class="section-title">What people come to me for</h2>
+            <div class="concern-grid">
+                <div>
+                    <h3>Anxiety and overthinking</h3>
+                    <p>When your mind won't slow down and worry runs the day.</p>
+                </div>
+                <div>
+                    <h3>Burnout and exhaustion</h3>
+                    <p>When work, caregiving, or school has left nothing in the tank.</p>
+                </div>
+                <div>
+                    <h3>Relationship strain</h3>
+                    <p>When the same arguments keep coming back, or you've grown apart.</p>
+                </div>
+                <div>
+                    <h3>Life transitions</h3>
+                    <p>New jobs, moves, breakups, becoming a parent, or a child leaving home.</p>
+                </div>
+            </div>
+            <p class="aside-note">You don't need to be in crisis to start. Plenty of people come in because they feel stuck and want a plan.</p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="band band-paper" aria-labelledby="services-title">
+        <div class="wrap">
+            <h2 id="services-title" class="section-title">How we can work together</h2>
+            <div class="service-list">
+                <article class="service">
+                    <h3>Individual therapy</h3>
+                    <p>One-on-one sessions to understand what's weighing on you and build practical tools for coping, calming down, and moving forward.</p>
+                </article>
+                <article class="service">
+                    <h3>Couples counseling</h3>
+                    <p>For partners who want to argue less and understand each other more. We work on communication, conflict, and reconnecting.</p>
+                </article>
+                <article class="service">
+                    <h3>Family therapy</h3>
+                    <p>For families working through a hard stretch together, from everyday conflict to big changes at home.</p>
+                </article>
+                <article class="service">
+                    <h3>Teen therapy, ages 14+</h3>
+                    <p>A space where teens feel heard instead of judged, with parents kept in the loop. <a href="#teens" data-nq-event="services-to-teens">For parents of teens</a></p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teens: written for parents; the "Teens (for parents)" ad group lands here -->
+    <section id="teens" class="band teens" aria-labelledby="teens-title">
+        <div class="wrap teens-grid">
+            <div>
+                <p class="eyebrow">For parents of teens 14 and up</p>
+                <h2 id="teens-title" class="section-title">Therapy your teen might actually talk in</h2>
+                <p>Growing up is hard, and teens don't always want to talk about it with a parent. I work with teens in a space where they feel heard instead of judged, so they can build coping skills and confidence. Sessions are by video, so your teen can join from home.</p>
+                <div class="hero-actions">
+                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="teens-open-form">Book a free call about your teen</button>
+                    <a class="btn btn-quiet" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
+                </div>
+            </div>
+            <dl class="teen-modes">
+                <div>
+                    <dt>One-on-one sessions</dt>
+                    <dd>Your teen gets their own space to talk things through.</dd>
+                </div>
+                <div>
+                    <dt>Family sessions</dt>
+                    <dd>Work through challenges together, as a team.</dd>
+                </div>
+                <div>
+                    <dt>Parent check-ins</dt>
+                    <dd>Stay in the loop on how things are going.</dd>
+                </div>
+                <p class="mix-note">We'll figure out the right mix for your family on the free call.</p>
+            </dl>
+        </div>
+    </section>
+
+    <!-- Her niche, said plainly -->
+    <section class="band geek" aria-labelledby="geek-title">
+        <div class="wrap geek-inner">
+            <h2 id="geek-title">Geeks and gamers welcome</h2>
+            <p>Gamers, anime fans, tabletop players, and anyone who's ever been called "too into" something: you won't have to explain your world here. If it's part of what you want to talk about, we'll talk about it.</p>
+        </div>
+    </section>
+
+    <!-- How starting works: a real sequence, so it's numbered -->
+    <section class="band band-paper" aria-labelledby="steps-title">
+        <div class="wrap">
+            <h2 id="steps-title" class="section-title">How getting started works</h2>
+            <ol class="steps">
+                <li>
+                    <h3>Free 15-minute call</h3>
+                    <p>We talk about what's going on and whether we're a good fit. No commitment.</p>
+                </li>
+                <li>
+                    <h3>Your first session</h3>
+                    <p>A 50-minute video session to get to know you and what you want to change.</p>
+                </li>
+                <li>
+                    <h3>Ongoing sessions</h3>
+                    <p>We meet on a schedule that works for you and build tools you can use between sessions.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Insurance -->
+    <section id="insurance" class="band insurance" aria-labelledby="insurance-title">
+        <div class="wrap insurance-inner">
+            <div>
+                <h2 id="insurance-title" class="section-title">Insurance and fees</h2>
+                <p>I'm in-network with Anthem and UnitedHealthcare. If you're out of network or would rather not use insurance, sliding-scale self-pay is available. We can go over what works for you on the free call.</p>
+            </div>
+            <ul class="plans">
+                <li>Anthem</li>
+                <li>UnitedHealthcare</li>
+                <li>Sliding-scale self-pay</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="band band-paper" aria-labelledby="about-title">
+        <div class="wrap about-inner">
+            <h2 id="about-title" class="section-title">About Dorasae</h2>
+            <p>I'm a Licensed Professional Clinical Counselor with over five years of experience helping children, teens, and adults build coping skills and confidence. I'm based in Cincinnati and see clients by video anywhere in Ohio, including Columbus, Cleveland, and everywhere in between.</p>
+            <a class="text-link" href="/about.html" data-nq-event="read-about">More about me</a>
+        </div>
+    </section>
+
+    <!-- FAQ (id kept as "wiki": the ads' "Common Questions" sitelink points here) -->
+    <section id="wiki" class="band faq" aria-labelledby="faq-title">
+        <div class="wrap faq-inner">
+            <h2 id="faq-title" class="section-title">Common questions</h2>
+            <details>
+                <summary>Do you take insurance?</summary>
+                <p>I accept Anthem and UnitedHealthcare. I also offer self-pay with a sliding scale to help make therapy accessible. On the free consultation we can go over rates and coverage that work for your situation.</p>
+            </details>
+            <details>
+                <summary>Is therapy right for me?</summary>
+                <p>If you're feeling overwhelmed or stuck, or you just want a clearer plan, therapy can help. You don't need to be in crisis to benefit.</p>
+            </details>
+            <details>
+                <summary>Where are you located?</summary>
+                <p>I'm based in Cincinnati and licensed throughout Ohio. Sessions are by video, so you can connect from anywhere in the state, whether that's Cincinnati, Columbus, Cleveland, or a small town in between.</p>
+            </details>
+            <details>
+                <summary>How long are sessions?</summary>
+                <p>Standard sessions are 50 minutes. That gives us time to work on what's going on now and set up tools for the week ahead.</p>
+            </details>
+            <details>
+                <summary>Do you work with teens?</summary>
+                <p>Yes, ages 14 and up, with one-on-one sessions, family sessions, and parent check-ins. <a href="#teens">More for parents</a></p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="band contact" aria-labelledby="contact-title">
+        <div class="wrap contact-inner">
+            <h2 id="contact-title">Ready when you are</h2>
+            <p>Send a message to set up your free 15-minute call. I'll get back to you to find a time.</p>
+            <div class="hero-actions centered">
+                <button type="button" class="btn btn-primary btn-on-dark" onclick="openContactForm()" data-nq-event="open-contact-form">Open the contact form</button>
+                <a class="btn btn-quiet-dark" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
+            </div>
+            <p class="contact-meta">
+                <a href="mailto:dorasae@newquestcounseling.com" data-nq-event="email-click">dorasae@newquestcounseling.com</a>
+                <span aria-hidden="true">·</span>
+                Secure form by SimplePractice
+            </p>
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <p class="footer-name">New Quest Counseling</p>
+            <p>Online therapy anywhere in Ohio. Based in Cincinnati.</p>
+            <p>
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" rel="noopener">Client portal</a>
+                <span aria-hidden="true">·</span>
+                <a href="https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447" data-nq-event="psychology-today" target="_blank" rel="noopener">Psychology Today profile</a>
+            </p>
+            <p class="footer-fine">If you are in crisis, call or text 988, or call 911.</p>
+            <p class="footer-fine">© 2026 New Quest Counseling</p>
+        </div>
+    </footer>
+
+    <!-- Phones: the two actions that matter, always within reach -->
+    <div class="mobile-bar" role="region" aria-label="Contact">
+        <a href="tel:5136229072" data-nq-event="phone-click">Call</a>
+        <button type="button" onclick="openContactForm()" data-nq-event="mobile-bar-open-form">Book a free call</button>
+    </div>
+
+    <!-- Contact Form Modal (ids and handlers unchanged: the tracking depends on them) -->
+    <div id="contact-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+        <div class="modal-backdrop" onclick="closeContactForm()"></div>
+        <div class="modal-panel">
+            <div class="modal-head">
+                <h2 id="contact-modal-title">Book a free 15-minute call</h2>
+                <button id="contact-modal-close" type="button" onclick="closeContactForm()" aria-label="Close contact form">
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="contact-iframe" src="" title="Contact form" allow="geolocation"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript: the contact form logic below is carried over unchanged from the live site -->
+    <script>
+        // Contact Form Modal Functions
+        let lastFocusedBeforeModal = null;
+        const CONTACT_WIDGET_ORIGIN = 'https://dorasae-rosario.clientsecure.me';
+
+        // Handing off to the confirmation page. Everything below can call this;
+        // the flag makes sure only the first caller wins, so a postMessage and
+        // an iframe load for the same submission don't fight over the tab.
+        let handedOffToThankYou = false;
+
+        function goToThankYou(reason) {
+            if (handedOffToThankYou) return;
+            handedOffToThankYou = true;
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: reason, source_page: 'pro' });
+            window.location.href = '/thank-you.html';
+        }
+
+        // Path 1: the widget tells us. SimplePractice isn't documented as
+        // posting anything, but if it ever does we take it - strictly from its
+        // own origin, and only for a message that looks like a submission.
+        window.addEventListener('message', (e) => {
+            if (e.origin !== CONTACT_WIDGET_ORIGIN) return;
+            const data = typeof e.data === 'string' ? e.data : (e.data && (e.data.type || e.data.event)) || '';
+            if (/submit|success|complete|thank/i.test(String(data))) goToThankYou('postMessage');
+        });
+
+        // Path 2: the widget navigates itself. The first load is the form; a
+        // later one would mean a new document. In practice the widget shows its
+        // own confirmation in place and never navigates, so this rarely fires -
+        // it stays as a cheap catch in case that ever changes.
+        let contactFormOpenedAt = 0;
+        let contactFormLoads = 0;
+        let reportedAdsConversion = false;
+
+        document.getElementById('contact-iframe').addEventListener('load', () => {
+            // Closing the modal blanks the src, which also fires load - ignore it.
+            if (!document.getElementById('contact-iframe').getAttribute('src')) return;
+            contactFormLoads++;
+            if (contactFormLoads < 2) return;
+            if (secondsWithForm() < MIN_FILL_SECONDS) return;
+            goToThankYou('iframe-navigation');
+        });
+
+        // Path 3, the one that actually carries the traffic: the widget puts its
+        // own "message sent" screen inside the iframe, so the last thing anyone
+        // does is close the modal. Closing after long enough to have filled the
+        // form in is treated as a submission and hands off to the confirmation
+        // page instead of dropping the visitor back on the home page.
+        // 45 seconds is the line: about the least it takes to type a name,
+        // email and message. It was 10 until Oct 2026, when a 2am phone visit
+        // that opened the form and then left was counted (and told) "sent".
+        const MIN_FILL_SECONDS = 45;
+
+        function secondsWithForm() {
+            if (!contactFormOpenedAt) return 0;   // never opened this page view
+            return (Date.now() - contactFormOpenedAt) / 1000;
+        }
+
+        // Did the visitor actually use the form? The widget is a cross-origin
+        // iframe, so we can't see typing or the Send button, but we can see
+        // focus move into it, which happens when someone taps a field. Opening
+        // the form and walking away (a phone locking at 2am, Oct 3) never
+        // does. Two signals, because not every phone browser fires the first:
+        // the window losing focus to the iframe, and a light poll of
+        // document.activeElement while the form is open.
+        let formTouched = false;
+        let touchPoll = 0;
+
+        function checkFormTouched() {
+            if (document.activeElement === document.getElementById('contact-iframe')) formTouched = true;
+        }
+        window.addEventListener('blur', () => setTimeout(checkFormTouched, 0));
+
+        // Counted as a submission only when both hold: the visitor used the
+        // form, and kept it open long enough to have filled it in.
+        function looksSubmitted() {
+            return formTouched && secondsWithForm() >= MIN_FILL_SECONDS;
+        }
+
+        function openContactForm() {
+            contactFormLoads = 0;
+            contactFormOpenedAt = Date.now();
+            formTouched = false;
+            clearInterval(touchPoll);
+            touchPoll = setInterval(checkFormTouched, 500);
+            lastFocusedBeforeModal = document.activeElement;
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
+            document.body.style.overflow = 'hidden';
+            // Move focus into the dialog so keyboard users aren't left behind it
+            document.getElementById('contact-modal-close').focus();
+            // Contact, not Lead: opening the form is intent, not a submission.
+            // Lead is reserved for the confirmation page, so one visitor who
+            // actually sends a message is counted once.
+            if (window.nqTrack) window.nqTrack('Contact', { content_name: 'contact-form-opened', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'pro' });
+
+            // Google Ads conversion, once per page view. Closing the form and
+            // opening it again is the same visitor having second thoughts, not
+            // a second lead.
+            if (!reportedAdsConversion) {
+                reportedAdsConversion = true;
+                gtag_report_conversion();
+            }
+        }
+
+        function closeContactForm() {
+            checkFormTouched();
+            const wasOpenLongEnough = looksSubmitted();
+            clearInterval(touchPoll);
+
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.getElementById('contact-iframe').src = '';
+            document.body.style.overflow = '';
+
+            // Used the form long enough to have sent something: carry on to the
+            // confirmation page rather than leaving them back on the home page.
+            if (wasOpenLongEnough) {
+                goToThankYou('modal-closed');
+                return;
+            }
+
+            // Return focus to whatever opened the dialog
+            if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+        }
+
+        // Path 4: the visitor leaves without closing the modal. Closing the
+        // tab, hitting back, or switching away on a phone never calls
+        // closeContactForm(), so someone who sent a message and then shut the
+        // tab was invisible - which is most of the reason the first campaign
+        // recorded three form opens and zero submissions.
+        //
+        // Same gate as the close path (used the form, 45+ seconds), so this
+        // reports exactly what that path would have. It cannot navigate anywhere (the page is on
+        // its way out), so it reports the conversion in place instead.
+        let reportedSubmission = false;
+
+        function reportSubmissionOnExit() {
+            if (reportedSubmission || handedOffToThankYou) return;
+            if (document.getElementById('contact-modal').classList.contains('hidden')) return;
+            checkFormTouched();
+            if (!looksSubmitted()) return;
+
+            reportedSubmission = true;
+            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-submitted', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: 'page-exit', source_page: 'pro' });
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18404659720/rRBlCLq1rOccEIikg8hE',
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+
+        // Both events, deliberately. pagehide is the accurate one but phones
+        // often kill a page without ever firing it, and visibilitychange is
+        // the last thing that reliably runs there. The cost is that a visitor
+        // who tabs away after filling the form and comes back is reported at the
+        // moment they tabbed away rather than when they close the form. They
+        // are counted once either way, and the alternative is missing real
+        // submissions on mobile, which is the worse error.
+        window.addEventListener('pagehide', reportSubmissionOnExit);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') reportSubmissionOnExit();
+        });
+
+        // Escape closes the modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('contact-modal').classList.contains('hidden')) {
+                closeContactForm();
+            }
+        });
+
+        // Arriving from the about page's "Open Contact Form" button: open it on
+        // landing so the visitor doesn't have to find the button again.
+        // Waits for DOMContentLoaded so deferred tracking.js has registered
+        // nqTrack and the open event isn't dropped.
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.search.indexOf('contact=open') === -1) return;
+            openContactForm();
+            // Drop the parameter so a refresh (or a shared link) doesn't reopen it
+            history.replaceState(null, '', window.location.pathname + window.location.hash);
+            // Re-assert focus once the page has settled; a focus() call this
+            // early in the load doesn't always stick.
+            window.addEventListener('load', () => {
+                document.getElementById('contact-modal-close').focus();
+            }, { once: true });
+        });
+
+    </script>
+</body>
+</html>

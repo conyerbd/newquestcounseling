@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Keep charset first. It must land within the first 1024 bytes or the
+         browser falls back to guessing the encoding, and the tag scripts below
+         are long enough to push it past that. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18404659720"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18404659720');
+    </script>
+
+    <!-- Google Ads conversion action 7732881582, label gxwRCK7RqeccEIikg8hE.
+         Called from openContactForm() when a visitor opens the contact form,
+         so it measures intent, not a submitted message. The action gets
+         renamed and demoted to Secondary in Google Ads; neither changes the
+         label, so this keeps working. The url argument is unused here
+         (nothing navigates on open), but it is kept as Google ships it so the
+         same helper works on a link later. -->
+    <!-- Actual form submissions are tracked separately on thank-you.html. -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18404659720/gxwRCK7RqeccEIikg8hE',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
+    <title>New Quest Counseling | Online Therapy in Ohio</title>
+    <meta name="description" content="Online therapy anywhere in Ohio, including Cincinnati, Columbus, and Cleveland. Individual, couples, and family counseling with Dorasae Rosario, LPCC, for anxiety, burnout, and life transitions. Anthem and UnitedHealthcare accepted, plus sliding-scale self-pay. Free 15-minute consultation.">
+    <link rel="canonical" href="https://www.newquestcounseling.com/">
+    <meta name="theme-color" content="#1A3A5C">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New Quest Counseling">
+    <meta property="og:url" content="https://www.newquestcounseling.com/">
+    <meta property="og:title" content="New Quest Counseling | Online Therapy in Ohio">
+    <meta property="og:description" content="Life didn't come with a walkthrough. Online individual, couples, and family therapy across Ohio. Now accepting Anthem and UnitedHealthcare. Free 15-minute consultation.">
+    <meta property="og:image" content="https://www.newquestcounseling.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="New Quest Counseling, online therapy across Ohio">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="New Quest Counseling | Online Therapy in Ohio">
+    <meta name="twitter:description" content="Life didn't come with a walkthrough. Online individual, couples, and family therapy across Ohio. Now accepting Anthem and UnitedHealthcare.">
+    <meta name="twitter:image" content="https://www.newquestcounseling.com/og-image.png">
+
+    <!-- Meta Pixel Code -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1395723405642951'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1395723405642951&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        quest: {
+                            bg: '#B3D4E8',      /* User: Light blue background */
+                            red: '#E85A8F',     /* User: Heart Pink (CTA) */
+                            'red-dark': '#C9265F', /* Darker pink: small text on color (WCAG AA 5.35:1 vs white) */
+                            blue: '#1A3A5C',    /* User: Navy (Outlines/Text) */
+                            green: '#98FF98',   /* Stamina Green (Kept for health bar) */
+                            'green-dark': '#137A42', /* Green for text on light backgrounds (5.40:1 vs white) */
+                            gold: '#F7D426',    /* User: Lightning Yellow (Accent) */
+                            dark: '#1A3A5C',    /* User: Navy (Main Text) */
+                            slate: '#2A4460',   /* Lighter Navy (Secondary Text) */
+                            card: '#FFFFFF',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'Nunito', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                    },
+                    boxShadow: {
+                        'pixel': '5px 5px 0px 0px #1A3A5C', /* Solid navy sticker shadow, like the ads */
+                        'pixel-hover': '8px 8px 0px 0px #E85A8F', /* Solid pink lift on hover */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Site design layer: dot-grid paper, sticker shadows, Fredoka headings, motion -->
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/enhance.js" defer></script>
+    <script src="/tracking.js" defer></script>
+
+    <!-- Structured Data: local practice details for search engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["ProfessionalService", "MedicalBusiness"],
+      "@id": "https://www.newquestcounseling.com/#practice",
+      "name": "New Quest Counseling",
+      "url": "https://www.newquestcounseling.com/",
+      "image": "https://www.newquestcounseling.com/og-image.png",
+      "logo": "https://www.newquestcounseling.com/logo.svg",
+      "description": "Online individual, couples, and family therapy for clients across Ohio, including Cincinnati, Columbus, and Cleveland. Based in Cincinnati, licensed statewide.",
+      "telephone": "+1-513-622-9072",
+      "email": "dorasae@newquestcounseling.com",
+      "priceRange": "$$",
+      "medicalSpecialty": "Psychiatric",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cincinnati",
+        "addressRegion": "OH",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Ohio"
+      },
+      "availableService": [
+        { "@type": "Service", "name": "Individual Therapy" },
+        { "@type": "Service", "name": "Couples Counseling" },
+        { "@type": "Service", "name": "Family Therapy" }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Dorasae Rosario",
+        "jobTitle": "Licensed Professional Clinical Counselor (LPCC)",
+        "url": "https://www.newquestcounseling.com/about.html"
+      },
+      "sameAs": [
+        "https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447"
+      ]
+    }
+    </script>
+</head>
+<body class="bg-quest-bg font-body text-quest-dark antialiased overflow-x-hidden">
+
+    <!-- Progress/Health Bar -->
+    <div id="health-bar-container">
+        <div id="health-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="site-nav" class="bg-white/95 backdrop-blur-md border-b-4 border-quest-blue sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Mobile bar: hamburger left, logo centered (shrinks on scroll) -->
+            <div class="flex md:hidden items-center relative py-2">
+                <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="text-quest-dark hover:text-quest-red focus:outline-none p-2 absolute left-0 z-20">
+                    <i class="fa-solid fa-bars text-3xl" aria-hidden="true"></i>
+                </button>
+                <a href="#home" class="group mx-auto z-10" aria-label="New Quest Counseling home">
+                    <img src="/logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo-mobile group-hover:scale-105 transition-transform">
+                </a>
+            </div>
+
+            <!-- Desktop bar: logo centered above the links; on scroll it shrinks
+                 and moves inline to the left of "Home Base" -->
+            <div class="hidden md:flex flex-wrap items-center justify-center">
+                <a href="#home" class="nav-logo-link group" aria-label="New Quest Counseling home">
+                    <img src="/logo.svg" alt="New Quest Counseling" width="500" height="300" fetchpriority="high" decoding="async" class="nav-logo group-hover:scale-105 transition-transform">
+                </a>
+                <div class="nav-links flex items-center space-x-10 py-3 font-heading font-bold text-quest-slate text-lg">
+                    <a href="#home" class="hover:text-quest-red transition-colors">Home Base</a>
+                    <a href="#services" data-nq-event="nav-services" class="hover:text-quest-blue transition-colors">Services</a>
+                    <a href="/about.html" data-nq-event="nav-about-me" class="hover:text-quest-green-dark transition-colors">About Me</a>
+                    <a href="#wiki" data-nq-event="nav-faq" class="hover:text-quest-gold transition-colors">FAQ</a>
+                    <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="bg-quest-blue text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                        Client Portal
+                    </a>
+                    <a href="#contact" data-nq-event="nav-get-started" class="bg-quest-red-dark text-white px-4 py-2 rounded-lg shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-center whitespace-nowrap border-2 border-quest-dark text-sm">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-b-4 border-quest-blue">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-heading font-bold">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Home Base</a>
+                <a href="#services" data-nq-event="nav-services" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">Services</a>
+                <a href="/about.html" data-nq-event="nav-about-me" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">About Me</a>
+                <a href="#wiki" data-nq-event="nav-faq" class="block px-3 py-2 rounded-md hover:bg-quest-bg text-quest-dark">FAQ</a>
+                <a href="#contact" data-nq-event="nav-get-started" class="block px-3 py-2 mt-4 text-center bg-quest-red-dark text-white rounded-xl shadow-sm border-2 border-quest-dark">Get Started</a>
+                <a href="https://dorasae-rosario.clientsecure.me/sign-in" data-nq-event="client-portal" target="_blank" class="block px-3 py-2 mt-2 text-center bg-quest-blue text-white rounded-xl shadow-sm border-2 border-quest-dark">Client Portal</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-16 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <!-- Decor Elements -->
+        <div class="absolute top-20 right-1/4 text-quest-blue opacity-10 text-9xl float-anim" style="animation-delay: 1s;"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
+        <div class="absolute bottom-20 left-1/4 text-quest-gold opacity-20 text-8xl float-anim"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center">
+                <div class="inline-block bg-white rounded-full px-4 py-1 mb-6 border-2 border-quest-dark shadow-pixel">
+                    <span class="text-quest-dark font-heading font-bold text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-compass mr-2 text-quest-gold" aria-hidden="true"></i> Ready to Start Your New Adventure?
+                    </span>
+                </div>
+                <h1 class="text-4xl tracking-tight font-heading font-extrabold text-quest-dark sm:text-5xl md:text-6xl mb-6 drop-shadow-sm">
+                    Life didn't come with a <br class="hidden sm:block" />
+                    <span class="text-quest-red">walkthrough.</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-quest-dark font-medium mb-10">
+                    But you don't have to do it alone. Upgrade your mental health, overcome your challenges, and unlock your potential with a guide who gets it.
+                </p>
+                <div class="flex justify-center gap-4 flex-col sm:flex-row">
+                    <a href="#contact" data-nq-event="schedule-consult" class="bg-quest-red text-white px-8 py-4 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">
+                        Schedule Consult
+                    </a>
+                    <a href="#services" data-nq-event="view-services" class="bg-white text-quest-dark border-2 border-quest-dark px-8 py-4 rounded-xl font-bold font-heading shadow-sm hover:bg-quest-bg transition-all btn-pixel text-lg">
+                        View Services
+                    </a>
+                </div>
+                <p class="mt-4 text-sm text-quest-slate font-bold italic"><i class="fa-solid fa-video mr-1" aria-hidden="true"></i>Online sessions anywhere in Ohio. Based in Cincinnati.</p>
+                <p class="mt-2 text-sm text-quest-slate font-bold"><i class="fa-solid fa-shield-heart mr-1 text-quest-red-dark" aria-hidden="true"></i>Now accepting Anthem &amp; UnitedHealthcare</p>
+                <p class="mt-4"><a href="tel:5136229072" data-nq-event="phone-click" class="inline-flex items-center gap-2 text-quest-red-dark font-heading font-bold text-lg underline underline-offset-4 decoration-2 hover:text-quest-dark"><i class="fa-solid fa-phone" aria-hidden="true"></i>Call (513) 622-9072</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section (The Glitch) -->
+    <section class="py-16 bg-white border-y-4 border-quest-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-quest-dark">Feeling Stuck?</h2>
+                <p class="mt-4 text-lg text-quest-slate max-w-2xl mx-auto">Even the best of us hit obstacles. Identify what's draining your energy.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
+                        <i class="fa-solid fa-smog text-2xl text-quest-slate" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">Overwhelming Anxiety</h3>
+                    <p class="text-quest-slate">Is stress making it hard to see the path forward? Let's clear the fog and find your way.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
+                        <i class="fa-solid fa-heart-crack text-2xl text-quest-red" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">Feeling Depleted</h3>
+                    <p class="text-quest-slate">Feeling drained, depressed, or burned out? We'll focus on restoration and building resilience.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-quest-bg p-8 rounded-2xl border-2 border-quest-dark hover:shadow-pixel transition-all hover:-translate-y-1 text-center group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border-2 border-quest-dark">
+                        <i class="fa-solid fa-users text-2xl text-quest-blue" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mb-3">Relationship Struggles</h3>
+                    <p class="text-quest-slate">Conflict with your partner? Learn to communicate better and reconnect with your team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Skill Trees) -->
+    <section id="services" class="py-20 bg-quest-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="font-pixel text-xs text-quest-dark mb-2 block bg-quest-gold inline-block px-2 py-1 border-2 border-quest-dark shadow-sm">CHOOSE YOUR PATH</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-extrabold text-quest-dark mt-4">Our Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Solo Campaign -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-blue hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-quest-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">GROWTH</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-user-astronaut text-4xl text-quest-blue" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Individual Therapy</h3>
+                    <p class="text-quest-slate mb-6">One-on-one sessions to explore your goals, build skills, and unlock personal growth.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Coping Strategies
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Emotional Regulation
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Self-Discovery
+                        </li>
+                    </ul>
+                    <a href="#contact" data-nq-event="learn-more-individual" class="block text-center w-full py-3 border-2 border-quest-blue text-quest-blue font-bold rounded-lg hover:bg-quest-blue hover:text-white transition-colors">Learn More</a>
+                </div>
+
+                <!-- Co-Op Mode -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-red hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-red-dark text-white text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">CONNECTION</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-people-arrows text-4xl text-quest-red" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Couples Counseling</h3>
+                    <p class="text-quest-slate mb-6">Improve your dynamic. Learn to support each other and coordinate on life's problems.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Conflict Resolution
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Better Communication
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Deep Intimacy
+                        </li>
+                    </ul>
+                    <a href="#contact" data-nq-event="learn-more-couples" class="block text-center w-full py-3 border-2 border-quest-red-dark text-quest-red-dark font-bold rounded-lg hover:bg-quest-red-dark hover:text-white transition-colors">Learn More</a>
+                </div>
+
+                <!-- Family Therapy -->
+                <div class="bg-white rounded-2xl shadow-pixel p-8 border-2 border-quest-dark hover:border-quest-gold hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-quest-gold text-quest-dark text-xs font-bold px-3 py-1 rounded-bl-lg font-pixel border-l-2 border-b-2 border-quest-dark">UNITY</div>
+                    <div class="mb-6">
+                        <i class="fa-solid fa-people-roof text-4xl text-quest-gold" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">Family Therapy</h3>
+                    <p class="text-quest-slate mb-6">Strengthen your family bonds and work together to overcome challenges as a team.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Family Dynamics
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Conflict Resolution
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fa-solid fa-check text-quest-green mr-3 drop-shadow-md" aria-hidden="true"></i> Stronger Bonds
+                        </li>
+                    </ul>
+                    <a href="#contact" data-nq-event="learn-more-family" class="block text-center w-full py-3 border-2 border-quest-gold text-yellow-700 font-bold rounded-lg hover:bg-quest-gold hover:text-quest-dark transition-colors">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Teens (written for parents; the "Teens" ad group lands here) -->
+            <div id="teens" class="mt-16 bg-white rounded-2xl border-2 border-quest-dark shadow-pixel p-8 scroll-mt-24">
+                <div class="text-center">
+                    <p class="font-pixel text-xs text-quest-dark mb-4 bg-quest-gold inline-block px-3 py-2 rounded">TEENS 14+</p>
+                    <h3 class="text-2xl font-heading font-bold text-quest-dark mb-3">Therapy for Teens</h3>
+                    <p class="text-quest-slate max-w-2xl mx-auto mb-8">
+                        Growing up is hard, and teens don't always want to talk about it with a parent. I work with teens 14 and up in a space where they feel heard instead of judged, so they can build coping skills and confidence. Sessions are by video, so your teen can join from home.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-quest-bg rounded-xl border-2 border-quest-dark p-5">
+                        <i class="fa-solid fa-user text-2xl text-quest-blue mb-3" aria-hidden="true"></i>
+                        <h4 class="font-heading font-bold text-lg mb-1">One-on-One Sessions</h4>
+                        <p class="text-sm text-quest-slate">Your teen gets their own space to talk things through.</p>
+                    </div>
+                    <div class="bg-quest-bg rounded-xl border-2 border-quest-dark p-5">
+                        <i class="fa-solid fa-people-roof text-2xl text-quest-red-dark mb-3" aria-hidden="true"></i>
+                        <h4 class="font-heading font-bold text-lg mb-1">Family Sessions</h4>
+                        <p class="text-sm text-quest-slate">Work through challenges together, as a team.</p>
+                    </div>
+                    <div class="bg-quest-bg rounded-xl border-2 border-quest-dark p-5">
+                        <i class="fa-solid fa-comments text-2xl text-yellow-700 mb-3" aria-hidden="true"></i>
+                        <h4 class="font-heading font-bold text-lg mb-1">Parent Check-Ins</h4>
+                        <p class="text-sm text-quest-slate">Stay in the loop on how things are going.</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-quest-slate mb-5">We'll figure out the right mix for your family during a free 15-minute consultation. Anthem and UnitedHealthcare accepted, plus sliding-scale self-pay.</p>
+                    <a href="#contact" data-nq-event="learn-more-teens" class="inline-block bg-quest-red text-white px-8 py-3 rounded-xl font-bold font-heading shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-lg border-2 border-quest-dark">Schedule a Free Consult</a>
+                </div>
+            </div>
+
+            <!-- Insurance Accepted -->
+            <div id="insurance" class="mt-16 bg-white rounded-2xl border-2 border-quest-dark shadow-pixel p-8 text-center scroll-mt-24">
+                <p class="font-pixel text-xs text-quest-gold mb-4 bg-quest-dark inline-block px-3 py-2 rounded">COVERAGE UNLOCKED</p>
+                <h3 class="text-2xl font-heading font-bold text-quest-dark mb-3">Insurance Accepted</h3>
+                <p class="text-quest-slate max-w-xl mx-auto mb-6">
+                    I'm in-network with the plans below. Sliding-scale self-pay is also available if you're out of network or prefer not to use insurance.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="flex items-center gap-2 bg-quest-bg border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark">
+                        <i class="fa-solid fa-shield-heart text-quest-red-dark" aria-hidden="true"></i> Anthem
+                    </span>
+                    <span class="flex items-center gap-2 bg-quest-bg border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark">
+                        <i class="fa-solid fa-shield-heart text-quest-red-dark" aria-hidden="true"></i> UnitedHealthcare
+                    </span>
+                    <span class="flex items-center gap-2 bg-quest-bg border-2 border-quest-dark rounded-xl px-5 py-3 font-heading font-bold text-quest-dark">
+                        <i class="fa-solid fa-hand-holding-dollar text-quest-blue" aria-hidden="true"></i> Sliding-Scale Self-Pay
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wiki (FAQ) -->
+    <section id="wiki" class="py-20 bg-white/50 border-t-4 border-quest-blue">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <i class="fa-solid fa-book-journal-whills text-4xl text-quest-blue mb-4" aria-hidden="true"></i>
+                <h2 class="text-3xl font-heading font-bold text-quest-dark">FAQ</h2>
+                <p class="text-quest-slate mt-2">Common questions answered.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button type="button" aria-expanded="false" class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
+                        <span class="font-bold text-lg text-quest-dark">Do you take insurance?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-gold mb-2 bg-quest-dark inline-block px-2 py-1 rounded">INSURANCE & SELF-PAY</p>
+                        <p class="mt-2">I accept <strong>Anthem</strong> and <strong>UnitedHealthcare</strong>. I also offer self-pay options with a sliding scale fee structure to help make therapy accessible. During our consultation, we can discuss rates and coverage that work for your situation.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button type="button" aria-expanded="false" class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
+                        <span class="font-bold text-lg text-quest-dark">Is therapy right for me?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-red mb-2 bg-quest-dark inline-block px-2 py-1 rounded">SUPPORT FOR EVERYONE</p>
+                        <p class="mt-2">If you're feeling overwhelmed, stuck, or just want to optimize your life, therapy is a great tool. You don't need to be in crisis to benefit from a strategy session.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item: Location -->
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button type="button" aria-expanded="false" class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
+                        <span class="font-bold text-lg text-quest-dark">Where are you located?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-gold mb-2 bg-quest-dark inline-block px-2 py-1 rounded">LOCATION</p>
+                        <p class="mt-2">I'm based in <strong>Cincinnati</strong> and licensed to practice throughout the state of Ohio. Sessions are held virtually, so you can connect from anywhere in the state, whether that's Cincinnati, Columbus, Cleveland, or a small town in between.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-sm border-2 border-quest-dark overflow-hidden">
+                    <button type="button" aria-expanded="false" class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-quest-bg transition-colors">
+                        <span class="font-bold text-lg text-quest-dark">How long are sessions?</span>
+                        <i class="fa-solid fa-chevron-down text-quest-blue transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-quest-slate bg-white">
+                        <p class="font-pixel text-xs text-quest-green mb-2 bg-quest-dark inline-block px-2 py-1 rounded">SESSION LENGTH</p>
+                        <p class="mt-2">Standard sessions are 50 minutes long. This gives us enough time to tackle current issues and set up tools for the week ahead.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-20 bg-quest-bg border-t-4 border-quest-blue">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-pixel border-2 border-quest-dark overflow-hidden flex flex-col md:flex-row">
+                <!-- Contact Info Side -->
+                <div class="bg-quest-dark text-white p-10 md:w-1/3 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-heading font-bold mb-6">Contact Me</h3>
+                        <p class="mb-6 opacity-90">Ready to start? Send a message to schedule your free 15-minute consultation.</p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-phone text-quest-green w-8" aria-hidden="true"></i>
+                                <a href="tel:5136229072" data-nq-event="phone-click" class="hover:text-quest-green transition-colors">(513) 622-9072</a>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-envelope text-quest-red w-8 mt-1" aria-hidden="true"></i>
+                                <a href="mailto:dorasae@newquestcounseling.com" data-nq-event="email-click" class="hover:text-quest-red transition-colors text-sm break-all">dorasae@newquestcounseling.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <p class="font-pixel text-xs opacity-50 mb-4">FIND ME</p>
+                        <div class="flex space-x-4">
+                            <a data-nq-event="psychology-today" href="https://www.psychologytoday.com/us/therapists/dorasae-rosario-blue-ash-oh/884447" target="_blank" class="hover:text-quest-gold transition-colors" title="Psychology Today">
+                                <i class="fa-solid fa-brain text-xl" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="p-10 md:w-2/3 flex flex-col justify-center text-center">
+                    <div class="max-w-md mx-auto">
+                        <div class="w-20 h-20 bg-quest-blue/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-quest-dark">
+                            <i class="fa-solid fa-dungeon text-3xl text-quest-blue" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-3xl font-heading font-bold text-quest-dark mb-4">Request Appointment</h3>
+                        <p class="text-lg text-quest-slate mb-8 leading-relaxed">
+                            Ready to start your new adventure? Click the button below to open our secure contact form and send a message to schedule your free consultation.
+                        </p>
+
+                        <button onclick="openContactForm()" data-nq-event="open-contact-form" class="w-full bg-quest-red text-white font-bold font-heading py-4 rounded-xl shadow-pixel hover:shadow-pixel-hover hover:-translate-y-1 transition-all btn-pixel text-xl flex justify-center items-center gap-3 group border-2 border-quest-dark cursor-pointer">
+                            <span>Open Contact Form</span>
+                            <i class="fa-solid fa-envelope group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
+                        </button>
+
+                        <p class="mt-6 text-sm text-quest-slate italic">
+                            <i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> Secure form powered by SimplePractice
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-[9999] hidden" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-quest-dark/80 backdrop-blur-sm" onclick="closeContactForm()"></div>
+
+        <!-- Modal Content -->
+        <div class="absolute inset-4 md:inset-y-10 md:left-1/2 md:-translate-x-1/2 md:w-[600px] lg:w-[650px] bg-white rounded-2xl shadow-2xl border-4 border-quest-blue overflow-hidden flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-4 border-b-2 border-quest-dark bg-quest-bg">
+                <h3 id="contact-modal-title" class="font-heading font-bold text-xl text-quest-dark">
+                    <i class="fa-solid fa-envelope mr-2 text-quest-red" aria-hidden="true"></i> Contact Form
+                </h3>
+                <button id="contact-modal-close" type="button" onclick="closeContactForm()" aria-label="Close contact form" class="w-10 h-10 bg-quest-red-dark text-white rounded-lg border-2 border-quest-dark hover:bg-quest-red transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body with iframe -->
+            <div class="flex-1 overflow-auto">
+                <iframe
+                    id="contact-iframe"
+                    src=""
+                    style="border: none; width: 100%; height: 100%; min-height: 500px;"
+                    title="Contact Form"
+                    allow="geolocation"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-quest-dark text-white py-12 border-t-4 border-quest-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img src="/logo.svg" alt="New Quest Counseling" width="500" height="300" loading="lazy" decoding="async" class="h-16 w-auto mx-auto mb-4">
+            <p class="text-slate-300 mb-8 max-w-md mx-auto">Game Over? Not yet. Just a checkpoint. Take a rest, refill your inventory, and try again.</p>
+
+            <div class="border-t border-gray-700 pt-8 mt-8">
+                <p class="text-sm text-slate-300 font-pixel">© 2026 NEW QUEST COUNSELING. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        function setMenu(open) {
+            menu.classList.toggle('open', open);
+            btn.setAttribute('aria-expanded', String(open));
+            btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        }
+
+        btn.addEventListener('click', () => {
+            setMenu(!menu.classList.contains('open'));
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                setMenu(false);
+            });
+        });
+
+        // FAQ Accordion
+        const toggles = document.querySelectorAll('.faq-toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+
+                // Toggle current
+                content.classList.toggle('hidden');
+                const isOpen = !content.classList.contains('hidden');
+                toggle.setAttribute('aria-expanded', String(isOpen));
+
+                // Rotate icon
+                icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+
+        // Contact Form Modal Functions
+        let lastFocusedBeforeModal = null;
+        const CONTACT_WIDGET_ORIGIN = 'https://dorasae-rosario.clientsecure.me';
+
+        // Handing off to the confirmation page. Everything below can call this;
+        // the flag makes sure only the first caller wins, so a postMessage and
+        // an iframe load for the same submission don't fight over the tab.
+        let handedOffToThankYou = false;
+
+        function goToThankYou(reason) {
+            if (handedOffToThankYou) return;
+            handedOffToThankYou = true;
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: reason, source_page: 'light' });
+            window.location.href = '/thank-you.html';
+        }
+
+        // Path 1: the widget tells us. SimplePractice isn't documented as
+        // posting anything, but if it ever does we take it - strictly from its
+        // own origin, and only for a message that looks like a submission.
+        window.addEventListener('message', (e) => {
+            if (e.origin !== CONTACT_WIDGET_ORIGIN) return;
+            const data = typeof e.data === 'string' ? e.data : (e.data && (e.data.type || e.data.event)) || '';
+            if (/submit|success|complete|thank/i.test(String(data))) goToThankYou('postMessage');
+        });
+
+        // Path 2: the widget navigates itself. The first load is the form; a
+        // later one would mean a new document. In practice the widget shows its
+        // own confirmation in place and never navigates, so this rarely fires -
+        // it stays as a cheap catch in case that ever changes.
+        let contactFormOpenedAt = 0;
+        let contactFormLoads = 0;
+        let reportedAdsConversion = false;
+
+        document.getElementById('contact-iframe').addEventListener('load', () => {
+            // Closing the modal blanks the src, which also fires load - ignore it.
+            if (!document.getElementById('contact-iframe').getAttribute('src')) return;
+            contactFormLoads++;
+            if (contactFormLoads < 2) return;
+            if (secondsWithForm() < MIN_FILL_SECONDS) return;
+            goToThankYou('iframe-navigation');
+        });
+
+        // Path 3, the one that actually carries the traffic: the widget puts its
+        // own "message sent" screen inside the iframe, so the last thing anyone
+        // does is close the modal. Closing after long enough to have filled the
+        // form in is treated as a submission and hands off to the confirmation
+        // page instead of dropping the visitor back on the home page.
+        // 45 seconds is the line: about the least it takes to type a name,
+        // email and message. It was 10 until Oct 2026, when a 2am phone visit
+        // that opened the form and then left was counted (and told) "sent".
+        const MIN_FILL_SECONDS = 45;
+
+        function secondsWithForm() {
+            if (!contactFormOpenedAt) return 0;   // never opened this page view
+            return (Date.now() - contactFormOpenedAt) / 1000;
+        }
+
+        // Did the visitor actually use the form? The widget is a cross-origin
+        // iframe, so we can't see typing or the Send button, but we can see
+        // focus move into it, which happens when someone taps a field. Opening
+        // the form and walking away (a phone locking at 2am, Oct 3) never
+        // does. Two signals, because not every phone browser fires the first:
+        // the window losing focus to the iframe, and a light poll of
+        // document.activeElement while the form is open.
+        let formTouched = false;
+        let touchPoll = 0;
+
+        function checkFormTouched() {
+            if (document.activeElement === document.getElementById('contact-iframe')) formTouched = true;
+        }
+        window.addEventListener('blur', () => setTimeout(checkFormTouched, 0));
+
+        // Counted as a submission only when both hold: the visitor used the
+        // form, and kept it open long enough to have filled it in.
+        function looksSubmitted() {
+            return formTouched && secondsWithForm() >= MIN_FILL_SECONDS;
+        }
+
+        function openContactForm() {
+            contactFormLoads = 0;
+            contactFormOpenedAt = Date.now();
+            formTouched = false;
+            clearInterval(touchPoll);
+            touchPoll = setInterval(checkFormTouched, 500);
+            lastFocusedBeforeModal = document.activeElement;
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.getElementById('contact-iframe').src = 'https://dorasae-rosario.clientsecure.me/contact-widget';
+            document.body.style.overflow = 'hidden';
+            // Move focus into the dialog so keyboard users aren't left behind it
+            document.getElementById('contact-modal-close').focus();
+            // Contact, not Lead: opening the form is intent, not a submission.
+            // Lead is reserved for the confirmation page, so one visitor who
+            // actually sends a message is counted once.
+            if (window.nqTrack) window.nqTrack('Contact', { content_name: 'contact-form-opened', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'light' });
+
+            // Google Ads conversion, once per page view. Closing the form and
+            // opening it again is the same visitor having second thoughts, not
+            // a second lead.
+            if (!reportedAdsConversion) {
+                reportedAdsConversion = true;
+                gtag_report_conversion();
+            }
+        }
+
+        function closeContactForm() {
+            checkFormTouched();
+            const wasOpenLongEnough = looksSubmitted();
+            clearInterval(touchPoll);
+
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.getElementById('contact-iframe').src = '';
+            document.body.style.overflow = '';
+
+            // Used the form long enough to have sent something: carry on to the
+            // confirmation page rather than leaving them back on the home page.
+            if (wasOpenLongEnough) {
+                goToThankYou('modal-closed');
+                return;
+            }
+
+            // Return focus to whatever opened the dialog
+            if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+        }
+
+        // Path 4: the visitor leaves without closing the modal. Closing the
+        // tab, hitting back, or switching away on a phone never calls
+        // closeContactForm(), so someone who sent a message and then shut the
+        // tab was invisible - which is most of the reason the first campaign
+        // recorded three form opens and zero submissions.
+        //
+        // Same gate as the close path (used the form, 45+ seconds), so this
+        // reports exactly what that path would have. It cannot navigate anywhere (the page is on
+        // its way out), so it reports the conversion in place instead.
+        let reportedSubmission = false;
+
+        function reportSubmissionOnExit() {
+            if (reportedSubmission || handedOffToThankYou) return;
+            if (document.getElementById('contact-modal').classList.contains('hidden')) return;
+            checkFormTouched();
+            if (!looksSubmitted()) return;
+
+            reportedSubmission = true;
+            if (window.nqTrack) window.nqTrack('Lead', { content_name: 'contact-form-submitted', content_category: 'Contact' });
+            if (window.nqTrackCustom) window.nqTrackCustom('contact-form-handoff', { detected_by: 'page-exit', source_page: 'light' });
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18404659720/rRBlCLq1rOccEIikg8hE',
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+
+        // Both events, deliberately. pagehide is the accurate one but phones
+        // often kill a page without ever firing it, and visibilitychange is
+        // the last thing that reliably runs there. The cost is that a visitor
+        // who tabs away after filling the form and comes back is reported at the
+        // moment they tabbed away rather than when they close the form. They
+        // are counted once either way, and the alternative is missing real
+        // submissions on mobile, which is the worse error.
+        window.addEventListener('pagehide', reportSubmissionOnExit);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') reportSubmissionOnExit();
+        });
+
+        // Escape closes the modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('contact-modal').classList.contains('hidden')) {
+                closeContactForm();
+            }
+        });
+
+        // Arriving from the about page's "Open Contact Form" button: open it on
+        // landing so the visitor doesn't have to find the button again.
+        // Waits for DOMContentLoaded so deferred tracking.js has registered
+        // nqTrack and the open event isn't dropped.
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.search.indexOf('contact=open') === -1) return;
+            openContactForm();
+            // Drop the parameter so a refresh (or a shared link) doesn't reopen it
+            history.replaceState(null, '', window.location.pathname + window.location.hash);
+            // Re-assert focus once the page has settled; a focus() call this
+            // early in the load doesn't always stick.
+            window.addEventListener('load', () => {
+                document.getElementById('contact-modal-close').focus();
+            }, { once: true });
+        });
+
+        // Meta Pixel event tracking (clicks + scroll depth) lives in tracking.js,
+        // shared with about.html.
+
+        // Nav: shrink the logo and move it inline once the page is scrolled.
+        // Driven purely by scroll position (with a hysteresis gap so it can't
+        // flutter), so the logo is always in the right state on load.
+        const siteNav = document.getElementById('site-nav');
+        // Thresholds are deliberately tight: a single wheel tick must land
+        // past COMPACT_AT, otherwise the nav sits at full height over
+        // already-scrolled content and looks stuck. The small gap between the
+        // two values is only there to absorb sub-pixel scroll jitter.
+        const COMPACT_AT = 8;    // scroll past this -> compact
+        const EXPAND_AT = 3;     // scroll back above this -> full size
+
+        function updateNav() {
+            const y = window.scrollY;
+            if (y > COMPACT_AT) {
+                siteNav.classList.add('compact');
+            } else if (y < EXPAND_AT) {
+                siteNav.classList.remove('compact');
+            }
+        }
+
+        updateNav(); // match the state to wherever the page actually opens
+        window.addEventListener('scroll', updateNav, { passive: true });
+
+        // Health Bar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const bar = document.getElementById('health-bar');
+
+            bar.style.width = scrolled + "%";
+
+            // Change color based on progress (Pink -> Yellow -> Green)
+            if (scrolled < 30) {
+                bar.style.background = "#E85A8F"; // Pink
+            } else if (scrolled < 70) {
+                bar.style.background = "#F7D426"; // Yellow
+            } else {
+                bar.style.background = "#98FF98"; // Green
+            }
+        });
+    </script>
+</body>
+</html>
