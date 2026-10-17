@@ -43,7 +43,7 @@ LOGIN_CUSTOMER_ID = "1713871701"  # the manager account above it
 ASSET_GROUP_ID = "6742123859"     # Asset Group 1
 
 # Tried in order; the first that answers a read is used.
-API_VERSIONS = ["v22", "v21", "v20", "v19"]
+API_VERSIONS = ["v25", "v24", "v23", "v22", "v21", "v20", "v19"]
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
