@@ -63,6 +63,10 @@
 //
 //   scroll-25 / scroll-50 / scroll-75   how far down the page people get
 //   engaged-15s / engaged-45s           visible time on page, tab-blur aware
+//   engaged-2min / engaged-5min         same, and also sent to Google Ads as the
+//                                       secondary "Stayed 2 minutes" / "Stayed 5
+//                                       minutes" conversions, so each ad group's
+//                                       landing page can be compared on time held
 //
 // These exist because ViewContent only fires once the Services section is on
 // screen, which is over two phone screens down. Without a shallower signal an
@@ -246,7 +250,9 @@
     // open in a background tab doesn't read as someone reading it.
     const timeMarks = [
         { seconds: 15, event: 'engaged-15s' },
-        { seconds: 45, event: 'engaged-45s' }
+        { seconds: 45, event: 'engaged-45s' },
+        { seconds: 120, event: 'engaged-2min', sendTo: 'AW-18404659720/u-L6CJfK9KIdEIikg8hE' },
+        { seconds: 300, event: 'engaged-5min', sendTo: 'AW-18404659720/jbzECJ3K9KIdEIikg8hE' }
     ];
 
     let visibleSeconds = 0;
@@ -262,6 +268,14 @@
             if (visibleSeconds >= mark.seconds) {
                 mark.fired = true;
                 trackCustom(mark.event, { seconds: mark.seconds, source_page: pageLabel });
+                // Secondary conversions, like "Engaged visit": reported, never a lead.
+                if (mark.sendTo && typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {
+                        'send_to': mark.sendTo,
+                        'value': 1.0,
+                        'currency': 'USD'
+                    });
+                }
             } else {
                 remaining++;
             }

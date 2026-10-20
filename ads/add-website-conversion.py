@@ -10,6 +10,10 @@ value the site's tag needs. Both are fired from tracking.js.
                  never counted as a lead). An ad visitor who stayed 30 visible
                  seconds or scrolled halfway, so the dashboard can tell "wrong
                  people clicked" apart from "right people, page didn't land".
+  stayed-2min    "Stayed 2 minutes", SECONDARY. 120 visible seconds on the page.
+  stayed-5min    "Stayed 5 minutes", SECONDARY. 300 visible seconds. With the
+                 two above, compares how long each landing page (/pro/ vs the
+                 home page and /light/) holds people, per ad group.
 
 Safe to re-run: if the action already exists it just prints its send_to.
 Same auth as apply-pmax-assets.py.
@@ -32,6 +36,8 @@ _spec.loader.exec_module(ads_client)
 PRESETS = {
     "phone-tap": {"name": "Phone number tapped", "category": "PHONE_CALL_LEAD", "primary": True},
     "engaged-visit": {"name": "Engaged visit", "category": "ENGAGEMENT", "primary": False},
+    "stayed-2min": {"name": "Stayed 2 minutes", "category": "ENGAGEMENT", "primary": False},
+    "stayed-5min": {"name": "Stayed 5 minutes", "category": "ENGAGEMENT", "primary": False},
 }
 
 
