@@ -45,7 +45,7 @@ HEADLINES = ["Black Therapist in Ohio", "Black Therapist, Online", "Black Counse
 DESCRIPTIONS = ["Online therapy with a Black therapist, anywhere in Ohio. Free 15-minute consultation.",
                 "In-network with Anthem and UnitedHealthcare. Sliding-scale self-pay if you are not.",
                 "Help with anxiety, self-esteem, relationships and life changes, by secure video.",
-                "Call or send a message to set up a free 15-minute call. No pressure, no judgment."]
+                "Send a message or call to schedule your free 15-minute consultation. No pressure."]
 
 
 def main():
