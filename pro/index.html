@@ -234,7 +234,7 @@
         .footer-fine { font-size: 13px; }
         @media (min-width: 601px) { .footer { padding-bottom: 40px; } }
 
-        /* Phones: Call and Book always reachable */
+        /* Phones: Call and Message always reachable */
         .mobile-bar { display: none; }
         @media (max-width: 600px) {
             .mobile-bar { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); }
@@ -317,7 +317,7 @@
             </nav>
             <div class="topbar-actions">
                 <a class="topbar-phone" href="tel:5136229072" data-nq-event="phone-click">(513) 622-9072</a>
-                <button type="button" class="btn btn-primary btn-sm" onclick="openContactForm()" data-nq-event="open-contact-form">Book a free call</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="openContactForm()" data-nq-event="open-contact-form">Send a message</button>
             </div>
         </div>
     </header>
@@ -332,7 +332,7 @@
                 <h1>Talk with a therapist who <em>gets&nbsp;it</em>.</h1>
                 <p class="lede">I'm Dorasae Rosario, a licensed counselor helping adults, couples, families, and teens 14 and up with anxiety, burnout, relationships, and big life changes. Sessions are by secure video, so you can start from wherever you are.</p>
                 <div class="hero-actions">
-                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="schedule-consult">Book a free 15-minute call</button>
+                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="schedule-consult">Send a message</button>
                     <a class="btn btn-quiet" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
                 </div>
                 <ul class="trust" aria-label="At a glance">
@@ -418,7 +418,7 @@
                 <h2 id="teens-title" class="section-title">Therapy your teen might actually talk in</h2>
                 <p>Growing up is hard, and teens don't always want to talk about it with a parent. I work with teens in a space where they feel heard instead of judged, so they can build coping skills and confidence. Sessions are by video, so your teen can join from home.</p>
                 <div class="hero-actions">
-                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="teens-open-form">Book a free call about your teen</button>
+                    <button type="button" class="btn btn-primary" onclick="openContactForm()" data-nq-event="teens-open-form">Send a message about your teen</button>
                     <a class="btn btn-quiet" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
                 </div>
             </div>
@@ -526,7 +526,7 @@
             <h2 id="contact-title">Ready when you are</h2>
             <p>Send a message to set up your free 15-minute call. I'll get back to you to find a time.</p>
             <div class="hero-actions centered">
-                <button type="button" class="btn btn-primary btn-on-dark" onclick="openContactForm()" data-nq-event="open-contact-form">Open the contact form</button>
+                <button type="button" class="btn btn-primary btn-on-dark" onclick="openContactForm()" data-nq-event="open-contact-form">Send a message</button>
                 <a class="btn btn-quiet-dark" href="tel:5136229072" data-nq-event="phone-click">Call (513) 622-9072</a>
             </div>
             <p class="contact-meta">
@@ -556,7 +556,7 @@
     <!-- Phones: the two actions that matter, always within reach -->
     <div class="mobile-bar" role="region" aria-label="Contact">
         <a href="tel:5136229072" data-nq-event="phone-click">Call</a>
-        <button type="button" onclick="openContactForm()" data-nq-event="mobile-bar-open-form">Book a free call</button>
+        <button type="button" onclick="openContactForm()" data-nq-event="mobile-bar-open-form">Send a message</button>
     </div>
 
     <!-- Contact Form Modal (ids and handlers unchanged: the tracking depends on them) -->
@@ -564,7 +564,7 @@
         <div class="modal-backdrop" onclick="closeContactForm()"></div>
         <div class="modal-panel">
             <div class="modal-head">
-                <h2 id="contact-modal-title">Book a free 15-minute call</h2>
+                <h2 id="contact-modal-title">Ask for your free 15-minute call</h2>
                 <button id="contact-modal-close" type="button" onclick="closeContactForm()" aria-label="Close contact form">
                     <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                 </button>
