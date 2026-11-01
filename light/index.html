@@ -719,6 +719,7 @@
             // actually sends a message is counted once.
             if (window.nqTrack) window.nqTrack('Contact', { content_name: 'contact-form-opened', content_category: 'Contact' });
             if (window.nqTrackCustom) window.nqTrackCustom('contact-form-opened', { source_page: 'light' });
+            if (window.nqTrackAnalytics) window.nqTrackAnalytics('contact_form_open', { source_page: 'light' });
 
             // Google Ads conversion, once per page view. Closing the form and
             // opening it again is the same visitor having second thoughts, not

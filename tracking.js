@@ -88,6 +88,13 @@
         window.fbq('trackCustom', event, params || {});
     }
 
+    // Google Analytics only, so visitors who didn't come from an ad are counted
+    // too. send_to keeps these out of Google Ads, which has its own conversions.
+    function trackAnalytics(event, params) {
+        if (typeof window.gtag !== 'function') return;
+        window.gtag('event', event, Object.assign({ send_to: 'G-M3G6J93YRG' }, params));
+    }
+
     // Which page the action happened on, attached to every event so the shared
     // names ("phone-click", "nav-faq") stay breakdown-able.
     const path = window.location.pathname;
@@ -100,6 +107,7 @@
     // Let the inline contact-modal code report the form opening.
     window.nqTrack = track;
     window.nqTrackCustom = trackCustom;
+    window.nqTrackAnalytics = trackAnalytics;
 
     // ---- Click tracking -------------------------------------------------
     // Delegated from the document so it covers both pages, survives markup
@@ -118,6 +126,7 @@
         if (href.indexOf('tel:') === 0) {
             track('Lead', { content_name: 'phone-click', content_category: 'Contact' });
             trackCustom('phone-click', { source_page: pageLabel });
+            trackAnalytics('phone_tap', { source_page: pageLabel });
             // Google Ads "Phone number tapped". Calls placed from the ad
             // itself are counted by Google separately; this covers visitors
             // who reached the site first. Every page with a tel: link loads
