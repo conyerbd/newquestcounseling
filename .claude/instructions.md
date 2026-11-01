@@ -113,6 +113,8 @@ Both pages share: mobile menu toggle (syncs `aria-expanded`/`aria-label`), nav c
 
 Meta Pixel `1395723405642951` is on both pages. `tracking.js` is shared by both and holds all event logic.
 
+Google Analytics 4 (`G-M3G6J93YRG`) is configured next to the Google Ads tag in the `<head>` of every page. It shares the `AW-18404659720` gtag.js loader, so add a page's tag by copying both `config` lines.
+
 **Standard events** (what Meta can optimize and attribute against):
 
 | Event | Fires on |

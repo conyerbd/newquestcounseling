@@ -74,6 +74,8 @@ async function newPage(browser, fired) {
       // Abort so Google never records this as a real conversion.
       return req.abort();
     }
+    // Keep test visits out of Google Analytics.
+    if (url.includes('/g/collect')) return req.abort();
     // The SimplePractice widget is slow and irrelevant to what we measure.
     if (url.includes('clientsecure.me') || url.includes('facebook')) return req.abort();
     req.continue();
