@@ -101,6 +101,7 @@
     const pageLabel = /about\.html$/.test(path) ? 'about'
         : /thank-you\.html$/.test(path) ? 'thank-you'
         : /^\/pro\//.test(path) ? 'pro'
+        : /^\/teens\//.test(path) ? 'teens'
         : /^\/light\//.test(path) ? 'light'
         : 'home';
 
