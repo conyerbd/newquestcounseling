@@ -10,7 +10,7 @@ Static site, no build step. Two hand-written HTML pages using Tailwind CSS via C
 |------|---------|
 | `index.html` | Home — hero, problem cards, services, insurance, FAQ, contact |
 | `pro/index.html` | Professional version of the home page, used as an ad landing page (Ohio, insurance, Black therapist, couples) |
-| `teens/index.html` | Parent-focused copy of `/pro/`, the landing page for the Teens ad group |
+| `teens/index.html` | Parent-focused page in the home page style (built from `/light/`), the landing page for the Teens ad group |
 | `light/index.html` | Copy of the original home page at its own URL, used as an ad landing page (gamers) |
 | `about.html` | Therapist bio, styled as an RPG "character sheet" |
 | `og-image.png` | 1200x630 social/ad share card (template: `images/og-image.html`) |
